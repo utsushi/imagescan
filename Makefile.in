@@ -375,10 +375,10 @@ stream_headers = utsushi/octet.hpp utsushi/context.hpp \
 	utsushi/iobase.hpp utsushi/device.hpp utsushi/filter.hpp \
 	utsushi/buffer.hpp utsushi/stream.hpp utsushi/pump.hpp
 setting_headers = utsushi/constraint.hpp utsushi/descriptor.hpp \
-	utsushi/key.hpp utsushi/option.hpp utsushi/preset.hpp \
-	utsushi/quantity.hpp utsushi/range.hpp utsushi/store.hpp \
-	utsushi/string.hpp utsushi/toggle.hpp utsushi/tag.hpp \
-	utsushi/value.hpp
+	utsushi/key.hpp utsushi/media.hpp utsushi/option.hpp \
+	utsushi/preset.hpp utsushi/quantity.hpp utsushi/range.hpp \
+	utsushi/store.hpp utsushi/string.hpp utsushi/toggle.hpp \
+	utsushi/tag.hpp utsushi/value.hpp
 test_headers = utsushi/test/runner.ipp \
 	utsushi/test/catch-system-errors.hpp \
 	utsushi/test/command-line.hpp utsushi/test/environment.hpp \
@@ -389,9 +389,9 @@ wrapper_headers = utsushi/cstdint.hpp utsushi/format.hpp \
 	utsushi/thread.hpp
 nobase_include_HEADERS = $(pattern_headers) $(stream_headers) \
 	$(setting_headers) utsushi/connexion.hpp \
-	utsushi/device-info.hpp utsushi/i18n.hpp utsushi/log.hpp \
-	utsushi/monitor.hpp utsushi/run-time.hpp utsushi/scanner.hpp \
-	$(wrapper_headers)
+	utsushi/device-info.hpp utsushi/exception.hpp utsushi/i18n.hpp \
+	utsushi/log.hpp utsushi/monitor.hpp utsushi/run-time.hpp \
+	utsushi/scanner.hpp $(wrapper_headers)
 BUILT_SOURCES = $(srcdir)/utsushi/tag.hpp $(srcdir)/lib/tag.cpp
 @with_included_boost_TRUE@boostdir = upstream/boost
 all: $(BUILT_SOURCES) config.h

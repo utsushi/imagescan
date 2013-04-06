@@ -103,24 +103,24 @@ libutsushi_la_DEPENDENCIES = $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_2)
-am__libutsushi_la_SOURCES_DIST = connexion.cpp device-info.cpp log.cpp \
-	monitor.cpp run-time.cpp run-time.ipp scanner.cpp octet.cpp \
-	context.cpp iobase.cpp device.cpp filter.cpp buffer.cpp \
-	stream.cpp pump.cpp constraint.cpp descriptor.cpp key.cpp \
-	option.cpp preset.cpp quantity.cpp range.cpp store.cpp \
-	string.cpp tag.cpp toggle.cpp value.cpp file.cpp \
-	../utsushi/file.hpp ../outputs/tiff.cpp ../outputs/tiff.hpp \
-	hal.cpp hal.hpp
+am__libutsushi_la_SOURCES_DIST = connexion.cpp device-info.cpp \
+	exception.cpp log.cpp monitor.cpp run-time.cpp run-time.ipp \
+	scanner.cpp octet.cpp context.cpp iobase.cpp device.cpp \
+	filter.cpp buffer.cpp stream.cpp pump.cpp constraint.cpp \
+	descriptor.cpp key.cpp media.cpp option.cpp preset.cpp \
+	quantity.cpp range.cpp store.cpp string.cpp tag.cpp toggle.cpp \
+	value.cpp file.cpp ../utsushi/file.hpp ../outputs/tiff.cpp \
+	../outputs/tiff.hpp hal.cpp hal.hpp
 am__objects_1 = octet.lo context.lo iobase.lo device.lo filter.lo \
 	buffer.lo stream.lo pump.lo
-am__objects_2 = constraint.lo descriptor.lo key.lo option.lo preset.lo \
-	quantity.lo range.lo store.lo string.lo tag.lo toggle.lo \
-	value.lo
+am__objects_2 = constraint.lo descriptor.lo key.lo media.lo option.lo \
+	preset.lo quantity.lo range.lo store.lo string.lo tag.lo \
+	toggle.lo value.lo
 @have_libtiff_TRUE@am__objects_3 = tiff.lo
 am__objects_4 = file.lo $(am__objects_3)
 @have_libhal_TRUE@am__objects_5 = hal.lo
-am_libutsushi_la_OBJECTS = connexion.lo device-info.lo log.lo \
-	monitor.lo run-time.lo scanner.lo $(am__objects_1) \
+am_libutsushi_la_OBJECTS = connexion.lo device-info.lo exception.lo \
+	log.lo monitor.lo run-time.lo scanner.lo $(am__objects_1) \
 	$(am__objects_2) $(am__objects_4) $(am__objects_5)
 libutsushi_la_OBJECTS = $(am_libutsushi_la_OBJECTS)
 AM_V_lt = $(am__v_lt_$(V))
@@ -415,16 +415,16 @@ top_srcdir = @top_srcdir@
 SUBDIRS = . tests
 streams = octet.cpp context.cpp iobase.cpp device.cpp filter.cpp \
 	buffer.cpp stream.cpp pump.cpp
-settings = constraint.cpp descriptor.cpp key.cpp option.cpp preset.cpp \
-	quantity.cpp range.cpp store.cpp string.cpp tag.cpp toggle.cpp \
-	value.cpp
+settings = constraint.cpp descriptor.cpp key.cpp media.cpp option.cpp \
+	preset.cpp quantity.cpp range.cpp store.cpp string.cpp tag.cpp \
+	toggle.cpp value.cpp
 outputs = file.cpp ../utsushi/file.hpp $(am__append_1)
 pkglib_LTLIBRARIES = libutsushi.la
 libutsushi_la_LIBADD = $(LIBUTSUSHI_LIBS) $(LIBLTDL) $(LTLIBINTL) \
 	$(LIBHAL_LIBS) $(LIBUDEV_LIBS) $(am__append_3)
-libutsushi_la_SOURCES = connexion.cpp device-info.cpp log.cpp \
-	monitor.cpp run-time.cpp run-time.ipp scanner.cpp $(streams) \
-	$(settings) $(outputs) $(am__append_2)
+libutsushi_la_SOURCES = connexion.cpp device-info.cpp exception.cpp \
+	log.cpp monitor.cpp run-time.cpp run-time.ipp scanner.cpp \
+	$(streams) $(settings) $(outputs) $(am__append_2)
 all: all-recursive
 
 .SUFFIXES:
@@ -506,12 +506,14 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/descriptor.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/device-info.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/device.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/exception.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/file.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/filter.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hal.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/iobase.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/key.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/log.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/media.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/monitor.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/octet.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/option.Plo@am__quote@

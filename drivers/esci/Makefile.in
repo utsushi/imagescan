@@ -16,6 +16,7 @@
 @SET_MAKE@
 
 
+
 VPATH = @srcdir@
 pkgdatadir = $(datadir)/@PACKAGE@
 pkgincludedir = $(includedir)/@PACKAGE@
@@ -35,6 +36,10 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
+@enable_boost_unit_test_framework_TRUE@noinst_PROGRAMS =  \
+@enable_boost_unit_test_framework_TRUE@	verify$(EXEEXT)
+@enable_boost_unit_test_framework_TRUE@@with_shared_enabled_TRUE@am__append_1 = -DBOOST_TEST_DYN_LINK
+@enable_boost_unit_test_framework_TRUE@@with_static_enabled_TRUE@am__append_2 = -DBOOST_TEST_ALTERNATIVE_INIT_API
 subdir = drivers/esci
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -118,6 +123,21 @@ libdrv_esci_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
 	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CXXLD) \
 	$(AM_CXXFLAGS) $(CXXFLAGS) $(libdrv_esci_la_LDFLAGS) \
 	$(LDFLAGS) -o $@
+PROGRAMS = $(noinst_PROGRAMS)
+am__verify_SOURCES_DIST = verify.cpp verify.hpp \
+	verify-compound-protocol.cpp verify-compound-scanning.cpp
+@enable_boost_unit_test_framework_TRUE@am_verify_OBJECTS = verify-verify.$(OBJEXT) \
+@enable_boost_unit_test_framework_TRUE@	verify-verify-compound-protocol.$(OBJEXT) \
+@enable_boost_unit_test_framework_TRUE@	verify-verify-compound-scanning.$(OBJEXT)
+verify_OBJECTS = $(am_verify_OBJECTS)
+am__DEPENDENCIES_1 =
+@enable_boost_unit_test_framework_TRUE@verify_DEPENDENCIES =  \
+@enable_boost_unit_test_framework_TRUE@	libdrv-esci.la \
+@enable_boost_unit_test_framework_TRUE@	../../lib/libutsushi.la \
+@enable_boost_unit_test_framework_TRUE@	$(am__DEPENDENCIES_1) \
+@enable_boost_unit_test_framework_TRUE@	$(am__DEPENDENCIES_1) \
+@enable_boost_unit_test_framework_TRUE@	../../connexions/libcnx-usb.la \
+@enable_boost_unit_test_framework_TRUE@	../../connexions/libcnx-hexdump.la
 DEFAULT_INCLUDES = 
 depcomp = $(SHELL) $(top_srcdir)/upstream/depcomp
 am__depfiles_maybe = depfiles
@@ -160,8 +180,8 @@ am__v_CCLD_0 = @echo "  CCLD  " $@;
 AM_V_GEN = $(am__v_GEN_$(V))
 am__v_GEN_ = $(am__v_GEN_$(AM_DEFAULT_VERBOSITY))
 am__v_GEN_0 = @echo "  GEN   " $@;
-SOURCES = $(libdrv_esci_la_SOURCES)
-DIST_SOURCES = $(libdrv_esci_la_SOURCES)
+SOURCES = $(libdrv_esci_la_SOURCES) $(verify_SOURCES)
+DIST_SOURCES = $(libdrv_esci_la_SOURCES) $(am__verify_SOURCES_DIST)
 RECURSIVE_TARGETS = all-recursive check-recursive dvi-recursive \
 	html-recursive info-recursive install-data-recursive \
 	install-dvi-recursive install-exec-recursive \
@@ -445,9 +465,36 @@ libdrv_esci_la_SOURCES = action.hpp buffer.hpp bounding-box.hpp \
 	set-zoom.hpp setter.hpp start-extended-scan.cpp \
 	start-extended-scan.hpp start-scan.hpp start-standard-scan.cpp \
 	start-standard-scan.hpp vector.hpp
-EXTRA_DIST = utsushi-esci.rules
+EXTRA_DIST = utsushi-esci.rules data/DS-5500.dat data/DS-6500.dat \
+	data/DS-7500.dat data/DS-50000.dat data/DS-60000.dat \
+	data/DS-70000.dat
 @enable_udev_config_TRUE@exec_udev_rulesdir = $(UDEV_SYSCONFDIR)/rules.d
 @enable_udev_config_TRUE@exec_udev_rules_DATA = utsushi-esci.rules
+@enable_boost_unit_test_framework_TRUE@verify_SOURCES = verify.cpp \
+@enable_boost_unit_test_framework_TRUE@	verify.hpp \
+@enable_boost_unit_test_framework_TRUE@	verify-compound-protocol.cpp \
+@enable_boost_unit_test_framework_TRUE@	verify-compound-scanning.cpp
+@enable_boost_unit_test_framework_TRUE@verify_CPPFLAGS =  \
+@enable_boost_unit_test_framework_TRUE@	$(AM_CPPFLAGS) \
+@enable_boost_unit_test_framework_TRUE@	-DBOOST_TEST_NO_MAIN \
+@enable_boost_unit_test_framework_TRUE@	$(am__append_1) \
+@enable_boost_unit_test_framework_TRUE@	$(am__append_2)
+@enable_boost_unit_test_framework_TRUE@verify_LDADD = libdrv-esci.la \
+@enable_boost_unit_test_framework_TRUE@	../../lib/libutsushi.la \
+@enable_boost_unit_test_framework_TRUE@	$(LIBUTSUSHI_LIBS) \
+@enable_boost_unit_test_framework_TRUE@	$(BOOST_UNIT_TEST_FRAMEWORK_LIB) \
+@enable_boost_unit_test_framework_TRUE@	../../connexions/libcnx-usb.la \
+@enable_boost_unit_test_framework_TRUE@	../../connexions/libcnx-hexdump.la
+clone_dat = \
+	src=`echo $< | sed 's,^.*/,,; s,\.dat$$,,'`; \
+	dst=`echo $@ | sed 's,^.*/,,; s,\.dat$$,,'`; \
+	sed -e "s,\(\#PRDh...\)$$src,\1$$dst," \
+	    -e 's,\([^\#]\)IPL ....,\1IPL     ,' \
+	    -e 's,\([^\#]\)ADF ....,\1ADF     ,' \
+	    -e 's,\([^\#]\)FB  ....,\1FB      ,' \
+	    -e 's,\([^\#]\)TPU ....,\1TPU     ,' \
+	    $< > $@
+
 all: all-recursive
 
 .SUFFIXES:
@@ -516,6 +563,18 @@ clean-driverlibLTLIBRARIES:
 libdrv-esci.la: $(libdrv_esci_la_OBJECTS) $(libdrv_esci_la_DEPENDENCIES) 
 	$(AM_V_CXXLD)$(libdrv_esci_la_LINK) -rpath $(driverlibdir) $(libdrv_esci_la_OBJECTS) $(libdrv_esci_la_LIBADD) $(LIBS)
 
+clean-noinstPROGRAMS:
+	@list='$(noinst_PROGRAMS)'; test -n "$$list" || exit 0; \
+	echo " rm -f" $$list; \
+	rm -f $$list || exit $$?; \
+	test -n "$(EXEEXT)" || exit 0; \
+	list=`for p in $$list; do echo "$$p"; done | sed 's/$(EXEEXT)$$//'`; \
+	echo " rm -f" $$list; \
+	rm -f $$list
+verify$(EXEEXT): $(verify_OBJECTS) $(verify_DEPENDENCIES) 
+	@rm -f verify$(EXEEXT)
+	$(AM_V_CXXLD)$(CXXLINK) $(verify_OBJECTS) $(verify_LDADD) $(LIBS)
+
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
 
@@ -557,6 +616,9 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/set-zoom.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/start-extended-scan.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/start-standard-scan.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/verify-verify-compound-protocol.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/verify-verify-compound-scanning.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/verify-verify.Po@am__quote@
 
 .cpp.o:
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -581,6 +643,54 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LTCXXCOMPILE) -c -o $@ $<
+
+verify-verify.o: verify.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(verify_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT verify-verify.o -MD -MP -MF $(DEPDIR)/verify-verify.Tpo -c -o verify-verify.o `test -f 'verify.cpp' || echo '$(srcdir)/'`verify.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/verify-verify.Tpo $(DEPDIR)/verify-verify.Po
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='verify.cpp' object='verify-verify.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(verify_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o verify-verify.o `test -f 'verify.cpp' || echo '$(srcdir)/'`verify.cpp
+
+verify-verify.obj: verify.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(verify_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT verify-verify.obj -MD -MP -MF $(DEPDIR)/verify-verify.Tpo -c -o verify-verify.obj `if test -f 'verify.cpp'; then $(CYGPATH_W) 'verify.cpp'; else $(CYGPATH_W) '$(srcdir)/verify.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/verify-verify.Tpo $(DEPDIR)/verify-verify.Po
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='verify.cpp' object='verify-verify.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(verify_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o verify-verify.obj `if test -f 'verify.cpp'; then $(CYGPATH_W) 'verify.cpp'; else $(CYGPATH_W) '$(srcdir)/verify.cpp'; fi`
+
+verify-verify-compound-protocol.o: verify-compound-protocol.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(verify_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT verify-verify-compound-protocol.o -MD -MP -MF $(DEPDIR)/verify-verify-compound-protocol.Tpo -c -o verify-verify-compound-protocol.o `test -f 'verify-compound-protocol.cpp' || echo '$(srcdir)/'`verify-compound-protocol.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/verify-verify-compound-protocol.Tpo $(DEPDIR)/verify-verify-compound-protocol.Po
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='verify-compound-protocol.cpp' object='verify-verify-compound-protocol.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(verify_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o verify-verify-compound-protocol.o `test -f 'verify-compound-protocol.cpp' || echo '$(srcdir)/'`verify-compound-protocol.cpp
+
+verify-verify-compound-protocol.obj: verify-compound-protocol.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(verify_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT verify-verify-compound-protocol.obj -MD -MP -MF $(DEPDIR)/verify-verify-compound-protocol.Tpo -c -o verify-verify-compound-protocol.obj `if test -f 'verify-compound-protocol.cpp'; then $(CYGPATH_W) 'verify-compound-protocol.cpp'; else $(CYGPATH_W) '$(srcdir)/verify-compound-protocol.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/verify-verify-compound-protocol.Tpo $(DEPDIR)/verify-verify-compound-protocol.Po
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='verify-compound-protocol.cpp' object='verify-verify-compound-protocol.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(verify_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o verify-verify-compound-protocol.obj `if test -f 'verify-compound-protocol.cpp'; then $(CYGPATH_W) 'verify-compound-protocol.cpp'; else $(CYGPATH_W) '$(srcdir)/verify-compound-protocol.cpp'; fi`
+
+verify-verify-compound-scanning.o: verify-compound-scanning.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(verify_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT verify-verify-compound-scanning.o -MD -MP -MF $(DEPDIR)/verify-verify-compound-scanning.Tpo -c -o verify-verify-compound-scanning.o `test -f 'verify-compound-scanning.cpp' || echo '$(srcdir)/'`verify-compound-scanning.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/verify-verify-compound-scanning.Tpo $(DEPDIR)/verify-verify-compound-scanning.Po
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='verify-compound-scanning.cpp' object='verify-verify-compound-scanning.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(verify_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o verify-verify-compound-scanning.o `test -f 'verify-compound-scanning.cpp' || echo '$(srcdir)/'`verify-compound-scanning.cpp
+
+verify-verify-compound-scanning.obj: verify-compound-scanning.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(verify_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT verify-verify-compound-scanning.obj -MD -MP -MF $(DEPDIR)/verify-verify-compound-scanning.Tpo -c -o verify-verify-compound-scanning.obj `if test -f 'verify-compound-scanning.cpp'; then $(CYGPATH_W) 'verify-compound-scanning.cpp'; else $(CYGPATH_W) '$(srcdir)/verify-compound-scanning.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/verify-verify-compound-scanning.Tpo $(DEPDIR)/verify-verify-compound-scanning.Po
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='verify-compound-scanning.cpp' object='verify-verify-compound-scanning.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(verify_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o verify-verify-compound-scanning.obj `if test -f 'verify-compound-scanning.cpp'; then $(CYGPATH_W) 'verify-compound-scanning.cpp'; else $(CYGPATH_W) '$(srcdir)/verify-compound-scanning.cpp'; fi`
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -803,7 +913,7 @@ distdir: $(DISTFILES)
 	done
 check-am: all-am
 check: check-recursive
-all-am: Makefile $(LTLIBRARIES) $(DATA)
+all-am: Makefile $(LTLIBRARIES) $(PROGRAMS) $(DATA)
 installdirs: installdirs-recursive
 installdirs-am:
 	for dir in "$(DESTDIR)$(driverlibdir)" "$(DESTDIR)$(exec_udev_rulesdir)"; do \
@@ -837,7 +947,7 @@ maintainer-clean-generic:
 clean: clean-recursive
 
 clean-am: clean-driverlibLTLIBRARIES clean-generic clean-libtool \
-	mostlyclean-am
+	clean-noinstPROGRAMS mostlyclean-am
 
 distclean: distclean-recursive
 	-rm -rf ./$(DEPDIR)
@@ -911,21 +1021,27 @@ uninstall-am: uninstall-driverlibLTLIBRARIES \
 
 .PHONY: $(RECURSIVE_CLEAN_TARGETS) $(RECURSIVE_TARGETS) CTAGS GTAGS \
 	all all-am check check-am clean clean-driverlibLTLIBRARIES \
-	clean-generic clean-libtool ctags ctags-recursive distclean \
-	distclean-compile distclean-generic distclean-libtool \
-	distclean-tags distdir dvi dvi-am html html-am info info-am \
-	install install-am install-data install-data-am \
-	install-driverlibLTLIBRARIES install-dvi install-dvi-am \
-	install-exec install-exec-am install-exec_udev_rulesDATA \
-	install-html install-html-am install-info install-info-am \
-	install-man install-pdf install-pdf-am install-ps \
-	install-ps-am install-strip installcheck installcheck-am \
-	installdirs installdirs-am maintainer-clean \
-	maintainer-clean-generic mostlyclean mostlyclean-compile \
-	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
-	tags tags-recursive uninstall uninstall-am \
+	clean-generic clean-libtool clean-noinstPROGRAMS ctags \
+	ctags-recursive distclean distclean-compile distclean-generic \
+	distclean-libtool distclean-tags distdir dvi dvi-am html \
+	html-am info info-am install install-am install-data \
+	install-data-am install-driverlibLTLIBRARIES install-dvi \
+	install-dvi-am install-exec install-exec-am \
+	install-exec_udev_rulesDATA install-html install-html-am \
+	install-info install-info-am install-man install-pdf \
+	install-pdf-am install-ps install-ps-am install-strip \
+	installcheck installcheck-am installdirs installdirs-am \
+	maintainer-clean maintainer-clean-generic mostlyclean \
+	mostlyclean-compile mostlyclean-generic mostlyclean-libtool \
+	pdf pdf-am ps ps-am tags tags-recursive uninstall uninstall-am \
 	uninstall-driverlibLTLIBRARIES uninstall-exec_udev_rulesDATA
 
+
+$(srcdir)/data/DS-6500.dat: $(srcdir)/data/DS-7500.dat
+	$(clone_dat)
+
+$(srcdir)/data/DS-60000.dat: $(srcdir)/data/DS-70000.dat
+	$(clone_dat)
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

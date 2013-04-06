@@ -51,6 +51,11 @@
 ../drivers/esci/compound.cpp
 ../drivers/esci/compound.hpp
 ../drivers/esci/constant.hpp
+../drivers/esci/data/
+../drivers/esci/data/DS-50000.dat
+../drivers/esci/data/DS-5500.dat
+../drivers/esci/data/DS-70000.dat
+../drivers/esci/data/DS-7500.dat
 ../drivers/esci/exception.hpp
 ../drivers/esci/extended-scanner.cpp
 ../drivers/esci/extended-scanner.hpp
@@ -130,8 +135,6 @@
 ../drivers/esci/start-standard-scan.hpp
 ../drivers/esci/tests/
 ../drivers/esci/tests/Makefile.am
-../drivers/esci/tests/compound-protocol.cpp
-../drivers/esci/tests/compound-scanning.cpp
 ../drivers/esci/tests/grammar-formats.cpp
 ../drivers/esci/tests/grammar-formats.tcs
 ../drivers/esci/tests/grammar.cpp
@@ -139,6 +142,10 @@
 ../drivers/esci/tests/setter.cpp
 ../drivers/esci/utsushi-esci.rules
 ../drivers/esci/vector.hpp
+../drivers/esci/verify-compound-protocol.cpp
+../drivers/esci/verify-compound-scanning.cpp
+../drivers/esci/verify.cpp
+../drivers/esci/verify.hpp
 ../filters/
 ../filters/Makefile.am
 ../filters/g3fax.cpp
@@ -205,6 +212,7 @@
 ../lib/descriptor.cpp
 ../lib/device-info.cpp
 ../lib/device.cpp
+../lib/exception.cpp
 ../lib/file.cpp
 ../lib/filter.cpp
 ../lib/hal.cpp
@@ -212,6 +220,7 @@
 ../lib/iobase.cpp
 ../lib/key.cpp
 ../lib/log.cpp
+../lib/media.cpp
 ../lib/monitor.cpp
 ../lib/octet.cpp
 ../lib/option.cpp
@@ -309,6 +318,7 @@
 ../utsushi/descriptor.hpp
 ../utsushi/device-info.hpp
 ../utsushi/device.hpp
+../utsushi/exception.hpp
 ../utsushi/file.hpp
 ../utsushi/filter.hpp
 ../utsushi/format.hpp
@@ -316,6 +326,7 @@
 ../utsushi/iobase.hpp
 ../utsushi/key.hpp
 ../utsushi/log.hpp
+../utsushi/media.hpp
 ../utsushi/memory.hpp
 ../utsushi/monitor.hpp
 ../utsushi/mutex.hpp

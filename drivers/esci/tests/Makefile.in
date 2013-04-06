@@ -43,9 +43,7 @@ host_triplet = @host@
 @enable_boost_unit_test_framework_TRUE@check_PROGRAMS =  \
 @enable_boost_unit_test_framework_TRUE@	setter.utr$(EXEEXT) \
 @enable_boost_unit_test_framework_TRUE@	grammar-formats.utr$(EXEEXT) \
-@enable_boost_unit_test_framework_TRUE@	grammar.utr$(EXEEXT) \
-@enable_boost_unit_test_framework_TRUE@	compound-protocol.utr$(EXEEXT) \
-@enable_boost_unit_test_framework_TRUE@	compound-scanning.utr$(EXEEXT)
+@enable_boost_unit_test_framework_TRUE@	grammar.utr$(EXEEXT)
 
 #  Set build-time flags to build Boost.Test Unit Test Framework (UTF)
 #  based test runners.
@@ -125,34 +123,20 @@ mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
-compound_protocol_utr_SOURCES = compound-protocol.cpp
-compound_protocol_utr_OBJECTS = compound-protocol.$(OBJEXT)
+grammar_formats_utr_SOURCES = grammar-formats.cpp
+grammar_formats_utr_OBJECTS = grammar-formats.$(OBJEXT)
 am__DEPENDENCIES_1 =
 @enable_boost_unit_test_framework_TRUE@am__DEPENDENCIES_2 =  \
 @enable_boost_unit_test_framework_TRUE@	../libdrv-esci.la \
 @enable_boost_unit_test_framework_TRUE@	$(am__DEPENDENCIES_1) \
 @enable_boost_unit_test_framework_TRUE@	$(am__DEPENDENCIES_1)
-@enable_boost_unit_test_framework_TRUE@compound_protocol_utr_DEPENDENCIES =  \
+@enable_boost_unit_test_framework_TRUE@grammar_formats_utr_DEPENDENCIES =  \
 @enable_boost_unit_test_framework_TRUE@	$(am__DEPENDENCIES_2) \
-@enable_boost_unit_test_framework_TRUE@	../../../lib/libutsushi.la \
 @enable_boost_unit_test_framework_TRUE@	$(am__DEPENDENCIES_1) \
 @enable_boost_unit_test_framework_TRUE@	../../../connexions/libcnx-usb.la
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
 am__v_lt_0 = --silent
-compound_scanning_utr_SOURCES = compound-scanning.cpp
-compound_scanning_utr_OBJECTS = compound-scanning.$(OBJEXT)
-@enable_boost_unit_test_framework_TRUE@compound_scanning_utr_DEPENDENCIES =  \
-@enable_boost_unit_test_framework_TRUE@	$(am__DEPENDENCIES_2) \
-@enable_boost_unit_test_framework_TRUE@	../../../lib/libutsushi.la \
-@enable_boost_unit_test_framework_TRUE@	$(am__DEPENDENCIES_1) \
-@enable_boost_unit_test_framework_TRUE@	../../../connexions/libcnx-usb.la
-grammar_formats_utr_SOURCES = grammar-formats.cpp
-grammar_formats_utr_OBJECTS = grammar-formats.$(OBJEXT)
-@enable_boost_unit_test_framework_TRUE@grammar_formats_utr_DEPENDENCIES =  \
-@enable_boost_unit_test_framework_TRUE@	$(am__DEPENDENCIES_2) \
-@enable_boost_unit_test_framework_TRUE@	$(am__DEPENDENCIES_1) \
-@enable_boost_unit_test_framework_TRUE@	../../../connexions/libcnx-usb.la
 grammar_utr_SOURCES = grammar.cpp
 grammar_utr_OBJECTS = grammar.$(OBJEXT)
 @enable_boost_unit_test_framework_TRUE@grammar_utr_DEPENDENCIES =  \
@@ -190,10 +174,8 @@ am__v_CXXLD_0 = @echo "  CXXLD " $@;
 AM_V_GEN = $(am__v_GEN_$(V))
 am__v_GEN_ = $(am__v_GEN_$(AM_DEFAULT_VERBOSITY))
 am__v_GEN_0 = @echo "  GEN   " $@;
-SOURCES = compound-protocol.cpp compound-scanning.cpp \
-	grammar-formats.cpp grammar.cpp setter.cpp
-DIST_SOURCES = compound-protocol.cpp compound-scanning.cpp \
-	grammar-formats.cpp grammar.cpp setter.cpp
+SOURCES = grammar-formats.cpp grammar.cpp setter.cpp
+DIST_SOURCES = grammar-formats.cpp grammar.cpp setter.cpp
 ETAGS = etags
 CTAGS = ctags
 am__tty_colors = \
@@ -409,16 +391,6 @@ top_srcdir = @top_srcdir@
 @enable_boost_unit_test_framework_TRUE@grammar_utr_LDADD = $(LDADD) \
 @enable_boost_unit_test_framework_TRUE@	$(BOOST_FILESYSTEM_LIB) \
 @enable_boost_unit_test_framework_TRUE@	../../../connexions/libcnx-usb.la
-@enable_boost_unit_test_framework_TRUE@compound_protocol_utr_LDADD =  \
-@enable_boost_unit_test_framework_TRUE@	$(LDADD) \
-@enable_boost_unit_test_framework_TRUE@	../../../lib/libutsushi.la \
-@enable_boost_unit_test_framework_TRUE@	$(LIBUTSUSHI_LIBS) \
-@enable_boost_unit_test_framework_TRUE@	../../../connexions/libcnx-usb.la
-@enable_boost_unit_test_framework_TRUE@compound_scanning_utr_LDADD =  \
-@enable_boost_unit_test_framework_TRUE@	$(LDADD) \
-@enable_boost_unit_test_framework_TRUE@	../../../lib/libutsushi.la \
-@enable_boost_unit_test_framework_TRUE@	$(LIBUTSUSHI_LIBS) \
-@enable_boost_unit_test_framework_TRUE@	../../../connexions/libcnx-usb.la
 @enable_boost_unit_test_framework_TRUE@setter_utr_LDADD = $(LDADD) ../../../connexions/libcnx-usb.la
 EXTRA_DIST = grammar-formats.tcs grammar.tcs
 CLEANFILES = $(am__append_7) $(am__append_9)
@@ -472,12 +444,6 @@ clean-checkPROGRAMS:
 	list=`for p in $$list; do echo "$$p"; done | sed 's/$(EXEEXT)$$//'`; \
 	echo " rm -f" $$list; \
 	rm -f $$list
-compound-protocol.utr$(EXEEXT): $(compound_protocol_utr_OBJECTS) $(compound_protocol_utr_DEPENDENCIES) 
-	@rm -f compound-protocol.utr$(EXEEXT)
-	$(AM_V_CXXLD)$(CXXLINK) $(compound_protocol_utr_OBJECTS) $(compound_protocol_utr_LDADD) $(LIBS)
-compound-scanning.utr$(EXEEXT): $(compound_scanning_utr_OBJECTS) $(compound_scanning_utr_DEPENDENCIES) 
-	@rm -f compound-scanning.utr$(EXEEXT)
-	$(AM_V_CXXLD)$(CXXLINK) $(compound_scanning_utr_OBJECTS) $(compound_scanning_utr_LDADD) $(LIBS)
 grammar-formats.utr$(EXEEXT): $(grammar_formats_utr_OBJECTS) $(grammar_formats_utr_DEPENDENCIES) 
 	@rm -f grammar-formats.utr$(EXEEXT)
 	$(AM_V_CXXLD)$(CXXLINK) $(grammar_formats_utr_OBJECTS) $(grammar_formats_utr_LDADD) $(LIBS)
@@ -494,8 +460,6 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/compound-protocol.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/compound-scanning.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/grammar-formats.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/grammar.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/setter.Po@am__quote@
