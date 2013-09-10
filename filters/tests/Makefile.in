@@ -397,6 +397,7 @@ mandir = @mandir@
 mkdir_p = @mkdir_p@
 oldincludedir = @oldincludedir@
 pdfdir = @pdfdir@
+pkgsysconfdir = @pkgsysconfdir@
 prefix = @prefix@
 program_transform_name = @program_transform_name@
 psdir = @psdir@
@@ -430,6 +431,11 @@ top_srcdir = @top_srcdir@
 @enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@pdf_utr_LDADD = $(LDADD) \
 @enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@	$(LIBJPEG_LIBS) \
 @enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@	$(am__append_5)
+@enable_boost_unit_test_framework_TRUE@EXTRA_DIST =  \
+@enable_boost_unit_test_framework_TRUE@	data/A4-300-x-300.jpg \
+@enable_boost_unit_test_framework_TRUE@	data/A4-300-x-max.jpg \
+@enable_boost_unit_test_framework_TRUE@	data/A4-max-x-300.jpg \
+@enable_boost_unit_test_framework_TRUE@	data/A4-max-x-max.jpg
 CLEANFILES = $(am__append_12) $(am__append_14)
 AM_DEFAULT_SOURCE_EXT = .cpp
 

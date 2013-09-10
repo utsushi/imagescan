@@ -217,7 +217,9 @@ AM_CPPFLAGS = @AM_CPPFLAGS@ $(LTDLINCL) \
 	-DPKGLIBEXECDIR="\"$(pkglibexecdir)\"" \
 	-DPKGLIBDIR="\"$(pkglibdir)\"" \
 	-DPKGDATADIR="\"$(pkgdatadir)\"" \
-	-DLOCALEDIR="\"$(localedir)\""
+	-DLOCALEDIR="\"$(localedir)\"" \
+	-DPKGSYSCONFDIR="\"$(pkgsysconfdir)\"" \
+	-DPKGCONFFILE="\"$(PACKAGE_TARNAME).conf\""
 AM_CXXFLAGS = @AM_CXXFLAGS@ $(LIBHAL_CFLAGS) $(LIBUDEV_CFLAGS) \
 	$(LIBUSB_CFLAGS) $(LIBUSB_LEGACY_CFLAGS) $(LIBTIFF_CFLAGS)
 AM_DEFAULT_VERBOSITY = @AM_DEFAULT_VERBOSITY@
@@ -400,6 +402,7 @@ mandir = @mandir@
 mkdir_p = @mkdir_p@
 oldincludedir = @oldincludedir@
 pdfdir = @pdfdir@
+pkgsysconfdir = @pkgsysconfdir@
 prefix = @prefix@
 program_transform_name = @program_transform_name@
 psdir = @psdir@
@@ -413,6 +416,7 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 SUBDIRS = . tests
+EXTRA_DIST = devices.conf
 streams = octet.cpp context.cpp iobase.cpp device.cpp filter.cpp \
 	buffer.cpp stream.cpp pump.cpp
 settings = constraint.cpp descriptor.cpp key.cpp media.cpp option.cpp \

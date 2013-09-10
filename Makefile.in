@@ -347,6 +347,7 @@ mandir = @mandir@
 mkdir_p = @mkdir_p@
 oldincludedir = @oldincludedir@
 pdfdir = @pdfdir@
+pkgsysconfdir = @pkgsysconfdir@
 prefix = @prefix@
 program_transform_name = @program_transform_name@
 psdir = @psdir@
@@ -368,7 +369,8 @@ EXTRA_DIST = bootstrap install-deps tools/boost-test-report \
 	lib/tag.xsl lib/tag.cpp
 ACLOCAL_AMFLAGS = -I upstream/aclocal
 DISTCHECK_CONFIGURE_FLAGS = --with-included-ltdl --with-gtkmm \
-	--with-sane --with-jpeg --with-tiff --enable-test-reports \
+	--with-sane --with-jpeg --with-tiff --disable-sane-config \
+	--disable-udev-config --enable-test-reports \
 	--enable-code-coverage
 pattern_headers = utsushi/pattern/decorator.hpp
 stream_headers = utsushi/octet.hpp utsushi/context.hpp \

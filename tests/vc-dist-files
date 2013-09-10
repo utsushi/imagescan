@@ -212,6 +212,7 @@
 ../lib/descriptor.cpp
 ../lib/device-info.cpp
 ../lib/device.cpp
+../lib/devices.conf
 ../lib/exception.cpp
 ../lib/file.cpp
 ../lib/filter.cpp
@@ -239,11 +240,14 @@
 ../lib/tests/
 ../lib/tests/Makefile.am
 ../lib/tests/buffer.cpp
+../lib/tests/connexion.cpp
 ../lib/tests/descriptor.cpp
 ../lib/tests/device.cpp
 ../lib/tests/file.cpp
+../lib/tests/ipc-cnx.cpp
 ../lib/tests/log.cpp
 ../lib/tests/memory.cpp
+../lib/tests/monitor.cpp
 ../lib/tests/null.cpp
 ../lib/tests/octet.cpp
 ../lib/tests/option.cpp

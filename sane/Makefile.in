@@ -34,6 +34,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
+@with_shared_enabled_TRUE@am__append_1 = check-soname
 subdir = sane
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -93,18 +94,19 @@ am__base_list = \
   sed '$$!N;$$!N;$$!N;$$!N;s/\n/ /g'
 am__installdirs = "$(DESTDIR)$(exec_sane_backenddir)"
 LTLIBRARIES = $(exec_sane_backend_LTLIBRARIES)
-libsane_utsushi_la_DEPENDENCIES = ../lib/libutsushi.la \
+libsane___BACKEND_NAME__la_DEPENDENCIES = ../lib/libutsushi.la \
 	../filters/libflt-all.la ../connexions/libcnx-usb.la
-am_libsane_utsushi_la_OBJECTS = backend.lo handle.lo device.lo \
+am_libsane___BACKEND_NAME__la_OBJECTS = backend.lo handle.lo device.lo \
 	value.lo
-libsane_utsushi_la_OBJECTS = $(am_libsane_utsushi_la_OBJECTS)
+libsane___BACKEND_NAME__la_OBJECTS =  \
+	$(am_libsane___BACKEND_NAME__la_OBJECTS)
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
 am__v_lt_0 = --silent
-libsane_utsushi_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
+libsane___BACKEND_NAME__la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
 	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CXXLD) \
-	$(AM_CXXFLAGS) $(CXXFLAGS) $(libsane_utsushi_la_LDFLAGS) \
-	$(LDFLAGS) -o $@
+	$(AM_CXXFLAGS) $(CXXFLAGS) \
+	$(libsane___BACKEND_NAME__la_LDFLAGS) $(LDFLAGS) -o $@
 DEFAULT_INCLUDES = 
 depcomp = $(SHELL) $(top_srcdir)/upstream/depcomp
 am__depfiles_maybe = depfiles
@@ -147,8 +149,8 @@ am__v_CCLD_0 = @echo "  CCLD  " $@;
 AM_V_GEN = $(am__v_GEN_$(V))
 am__v_GEN_ = $(am__v_GEN_$(AM_DEFAULT_VERBOSITY))
 am__v_GEN_0 = @echo "  GEN   " $@;
-SOURCES = $(libsane_utsushi_la_SOURCES)
-DIST_SOURCES = $(libsane_utsushi_la_SOURCES)
+SOURCES = $(libsane___BACKEND_NAME__la_SOURCES)
+DIST_SOURCES = $(libsane___BACKEND_NAME__la_SOURCES)
 RECURSIVE_TARGETS = all-recursive check-recursive dvi-recursive \
 	html-recursive info-recursive install-data-recursive \
 	install-dvi-recursive install-exec-recursive \
@@ -375,6 +377,7 @@ mandir = @mandir@
 mkdir_p = @mkdir_p@
 oldincludedir = @oldincludedir@
 pdfdir = @pdfdir@
+pkgsysconfdir = @pkgsysconfdir@
 prefix = @prefix@
 program_transform_name = @program_transform_name@
 psdir = @psdir@
@@ -392,20 +395,22 @@ EXTRA_DIST = ltmain.sh-2.4.diff ltmain.sh-2.2.6b.diff
 BACKEND_NAME = utsushi
 SANE_VERSION = $(SANE_MAJOR):$(SANE_MINOR):$(SANE_REVISION)
 exec_sane_backenddir = $(pkglibdir)/sane
-exec_sane_backend_LTLIBRARIES = libsane-utsushi.la
-libsane_utsushi_la_SOURCES = backend.cpp backend.hpp version.hpp \
-	guard.hpp handle.cpp handle.hpp device.cpp device.hpp \
-	value.cpp value.hpp log.hpp
-libsane_utsushi_la_LDFLAGS = -export-dynamic -export-symbols \
-	sane-$(BACKEND_NAME)-api.sym -version-number $(SANE_VERSION) \
-	-weak libsane
-libsane_utsushi_la_LIBADD = ../lib/libutsushi.la \
+exec_sane_backend_LTLIBRARIES = libsane-$(BACKEND_NAME).la
+libsane___BACKEND_NAME__la_SOURCES = backend.cpp backend.hpp \
+	version.hpp guard.hpp handle.cpp handle.hpp device.cpp \
+	device.hpp value.cpp value.hpp log.hpp sane-api.sym
+libsane___BACKEND_NAME__la_LDFLAGS = -export-dynamic -export-symbols \
+	$(srcdir)/sane-api.sym -version-number $(SANE_VERSION) -weak \
+	libsane
+libsane___BACKEND_NAME__la_LIBADD = ../lib/libutsushi.la \
 	../filters/libflt-all.la ../connexions/libcnx-usb.la
-CLEANFILES = sane-$(BACKEND_NAME)-api.sym
-SANE_BACKEND_SANITY_CHECKS = check-soname
+BUILT_SOURCES = $(srcdir)/sane-api.sym
+CLEANFILES = sane-api.sym
+SANE_BACKEND_SANITY_CHECKS = $(am__append_1)
 auxdir = $(top_srcdir)/upstream
 @enable_sane_config_TRUE@@with_static_enabled_TRUE@STATIC_BACKEND_LIB = libsane-$(BACKEND_NAME).a
-all: all-recursive
+all: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) all-recursive
 
 .SUFFIXES:
 .SUFFIXES: .cpp .lo .o .obj
@@ -470,8 +475,8 @@ clean-exec_sane_backendLTLIBRARIES:
 	  echo "rm -f \"$${dir}/so_locations\""; \
 	  rm -f "$${dir}/so_locations"; \
 	done
-libsane-utsushi.la: $(libsane_utsushi_la_OBJECTS) $(libsane_utsushi_la_DEPENDENCIES) 
-	$(AM_V_CXXLD)$(libsane_utsushi_la_LINK) -rpath $(exec_sane_backenddir) $(libsane_utsushi_la_OBJECTS) $(libsane_utsushi_la_LIBADD) $(LIBS)
+libsane-$(BACKEND_NAME).la: $(libsane___BACKEND_NAME__la_OBJECTS) $(libsane___BACKEND_NAME__la_DEPENDENCIES) 
+	$(AM_V_CXXLD)$(libsane___BACKEND_NAME__la_LINK) -rpath $(exec_sane_backenddir) $(libsane___BACKEND_NAME__la_OBJECTS) $(libsane___BACKEND_NAME__la_LIBADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -709,14 +714,16 @@ distdir: $(DISTFILES)
 	done
 check-am: all-am
 	$(MAKE) $(AM_MAKEFLAGS) check-local
-check: check-recursive
+check: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) check-recursive
 all-am: Makefile $(LTLIBRARIES)
 installdirs: installdirs-recursive
 installdirs-am:
 	for dir in "$(DESTDIR)$(exec_sane_backenddir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
-install: install-recursive
+install: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) install-recursive
 install-exec: install-exec-recursive
 install-data: install-data-recursive
 uninstall: uninstall-recursive
@@ -742,6 +749,7 @@ distclean-generic:
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
 	@echo "it deletes files that may require special tools to rebuild."
+	-test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
 @enable_sane_config_FALSE@install-exec-hook:
 @enable_sane_config_FALSE@install-data-hook:
 @enable_sane_config_FALSE@uninstall-hook:
@@ -819,9 +827,9 @@ ps-am:
 uninstall-am: uninstall-exec_sane_backendLTLIBRARIES
 	@$(NORMAL_INSTALL)
 	$(MAKE) $(AM_MAKEFLAGS) uninstall-hook
-.MAKE: $(RECURSIVE_CLEAN_TARGETS) $(RECURSIVE_TARGETS) check-am \
-	ctags-recursive install-am install-data-am install-exec-am \
-	install-strip tags-recursive uninstall-am
+.MAKE: $(RECURSIVE_CLEAN_TARGETS) $(RECURSIVE_TARGETS) all check \
+	check-am ctags-recursive install install-am install-data-am \
+	install-exec-am install-strip tags-recursive uninstall-am
 
 .PHONY: $(RECURSIVE_CLEAN_TARGETS) $(RECURSIVE_TARGETS) CTAGS GTAGS \
 	all all-am check check-am check-local clean \
@@ -842,9 +850,9 @@ uninstall-am: uninstall-exec_sane_backendLTLIBRARIES
 	uninstall-hook
 
 
-libsane-$(BACKEND_NAME).la: sane-$(BACKEND_NAME)-api.sym
-sane-$(BACKEND_NAME)-api.sym: $(srcdir)/backend.hpp
+sane-api.sym: $(srcdir)/backend.hpp
 	$(AWK) '/^#define sane_/{ print $$2 }' $< \
+	    | sed '/_$$/d' \
 	    | sed -n 'p; s/sane_/sane_$(BACKEND_NAME)_/p' > $@
 
 check-local: $(SANE_BACKEND_SANITY_CHECKS)
@@ -856,9 +864,10 @@ check-soname: libsane-$(BACKEND_NAME).la
 	                /^soname_spec=/p; \
 	                /^libname_spec=/p; \
 	                /^library_names_spec=/p'`; \
+	test -f libsane-$(BACKEND_NAME).la || exit 5; \
 	eval `sed -n '/^library_names=/p' libsane-$(BACKEND_NAME).la`; \
 	sofile=$$objdir/`echo $$library_names | $(AWK) '{print $$1}'`; \
-	test -f $$sofile || exit 0; \
+	test -f $$sofile || exit 4; \
 	shared_ext="$$shrext_cmds"; \
 	case $(host) in \
 	    *cygwin* | mingw* | *cegcc*)  major=-$(SANE_MAJOR);; \
@@ -875,7 +884,7 @@ check-soname: libsane-$(BACKEND_NAME).la
 	esac; \
 	if test "$$soname" != "$$soname_expect"; then \
 	    echo "$@: $$sofile: $$soname_expect != $$soname"; \
-	    exit 1; \
+	    exit 3; \
 	fi;
 ltmain.sh.diff: $(auxdir)/ltmain.sh.orig $(auxdir)/ltmain.sh
 	test -f $< || exit 0
@@ -934,18 +943,19 @@ $(top_srcdir)/upstream/ltmain.sh.orig:
 @enable_sane_config_TRUE@	fi
 @enable_sane_config_TRUE@	if test -d "$(SANE_SYSCONFDIR)/dll.d"; then \
 @enable_sane_config_TRUE@	  dirname="$(DESTDIR)$(SANE_SYSCONFDIR)/dll.d"; \
-@enable_sane_config_TRUE@	  file=$$dirname/$(PACKAGE_TARNAME); \
+@enable_sane_config_TRUE@	  file=$$dirname/$(BACKEND_NAME); \
 @enable_sane_config_TRUE@	  test -d $$dirname || $(MKDIR_P) $$dirname; \
-@enable_sane_config_TRUE@	  echo "#  $(PACKAGE_TARNAME) -- dll.conf snippet" > $$file; \
+@enable_sane_config_TRUE@	  echo "#  $(BACKEND_NAME) -- dll.conf snippet" > $$file; \
 @enable_sane_config_TRUE@	  echo "" >> $$file; \
 @enable_sane_config_TRUE@	  echo "$(BACKEND_NAME)" >> $$file; \
 @enable_sane_config_TRUE@	else \
 @enable_sane_config_TRUE@	  dirname="$(DESTDIR)$(SANE_SYSCONFDIR)"; \
 @enable_sane_config_TRUE@	  file=$$dirname/dll.conf; \
 @enable_sane_config_TRUE@	  if test -f $$file; then \
-@enable_sane_config_TRUE@	    if test -n "`$(GREP) '^#[ \t]*$(BACKEND_NAME)' $$file`"; then \
-@enable_sane_config_TRUE@	      sed -i 's,^#\([ \t]*$(BACKEND_NAME)\),\1,' $$file; \
-@enable_sane_config_TRUE@	    else \
+@enable_sane_config_TRUE@	    if test -n "`$(GREP) '^[ \t]*#[ \t#]*$(BACKEND_NAME)' $$file`"; \
+@enable_sane_config_TRUE@	    then \
+@enable_sane_config_TRUE@	      sed -i 's,^[ \t]*#[ \t#]*\($(BACKEND_NAME)\),\1,' $$file; \
+@enable_sane_config_TRUE@	    elif test -z "`$(GREP) $(BACKEND_NAME) $$file`"; then\
 @enable_sane_config_TRUE@	      echo $(BACKEND_NAME) >> $$file; \
 @enable_sane_config_TRUE@	    fi; \
 @enable_sane_config_TRUE@	  else \
@@ -962,13 +972,13 @@ $(top_srcdir)/upstream/ltmain.sh.orig:
 @enable_sane_config_TRUE@	  exit 1; \
 @enable_sane_config_TRUE@	fi
 @enable_sane_config_TRUE@	-if test -d "$(SANE_SYSCONFDIR)/dll.d"; then \
-@enable_sane_config_TRUE@	  rm -f "$(DESTDIR)$(SANE_SYSCONFDIR)/dll.d/$(PACKAGE_TARNAME)"; \
+@enable_sane_config_TRUE@	  rm -f "$(DESTDIR)$(SANE_SYSCONFDIR)/dll.d/$(BACKEND_NAME)"; \
 @enable_sane_config_TRUE@	else \
 @enable_sane_config_TRUE@	  dirname="$(DESTDIR)$(SANE_SYSCONFDIR)"; \
 @enable_sane_config_TRUE@	  file=$$dirname/dll.conf; \
 @enable_sane_config_TRUE@	  if test -f $$file; then \
 @enable_sane_config_TRUE@	    if test -n "`$(GREP) '^[ \t]*$(BACKEND_NAME)' $$file`"; then \
-@enable_sane_config_TRUE@	      sed -i 's,^\([ \t]*$(BACKEND_NAME)\),#\1,' $$file; \
+@enable_sane_config_TRUE@	      sed -i 's,^[ \t]*\($(BACKEND_NAME)\),#\1,' $$file; \
 @enable_sane_config_TRUE@	    fi; \
 @enable_sane_config_TRUE@	  else \
 @enable_sane_config_TRUE@	    echo $(ECHO_N) "WARNING: $$file not found,"; \

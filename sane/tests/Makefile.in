@@ -37,9 +37,10 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
+@enable_boost_unit_test_framework_TRUE@TESTS = $(am__EXEEXT_1)
 @enable_boost_unit_test_framework_TRUE@check_PROGRAMS =  \
 @enable_boost_unit_test_framework_TRUE@	backend.utr$(EXEEXT) \
-@enable_boost_unit_test_framework_TRUE@	value.utr$(EXEEXT)
+@enable_boost_unit_test_framework_TRUE@	$(am__EXEEXT_1)
 
 #  Set build-time flags to build Boost.Test Unit Test Framework (UTF)
 #  based test runners.
@@ -117,6 +118,8 @@ mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
+@enable_boost_unit_test_framework_TRUE@am__EXEEXT_1 =  \
+@enable_boost_unit_test_framework_TRUE@	value.utr$(EXEEXT)
 backend_utr_SOURCES = backend.cpp
 backend_utr_OBJECTS = backend.$(OBJEXT)
 backend_utr_LDADD = $(LDADD)
@@ -355,6 +358,7 @@ mandir = @mandir@
 mkdir_p = @mkdir_p@
 oldincludedir = @oldincludedir@
 pdfdir = @pdfdir@
+pkgsysconfdir = @pkgsysconfdir@
 prefix = @prefix@
 program_transform_name = @program_transform_name@
 psdir = @psdir@
@@ -371,7 +375,7 @@ top_srcdir = @top_srcdir@
 @enable_boost_unit_test_framework_TRUE@TESTS_ENVIRONMENT =  \
 @enable_boost_unit_test_framework_TRUE@	$(am__append_8) \
 @enable_boost_unit_test_framework_TRUE@	$(am__append_10)
-@enable_boost_unit_test_framework_TRUE@TESTS = $(check_PROGRAMS)
+@enable_boost_unit_test_framework_TRUE@test_runners = value.utr
 @enable_boost_unit_test_framework_TRUE@LDADD = ../../lib/libutsushi.la \
 @enable_boost_unit_test_framework_TRUE@	$(LIBUTSUSHI_LIBS) \
 @enable_boost_unit_test_framework_TRUE@	../../filters/libflt-all.la \

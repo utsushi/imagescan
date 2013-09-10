@@ -226,7 +226,7 @@ am__relativize = \
   reldir="$$dir2"
 ACLOCAL = @ACLOCAL@
 AMTAR = @AMTAR@
-AM_CPPFLAGS = @AM_CPPFLAGS@ -DFUSION_MAX_VECTOR_SIZE=21 \
+AM_CPPFLAGS = @AM_CPPFLAGS@ -DFUSION_MAX_VECTOR_SIZE=22 \
 	-DESCI_GRAMMAR_TRACE=1
 AM_CXXFLAGS = @AM_CXXFLAGS@
 AM_DEFAULT_VERBOSITY = @AM_DEFAULT_VERBOSITY@
@@ -409,6 +409,7 @@ mandir = @mandir@
 mkdir_p = @mkdir_p@
 oldincludedir = @oldincludedir@
 pdfdir = @pdfdir@
+pkgsysconfdir = @pkgsysconfdir@
 prefix = @prefix@
 program_transform_name = @program_transform_name@
 psdir = @psdir@
