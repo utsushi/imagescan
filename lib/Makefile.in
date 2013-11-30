@@ -38,6 +38,7 @@ host_triplet = @host@
 @have_libtiff_TRUE@	../outputs/tiff.hpp
 @have_libhal_TRUE@am__append_2 = hal.cpp hal.hpp
 @have_libtiff_TRUE@am__append_3 = $(LIBTIFF_LIBS)
+@have_libudev_TRUE@am__append_4 = udev.cpp udev.hpp
 subdir = lib
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -110,7 +111,7 @@ am__libutsushi_la_SOURCES_DIST = connexion.cpp device-info.cpp \
 	descriptor.cpp key.cpp media.cpp option.cpp preset.cpp \
 	quantity.cpp range.cpp store.cpp string.cpp tag.cpp toggle.cpp \
 	value.cpp file.cpp ../utsushi/file.hpp ../outputs/tiff.cpp \
-	../outputs/tiff.hpp hal.cpp hal.hpp
+	../outputs/tiff.hpp hal.cpp hal.hpp udev.cpp udev.hpp
 am__objects_1 = octet.lo context.lo iobase.lo device.lo filter.lo \
 	buffer.lo stream.lo pump.lo
 am__objects_2 = constraint.lo descriptor.lo key.lo media.lo option.lo \
@@ -119,9 +120,11 @@ am__objects_2 = constraint.lo descriptor.lo key.lo media.lo option.lo \
 @have_libtiff_TRUE@am__objects_3 = tiff.lo
 am__objects_4 = file.lo $(am__objects_3)
 @have_libhal_TRUE@am__objects_5 = hal.lo
+@have_libudev_TRUE@am__objects_6 = udev.lo
 am_libutsushi_la_OBJECTS = connexion.lo device-info.lo exception.lo \
 	log.lo monitor.lo run-time.lo scanner.lo $(am__objects_1) \
-	$(am__objects_2) $(am__objects_4) $(am__objects_5)
+	$(am__objects_2) $(am__objects_4) $(am__objects_5) \
+	$(am__objects_6)
 libutsushi_la_OBJECTS = $(am_libutsushi_la_OBJECTS)
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
@@ -428,7 +431,8 @@ libutsushi_la_LIBADD = $(LIBUTSUSHI_LIBS) $(LIBLTDL) $(LTLIBINTL) \
 	$(LIBHAL_LIBS) $(LIBUDEV_LIBS) $(am__append_3)
 libutsushi_la_SOURCES = connexion.cpp device-info.cpp exception.cpp \
 	log.cpp monitor.cpp run-time.cpp run-time.ipp scanner.cpp \
-	$(streams) $(settings) $(outputs) $(am__append_2)
+	$(streams) $(settings) $(outputs) $(am__append_2) \
+	$(am__append_4)
 all: all-recursive
 
 .SUFFIXES:
@@ -533,6 +537,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tag.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tiff.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/toggle.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/udev.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/value.Plo@am__quote@
 
 .cpp.o:

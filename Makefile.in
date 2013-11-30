@@ -386,9 +386,9 @@ test_headers = utsushi/test/runner.ipp \
 	utsushi/test/command-line.hpp utsushi/test/environment.hpp \
 	utsushi/test/tools.hpp utsushi/test/memory.hpp \
 	utsushi/test/null.hpp
-wrapper_headers = utsushi/cstdint.hpp utsushi/format.hpp \
-	utsushi/memory.hpp utsushi/mutex.hpp utsushi/signal.hpp \
-	utsushi/thread.hpp
+wrapper_headers = utsushi/cstdint.hpp utsushi/condition-variable.hpp \
+	utsushi/format.hpp utsushi/memory.hpp utsushi/mutex.hpp \
+	utsushi/signal.hpp utsushi/thread.hpp
 nobase_include_HEADERS = $(pattern_headers) $(stream_headers) \
 	$(setting_headers) utsushi/connexion.hpp \
 	utsushi/device-info.hpp utsushi/exception.hpp utsushi/i18n.hpp \

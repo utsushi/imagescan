@@ -150,6 +150,8 @@
 ../filters/Makefile.am
 ../filters/g3fax.cpp
 ../filters/g3fax.hpp
+../filters/image-skip.cpp
+../filters/image-skip.hpp
 ../filters/jpeg.cpp
 ../filters/jpeg.hpp
 ../filters/lut.cpp
@@ -173,6 +175,12 @@
 ../filters/pnm.hpp
 ../filters/tests/
 ../filters/tests/Makefile.am
+../filters/tests/data/
+../filters/tests/data/A4-300-x-300.jpg
+../filters/tests/data/A4-300-x-max.jpg
+../filters/tests/data/A4-max-x-300.jpg
+../filters/tests/data/A4-max-x-max.jpg
+../filters/tests/image-skip.cpp
 ../filters/tests/jpeg.cpp
 ../filters/tests/lut.cpp
 ../filters/tests/pdf.cpp
@@ -260,6 +268,8 @@
 ../lib/tests/value.cpp
 ../lib/tests/value.hpp
 ../lib/toggle.cpp
+../lib/udev.cpp
+../lib/udev.hpp
 ../lib/value.cpp
 ../outputs/
 ../outputs/tiff.cpp
@@ -315,6 +325,7 @@
 ../upstream/include/no_attribute_directive.hpp
 ../utsushi/
 ../utsushi/buffer.hpp
+../utsushi/condition-variable.hpp
 ../utsushi/connexion.hpp
 ../utsushi/constraint.hpp
 ../utsushi/context.hpp

@@ -100,18 +100,20 @@ am__DEPENDENCIES_1 =
 @have_libjpeg_TRUE@am__DEPENDENCIES_2 = $(am__DEPENDENCIES_1)
 libflt_all_la_DEPENDENCIES = $(am__DEPENDENCIES_2)
 am__libflt_all_la_SOURCES_DIST = g3fax.cpp g3fax.hpp lut.cpp lut.hpp \
-	padding.cpp padding.hpp pnm.cpp pnm.hpp threshold.cpp \
-	threshold.hpp pdf.cpp pdf.hpp pdf/array.cpp pdf/array.hpp \
-	pdf/dictionary.cpp pdf/dictionary.hpp pdf/object.cpp \
-	pdf/object.hpp pdf/primitive.cpp pdf/primitive.hpp \
-	pdf/writer.cpp pdf/writer.hpp jpeg.cpp jpeg.hpp
+	image-skip.cpp image-skip.hpp padding.cpp padding.hpp pnm.cpp \
+	pnm.hpp threshold.cpp threshold.hpp pdf.cpp pdf.hpp \
+	pdf/array.cpp pdf/array.hpp pdf/dictionary.cpp \
+	pdf/dictionary.hpp pdf/object.cpp pdf/object.hpp \
+	pdf/primitive.cpp pdf/primitive.hpp pdf/writer.cpp \
+	pdf/writer.hpp jpeg.cpp jpeg.hpp
 am__objects_1 = libflt_all_la-pdf.lo libflt_all_la-array.lo \
 	libflt_all_la-dictionary.lo libflt_all_la-object.lo \
 	libflt_all_la-primitive.lo libflt_all_la-writer.lo
 @have_libjpeg_TRUE@am__objects_2 = libflt_all_la-jpeg.lo
 am_libflt_all_la_OBJECTS = libflt_all_la-g3fax.lo libflt_all_la-lut.lo \
-	libflt_all_la-padding.lo libflt_all_la-pnm.lo \
-	libflt_all_la-threshold.lo $(am__objects_1) $(am__objects_2)
+	libflt_all_la-image-skip.lo libflt_all_la-padding.lo \
+	libflt_all_la-pnm.lo libflt_all_la-threshold.lo \
+	$(am__objects_1) $(am__objects_2)
 libflt_all_la_OBJECTS = $(am_libflt_all_la_OBJECTS)
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
@@ -411,8 +413,9 @@ libflt_all_la_CXXFLAGS = $(AM_CXXFLAGS) $(am__append_1)
 libflt_all_la_LDFLAGS = $(filter_ldflags)
 libflt_all_la_LIBADD = $(am__append_2)
 libflt_all_la_SOURCES = g3fax.cpp g3fax.hpp lut.cpp lut.hpp \
-	padding.cpp padding.hpp pnm.cpp pnm.hpp threshold.cpp \
-	threshold.hpp $(pdf_filter) $(am__append_3)
+	image-skip.cpp image-skip.hpp padding.cpp padding.hpp pnm.cpp \
+	pnm.hpp threshold.cpp threshold.hpp $(pdf_filter) \
+	$(am__append_3)
 pdf_filter = pdf.cpp pdf.hpp pdf/array.cpp pdf/array.hpp \
 	pdf/dictionary.cpp pdf/dictionary.hpp pdf/object.cpp \
 	pdf/object.hpp pdf/primitive.cpp pdf/primitive.hpp \
@@ -494,6 +497,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libflt_all_la-array.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libflt_all_la-dictionary.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libflt_all_la-g3fax.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libflt_all_la-image-skip.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libflt_all_la-jpeg.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libflt_all_la-lut.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libflt_all_la-object.Plo@am__quote@
@@ -543,6 +547,14 @@ libflt_all_la-lut.lo: lut.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lut.cpp' object='libflt_all_la-lut.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o libflt_all_la-lut.lo `test -f 'lut.cpp' || echo '$(srcdir)/'`lut.cpp
+
+libflt_all_la-image-skip.lo: image-skip.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -MT libflt_all_la-image-skip.lo -MD -MP -MF $(DEPDIR)/libflt_all_la-image-skip.Tpo -c -o libflt_all_la-image-skip.lo `test -f 'image-skip.cpp' || echo '$(srcdir)/'`image-skip.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libflt_all_la-image-skip.Tpo $(DEPDIR)/libflt_all_la-image-skip.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='image-skip.cpp' object='libflt_all_la-image-skip.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o libflt_all_la-image-skip.lo `test -f 'image-skip.cpp' || echo '$(srcdir)/'`image-skip.cpp
 
 libflt_all_la-padding.lo: padding.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -MT libflt_all_la-padding.lo -MD -MP -MF $(DEPDIR)/libflt_all_la-padding.Tpo -c -o libflt_all_la-padding.lo `test -f 'padding.cpp' || echo '$(srcdir)/'`padding.cpp

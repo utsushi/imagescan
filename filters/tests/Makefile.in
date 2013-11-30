@@ -41,6 +41,7 @@ host_triplet = @host@
 @enable_boost_unit_test_framework_TRUE@	pnm.utr$(EXEEXT) \
 @enable_boost_unit_test_framework_TRUE@	lut.utr$(EXEEXT) \
 @enable_boost_unit_test_framework_TRUE@	threshold.utr$(EXEEXT) \
+@enable_boost_unit_test_framework_TRUE@	image-skip.utr$(EXEEXT) \
 @enable_boost_unit_test_framework_TRUE@	$(am__EXEEXT_1)
 @enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@am__append_1 = jpeg.utr \
 @enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@	pdf.utr
@@ -125,9 +126,21 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 @enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@am__EXEEXT_1 = jpeg.utr$(EXEEXT) \
 @enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@	pdf.utr$(EXEEXT)
+image_skip_utr_SOURCES = image-skip.cpp
+image_skip_utr_OBJECTS = image-skip.$(OBJEXT)
+image_skip_utr_LDADD = $(LDADD)
+am__DEPENDENCIES_1 =
+@enable_boost_unit_test_framework_TRUE@image_skip_utr_DEPENDENCIES =  \
+@enable_boost_unit_test_framework_TRUE@	../libflt-all.la \
+@enable_boost_unit_test_framework_TRUE@	../../lib/libutsushi.la \
+@enable_boost_unit_test_framework_TRUE@	$(am__DEPENDENCIES_1) \
+@enable_boost_unit_test_framework_TRUE@	../../connexions/libcnx-usb.la \
+@enable_boost_unit_test_framework_TRUE@	$(am__DEPENDENCIES_1)
+AM_V_lt = $(am__v_lt_$(V))
+am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
+am__v_lt_0 = --silent
 jpeg_utr_SOURCES = jpeg.cpp
 jpeg_utr_OBJECTS = jpeg_utr-jpeg.$(OBJEXT)
-am__DEPENDENCIES_1 =
 @enable_boost_unit_test_framework_TRUE@am__DEPENDENCIES_2 =  \
 @enable_boost_unit_test_framework_TRUE@	../libflt-all.la \
 @enable_boost_unit_test_framework_TRUE@	../../lib/libutsushi.la \
@@ -138,9 +151,6 @@ am__DEPENDENCIES_1 =
 @enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@jpeg_utr_DEPENDENCIES = $(am__DEPENDENCIES_2) \
 @enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@	$(am__DEPENDENCIES_1) \
 @enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@	$(am__DEPENDENCIES_3)
-AM_V_lt = $(am__v_lt_$(V))
-am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
-am__v_lt_0 = --silent
 jpeg_utr_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(jpeg_utr_CXXFLAGS) \
 	$(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
@@ -205,8 +215,10 @@ am__v_CXXLD_0 = @echo "  CXXLD " $@;
 AM_V_GEN = $(am__v_GEN_$(V))
 am__v_GEN_ = $(am__v_GEN_$(AM_DEFAULT_VERBOSITY))
 am__v_GEN_0 = @echo "  GEN   " $@;
-SOURCES = jpeg.cpp lut.cpp pdf.cpp pnm.cpp threshold.cpp
-DIST_SOURCES = jpeg.cpp lut.cpp pdf.cpp pnm.cpp threshold.cpp
+SOURCES = image-skip.cpp jpeg.cpp lut.cpp pdf.cpp pnm.cpp \
+	threshold.cpp
+DIST_SOURCES = image-skip.cpp jpeg.cpp lut.cpp pdf.cpp pnm.cpp \
+	threshold.cpp
 ETAGS = etags
 CTAGS = ctags
 am__tty_colors = \
@@ -487,6 +499,9 @@ clean-checkPROGRAMS:
 	list=`for p in $$list; do echo "$$p"; done | sed 's/$(EXEEXT)$$//'`; \
 	echo " rm -f" $$list; \
 	rm -f $$list
+image-skip.utr$(EXEEXT): $(image_skip_utr_OBJECTS) $(image_skip_utr_DEPENDENCIES) 
+	@rm -f image-skip.utr$(EXEEXT)
+	$(AM_V_CXXLD)$(CXXLINK) $(image_skip_utr_OBJECTS) $(image_skip_utr_LDADD) $(LIBS)
 jpeg.utr$(EXEEXT): $(jpeg_utr_OBJECTS) $(jpeg_utr_DEPENDENCIES) 
 	@rm -f jpeg.utr$(EXEEXT)
 	$(AM_V_CXXLD)$(jpeg_utr_LINK) $(jpeg_utr_OBJECTS) $(jpeg_utr_LDADD) $(LIBS)
@@ -509,6 +524,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/image-skip.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/jpeg_utr-jpeg.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lut.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pdf_utr-pdf.Po@am__quote@
