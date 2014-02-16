@@ -323,6 +323,7 @@ LT_DLLOADERS = @LT_DLLOADERS@
 LT_DLPREOPEN = @LT_DLPREOPEN@
 LT_MODULE_EXT = @LT_MODULE_EXT@
 LT_MODULE_PATH_VAR = @LT_MODULE_PATH_VAR@
+MAGICK_CONVERT = @MAGICK_CONVERT@
 MAINT = @MAINT@
 MAKEINFO = @MAKEINFO@
 MKDIR_P = @MKDIR_P@
@@ -466,9 +467,10 @@ libdrv_esci_la_SOURCES = action.hpp buffer.hpp bounding-box.hpp \
 	set-zoom.hpp setter.hpp start-extended-scan.cpp \
 	start-extended-scan.hpp start-scan.hpp start-standard-scan.cpp \
 	start-standard-scan.hpp vector.hpp
-EXTRA_DIST = utsushi-esci.rules data/DS-5500.dat data/DS-6500.dat \
-	data/DS-7500.dat data/DS-50000.dat data/DS-60000.dat \
-	data/DS-70000.dat
+EXTRA_DIST = utsushi-esci.rules data/DS-510.dat data/DS-560.dat \
+	data/DS-760.dat data/DS-860.dat data/DS-5500.dat \
+	data/DS-6500.dat data/DS-7500.dat data/DS-50000.dat \
+	data/DS-60000.dat data/DS-70000.dat
 @enable_udev_config_TRUE@exec_udev_rulesdir = $(UDEV_SYSCONFDIR)/rules.d
 @enable_udev_config_TRUE@exec_udev_rules_DATA = utsushi-esci.rules
 @enable_boost_unit_test_framework_TRUE@verify_SOURCES = verify.cpp \
@@ -1037,6 +1039,9 @@ uninstall-am: uninstall-driverlibLTLIBRARIES \
 	pdf pdf-am ps ps-am tags tags-recursive uninstall uninstall-am \
 	uninstall-driverlibLTLIBRARIES uninstall-exec_udev_rulesDATA
 
+
+$(srcdir)/data/DS-760.dat: $(srcdir)/data/DS-860.dat
+	$(clone_dat)
 
 $(srcdir)/data/DS-6500.dat: $(srcdir)/data/DS-7500.dat
 	$(clone_dat)

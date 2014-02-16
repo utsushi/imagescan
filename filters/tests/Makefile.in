@@ -38,10 +38,13 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 @enable_boost_unit_test_framework_TRUE@check_PROGRAMS =  \
+@enable_boost_unit_test_framework_TRUE@	padding.utr$(EXEEXT) \
 @enable_boost_unit_test_framework_TRUE@	pnm.utr$(EXEEXT) \
 @enable_boost_unit_test_framework_TRUE@	lut.utr$(EXEEXT) \
 @enable_boost_unit_test_framework_TRUE@	threshold.utr$(EXEEXT) \
 @enable_boost_unit_test_framework_TRUE@	image-skip.utr$(EXEEXT) \
+@enable_boost_unit_test_framework_TRUE@	shell-pipe.utr$(EXEEXT) \
+@enable_boost_unit_test_framework_TRUE@	magick.utr$(EXEEXT) \
 @enable_boost_unit_test_framework_TRUE@	$(am__EXEEXT_1)
 @enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@am__append_1 = jpeg.utr \
 @enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@	pdf.utr
@@ -163,6 +166,24 @@ lut_utr_LDADD = $(LDADD)
 @enable_boost_unit_test_framework_TRUE@	$(am__DEPENDENCIES_1) \
 @enable_boost_unit_test_framework_TRUE@	../../connexions/libcnx-usb.la \
 @enable_boost_unit_test_framework_TRUE@	$(am__DEPENDENCIES_1)
+magick_utr_SOURCES = magick.cpp
+magick_utr_OBJECTS = magick.$(OBJEXT)
+magick_utr_LDADD = $(LDADD)
+@enable_boost_unit_test_framework_TRUE@magick_utr_DEPENDENCIES =  \
+@enable_boost_unit_test_framework_TRUE@	../libflt-all.la \
+@enable_boost_unit_test_framework_TRUE@	../../lib/libutsushi.la \
+@enable_boost_unit_test_framework_TRUE@	$(am__DEPENDENCIES_1) \
+@enable_boost_unit_test_framework_TRUE@	../../connexions/libcnx-usb.la \
+@enable_boost_unit_test_framework_TRUE@	$(am__DEPENDENCIES_1)
+padding_utr_SOURCES = padding.cpp
+padding_utr_OBJECTS = padding.$(OBJEXT)
+padding_utr_LDADD = $(LDADD)
+@enable_boost_unit_test_framework_TRUE@padding_utr_DEPENDENCIES =  \
+@enable_boost_unit_test_framework_TRUE@	../libflt-all.la \
+@enable_boost_unit_test_framework_TRUE@	../../lib/libutsushi.la \
+@enable_boost_unit_test_framework_TRUE@	$(am__DEPENDENCIES_1) \
+@enable_boost_unit_test_framework_TRUE@	../../connexions/libcnx-usb.la \
+@enable_boost_unit_test_framework_TRUE@	$(am__DEPENDENCIES_1)
 pdf_utr_SOURCES = pdf.cpp
 pdf_utr_OBJECTS = pdf_utr-pdf.$(OBJEXT)
 @enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@pdf_utr_DEPENDENCIES = $(am__DEPENDENCIES_2) \
@@ -175,6 +196,15 @@ pnm_utr_SOURCES = pnm.cpp
 pnm_utr_OBJECTS = pnm.$(OBJEXT)
 pnm_utr_LDADD = $(LDADD)
 @enable_boost_unit_test_framework_TRUE@pnm_utr_DEPENDENCIES =  \
+@enable_boost_unit_test_framework_TRUE@	../libflt-all.la \
+@enable_boost_unit_test_framework_TRUE@	../../lib/libutsushi.la \
+@enable_boost_unit_test_framework_TRUE@	$(am__DEPENDENCIES_1) \
+@enable_boost_unit_test_framework_TRUE@	../../connexions/libcnx-usb.la \
+@enable_boost_unit_test_framework_TRUE@	$(am__DEPENDENCIES_1)
+shell_pipe_utr_SOURCES = shell-pipe.cpp
+shell_pipe_utr_OBJECTS = shell-pipe.$(OBJEXT)
+shell_pipe_utr_LDADD = $(LDADD)
+@enable_boost_unit_test_framework_TRUE@shell_pipe_utr_DEPENDENCIES =  \
 @enable_boost_unit_test_framework_TRUE@	../libflt-all.la \
 @enable_boost_unit_test_framework_TRUE@	../../lib/libutsushi.la \
 @enable_boost_unit_test_framework_TRUE@	$(am__DEPENDENCIES_1) \
@@ -215,10 +245,10 @@ am__v_CXXLD_0 = @echo "  CXXLD " $@;
 AM_V_GEN = $(am__v_GEN_$(V))
 am__v_GEN_ = $(am__v_GEN_$(AM_DEFAULT_VERBOSITY))
 am__v_GEN_0 = @echo "  GEN   " $@;
-SOURCES = image-skip.cpp jpeg.cpp lut.cpp pdf.cpp pnm.cpp \
-	threshold.cpp
-DIST_SOURCES = image-skip.cpp jpeg.cpp lut.cpp pdf.cpp pnm.cpp \
-	threshold.cpp
+SOURCES = image-skip.cpp jpeg.cpp lut.cpp magick.cpp padding.cpp \
+	pdf.cpp pnm.cpp shell-pipe.cpp threshold.cpp
+DIST_SOURCES = image-skip.cpp jpeg.cpp lut.cpp magick.cpp padding.cpp \
+	pdf.cpp pnm.cpp shell-pipe.cpp threshold.cpp
 ETAGS = etags
 CTAGS = ctags
 am__tty_colors = \
@@ -323,6 +353,7 @@ LT_DLLOADERS = @LT_DLLOADERS@
 LT_DLPREOPEN = @LT_DLPREOPEN@
 LT_MODULE_EXT = @LT_MODULE_EXT@
 LT_MODULE_PATH_VAR = @LT_MODULE_PATH_VAR@
+MAGICK_CONVERT = @MAGICK_CONVERT@
 MAINT = @MAINT@
 MAKEINFO = @MAKEINFO@
 MKDIR_P = @MKDIR_P@
@@ -426,6 +457,7 @@ top_srcdir = @top_srcdir@
 @enable_boost_unit_test_framework_TRUE@	$(am__append_13) \
 @enable_boost_unit_test_framework_TRUE@	$(am__append_15)
 @enable_boost_unit_test_framework_TRUE@TESTS = $(check_PROGRAMS)
+#endif
 @enable_boost_unit_test_framework_TRUE@LDADD = ../libflt-all.la \
 @enable_boost_unit_test_framework_TRUE@	../../lib/libutsushi.la \
 @enable_boost_unit_test_framework_TRUE@	$(LIBUTSUSHI_LIBS) \
@@ -508,12 +540,21 @@ jpeg.utr$(EXEEXT): $(jpeg_utr_OBJECTS) $(jpeg_utr_DEPENDENCIES)
 lut.utr$(EXEEXT): $(lut_utr_OBJECTS) $(lut_utr_DEPENDENCIES) 
 	@rm -f lut.utr$(EXEEXT)
 	$(AM_V_CXXLD)$(CXXLINK) $(lut_utr_OBJECTS) $(lut_utr_LDADD) $(LIBS)
+magick.utr$(EXEEXT): $(magick_utr_OBJECTS) $(magick_utr_DEPENDENCIES) 
+	@rm -f magick.utr$(EXEEXT)
+	$(AM_V_CXXLD)$(CXXLINK) $(magick_utr_OBJECTS) $(magick_utr_LDADD) $(LIBS)
+padding.utr$(EXEEXT): $(padding_utr_OBJECTS) $(padding_utr_DEPENDENCIES) 
+	@rm -f padding.utr$(EXEEXT)
+	$(AM_V_CXXLD)$(CXXLINK) $(padding_utr_OBJECTS) $(padding_utr_LDADD) $(LIBS)
 pdf.utr$(EXEEXT): $(pdf_utr_OBJECTS) $(pdf_utr_DEPENDENCIES) 
 	@rm -f pdf.utr$(EXEEXT)
 	$(AM_V_CXXLD)$(pdf_utr_LINK) $(pdf_utr_OBJECTS) $(pdf_utr_LDADD) $(LIBS)
 pnm.utr$(EXEEXT): $(pnm_utr_OBJECTS) $(pnm_utr_DEPENDENCIES) 
 	@rm -f pnm.utr$(EXEEXT)
 	$(AM_V_CXXLD)$(CXXLINK) $(pnm_utr_OBJECTS) $(pnm_utr_LDADD) $(LIBS)
+shell-pipe.utr$(EXEEXT): $(shell_pipe_utr_OBJECTS) $(shell_pipe_utr_DEPENDENCIES) 
+	@rm -f shell-pipe.utr$(EXEEXT)
+	$(AM_V_CXXLD)$(CXXLINK) $(shell_pipe_utr_OBJECTS) $(shell_pipe_utr_LDADD) $(LIBS)
 threshold.utr$(EXEEXT): $(threshold_utr_OBJECTS) $(threshold_utr_DEPENDENCIES) 
 	@rm -f threshold.utr$(EXEEXT)
 	$(AM_V_CXXLD)$(CXXLINK) $(threshold_utr_OBJECTS) $(threshold_utr_LDADD) $(LIBS)
@@ -527,8 +568,11 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/image-skip.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/jpeg_utr-jpeg.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lut.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/magick.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/padding.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pdf_utr-pdf.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pnm.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/shell-pipe.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/threshold.Po@am__quote@
 
 .cpp.o:

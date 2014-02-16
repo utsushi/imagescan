@@ -217,6 +217,7 @@ LT_DLLOADERS = @LT_DLLOADERS@
 LT_DLPREOPEN = @LT_DLPREOPEN@
 LT_MODULE_EXT = @LT_MODULE_EXT@
 LT_MODULE_PATH_VAR = @LT_MODULE_PATH_VAR@
+MAGICK_CONVERT = @MAGICK_CONVERT@
 MAINT = @MAINT@
 MAKEINFO = @MAKEINFO@
 MKDIR_P = @MKDIR_P@
@@ -724,9 +725,9 @@ uninstall-am: uninstall-local
 logo.png: logo.svg
 	rsvg-convert -h 100 -f png $< > $@
 icon32.xpm: icon.svg
-	rsvg-convert -h 32 -f png $< | convert png:- $@
+	rsvg-convert -h 32 -f png $< | $(MAGICK_CONVERT) png:- $@
 icon16.xpm: icon.svg
-	rsvg-convert -h 16 -f png $< | convert png:- $@
+	rsvg-convert -h 16 -f png $< | $(MAGICK_CONVERT) png:- $@
 
 clean-local: $(supported_formats:target=clean)
 uninstall-local: $(supported_formats:target=uninstall)

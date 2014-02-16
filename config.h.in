@@ -152,6 +152,9 @@
 /* Define to 1 if you have the <mach-o/dyld.h> header file. */
 #undef HAVE_MACH_O_DYLD_H
 
+/* Define to 1 if GraphicsMagick or ImageMagick is available */
+#undef HAVE_MAGICK
+
 /* Define to 1 if you have the <memory.h> header file. */
 #undef HAVE_MEMORY_H
 
@@ -225,6 +228,9 @@
 /* Define to the sub-directory in which libtool stores uninstalled libraries.
    */
 #undef LT_OBJDIR
+
+/* Define to an appropriate command-line invocation for convert */
+#undef MAGICK_CONVERT
 
 /* Define if dlsym() requires a leading underscore in symbol names. */
 #undef NEED_USCORE

@@ -37,6 +37,7 @@ host_triplet = @host@
 @have_libjpeg_TRUE@am__append_1 = $(LIBJPEG_CFLAGS)
 @have_libjpeg_TRUE@am__append_2 = $(LIBJPEG_LIBS)
 @have_libjpeg_TRUE@am__append_3 = jpeg.cpp jpeg.hpp
+@have_magick_TRUE@am__append_4 = magick.cpp magick.hpp
 subdir = filters
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -101,19 +102,22 @@ am__DEPENDENCIES_1 =
 libflt_all_la_DEPENDENCIES = $(am__DEPENDENCIES_2)
 am__libflt_all_la_SOURCES_DIST = g3fax.cpp g3fax.hpp lut.cpp lut.hpp \
 	image-skip.cpp image-skip.hpp padding.cpp padding.hpp pnm.cpp \
-	pnm.hpp threshold.cpp threshold.hpp pdf.cpp pdf.hpp \
-	pdf/array.cpp pdf/array.hpp pdf/dictionary.cpp \
-	pdf/dictionary.hpp pdf/object.cpp pdf/object.hpp \
-	pdf/primitive.cpp pdf/primitive.hpp pdf/writer.cpp \
-	pdf/writer.hpp jpeg.cpp jpeg.hpp
+	pnm.hpp shell-pipe.cpp shell-pipe.hpp threshold.cpp \
+	threshold.hpp pdf.cpp pdf.hpp pdf/array.cpp pdf/array.hpp \
+	pdf/dictionary.cpp pdf/dictionary.hpp pdf/object.cpp \
+	pdf/object.hpp pdf/primitive.cpp pdf/primitive.hpp \
+	pdf/writer.cpp pdf/writer.hpp jpeg.cpp jpeg.hpp magick.cpp \
+	magick.hpp
 am__objects_1 = libflt_all_la-pdf.lo libflt_all_la-array.lo \
 	libflt_all_la-dictionary.lo libflt_all_la-object.lo \
 	libflt_all_la-primitive.lo libflt_all_la-writer.lo
 @have_libjpeg_TRUE@am__objects_2 = libflt_all_la-jpeg.lo
+@have_magick_TRUE@am__objects_3 = libflt_all_la-magick.lo
 am_libflt_all_la_OBJECTS = libflt_all_la-g3fax.lo libflt_all_la-lut.lo \
 	libflt_all_la-image-skip.lo libflt_all_la-padding.lo \
-	libflt_all_la-pnm.lo libflt_all_la-threshold.lo \
-	$(am__objects_1) $(am__objects_2)
+	libflt_all_la-pnm.lo libflt_all_la-shell-pipe.lo \
+	libflt_all_la-threshold.lo $(am__objects_1) $(am__objects_2) \
+	$(am__objects_3)
 libflt_all_la_OBJECTS = $(am_libflt_all_la_OBJECTS)
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
@@ -305,6 +309,7 @@ LT_DLLOADERS = @LT_DLLOADERS@
 LT_DLPREOPEN = @LT_DLPREOPEN@
 LT_MODULE_EXT = @LT_MODULE_EXT@
 LT_MODULE_PATH_VAR = @LT_MODULE_PATH_VAR@
+MAGICK_CONVERT = @MAGICK_CONVERT@
 MAINT = @MAINT@
 MAKEINFO = @MAKEINFO@
 MKDIR_P = @MKDIR_P@
@@ -414,8 +419,8 @@ libflt_all_la_LDFLAGS = $(filter_ldflags)
 libflt_all_la_LIBADD = $(am__append_2)
 libflt_all_la_SOURCES = g3fax.cpp g3fax.hpp lut.cpp lut.hpp \
 	image-skip.cpp image-skip.hpp padding.cpp padding.hpp pnm.cpp \
-	pnm.hpp threshold.cpp threshold.hpp $(pdf_filter) \
-	$(am__append_3)
+	pnm.hpp shell-pipe.cpp shell-pipe.hpp threshold.cpp \
+	threshold.hpp $(pdf_filter) $(am__append_3) $(am__append_4)
 pdf_filter = pdf.cpp pdf.hpp pdf/array.cpp pdf/array.hpp \
 	pdf/dictionary.cpp pdf/dictionary.hpp pdf/object.cpp \
 	pdf/object.hpp pdf/primitive.cpp pdf/primitive.hpp \
@@ -500,11 +505,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libflt_all_la-image-skip.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libflt_all_la-jpeg.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libflt_all_la-lut.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libflt_all_la-magick.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libflt_all_la-object.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libflt_all_la-padding.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libflt_all_la-pdf.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libflt_all_la-pnm.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libflt_all_la-primitive.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libflt_all_la-shell-pipe.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libflt_all_la-threshold.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libflt_all_la-writer.Plo@am__quote@
 
@@ -572,6 +579,14 @@ libflt_all_la-pnm.lo: pnm.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o libflt_all_la-pnm.lo `test -f 'pnm.cpp' || echo '$(srcdir)/'`pnm.cpp
 
+libflt_all_la-shell-pipe.lo: shell-pipe.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -MT libflt_all_la-shell-pipe.lo -MD -MP -MF $(DEPDIR)/libflt_all_la-shell-pipe.Tpo -c -o libflt_all_la-shell-pipe.lo `test -f 'shell-pipe.cpp' || echo '$(srcdir)/'`shell-pipe.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libflt_all_la-shell-pipe.Tpo $(DEPDIR)/libflt_all_la-shell-pipe.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='shell-pipe.cpp' object='libflt_all_la-shell-pipe.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o libflt_all_la-shell-pipe.lo `test -f 'shell-pipe.cpp' || echo '$(srcdir)/'`shell-pipe.cpp
+
 libflt_all_la-threshold.lo: threshold.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -MT libflt_all_la-threshold.lo -MD -MP -MF $(DEPDIR)/libflt_all_la-threshold.Tpo -c -o libflt_all_la-threshold.lo `test -f 'threshold.cpp' || echo '$(srcdir)/'`threshold.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libflt_all_la-threshold.Tpo $(DEPDIR)/libflt_all_la-threshold.Plo
@@ -635,6 +650,14 @@ libflt_all_la-jpeg.lo: jpeg.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='jpeg.cpp' object='libflt_all_la-jpeg.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o libflt_all_la-jpeg.lo `test -f 'jpeg.cpp' || echo '$(srcdir)/'`jpeg.cpp
+
+libflt_all_la-magick.lo: magick.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -MT libflt_all_la-magick.lo -MD -MP -MF $(DEPDIR)/libflt_all_la-magick.Tpo -c -o libflt_all_la-magick.lo `test -f 'magick.cpp' || echo '$(srcdir)/'`magick.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libflt_all_la-magick.Tpo $(DEPDIR)/libflt_all_la-magick.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='magick.cpp' object='libflt_all_la-magick.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o libflt_all_la-magick.lo `test -f 'magick.cpp' || echo '$(srcdir)/'`magick.cpp
 
 mostlyclean-libtool:
 	-rm -f *.lo

@@ -39,11 +39,13 @@ build_triplet = @build@
 host_triplet = @host@
 @enable_boost_unit_test_framework_TRUE@TESTS = setter.utr$(EXEEXT) \
 @enable_boost_unit_test_framework_TRUE@	grammar-formats.utr$(EXEEXT) \
-@enable_boost_unit_test_framework_TRUE@	grammar.utr$(EXEEXT)
+@enable_boost_unit_test_framework_TRUE@	grammar.utr$(EXEEXT) \
+@enable_boost_unit_test_framework_TRUE@	grammar-mechanics.utr$(EXEEXT)
 @enable_boost_unit_test_framework_TRUE@check_PROGRAMS =  \
 @enable_boost_unit_test_framework_TRUE@	setter.utr$(EXEEXT) \
 @enable_boost_unit_test_framework_TRUE@	grammar-formats.utr$(EXEEXT) \
-@enable_boost_unit_test_framework_TRUE@	grammar.utr$(EXEEXT)
+@enable_boost_unit_test_framework_TRUE@	grammar.utr$(EXEEXT) \
+@enable_boost_unit_test_framework_TRUE@	grammar-mechanics.utr$(EXEEXT)
 
 #  Set build-time flags to build Boost.Test Unit Test Framework (UTF)
 #  based test runners.
@@ -137,6 +139,11 @@ am__DEPENDENCIES_1 =
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
 am__v_lt_0 = --silent
+grammar_mechanics_utr_SOURCES = grammar-mechanics.cpp
+grammar_mechanics_utr_OBJECTS = grammar-mechanics.$(OBJEXT)
+@enable_boost_unit_test_framework_TRUE@grammar_mechanics_utr_DEPENDENCIES =  \
+@enable_boost_unit_test_framework_TRUE@	$(am__DEPENDENCIES_2) \
+@enable_boost_unit_test_framework_TRUE@	../../../connexions/libcnx-usb.la
 grammar_utr_SOURCES = grammar.cpp
 grammar_utr_OBJECTS = grammar.$(OBJEXT)
 @enable_boost_unit_test_framework_TRUE@grammar_utr_DEPENDENCIES =  \
@@ -174,8 +181,10 @@ am__v_CXXLD_0 = @echo "  CXXLD " $@;
 AM_V_GEN = $(am__v_GEN_$(V))
 am__v_GEN_ = $(am__v_GEN_$(AM_DEFAULT_VERBOSITY))
 am__v_GEN_0 = @echo "  GEN   " $@;
-SOURCES = grammar-formats.cpp grammar.cpp setter.cpp
-DIST_SOURCES = grammar-formats.cpp grammar.cpp setter.cpp
+SOURCES = grammar-formats.cpp grammar-mechanics.cpp grammar.cpp \
+	setter.cpp
+DIST_SOURCES = grammar-formats.cpp grammar-mechanics.cpp grammar.cpp \
+	setter.cpp
 ETAGS = etags
 CTAGS = ctags
 am__tty_colors = \
@@ -280,6 +289,7 @@ LT_DLLOADERS = @LT_DLLOADERS@
 LT_DLPREOPEN = @LT_DLPREOPEN@
 LT_MODULE_EXT = @LT_MODULE_EXT@
 LT_MODULE_PATH_VAR = @LT_MODULE_PATH_VAR@
+MAGICK_CONVERT = @MAGICK_CONVERT@
 MAINT = @MAINT@
 MAKEINFO = @MAKEINFO@
 MKDIR_P = @MKDIR_P@
@@ -393,6 +403,7 @@ top_srcdir = @top_srcdir@
 @enable_boost_unit_test_framework_TRUE@	$(BOOST_FILESYSTEM_LIB) \
 @enable_boost_unit_test_framework_TRUE@	../../../connexions/libcnx-usb.la
 @enable_boost_unit_test_framework_TRUE@setter_utr_LDADD = $(LDADD) ../../../connexions/libcnx-usb.la
+@enable_boost_unit_test_framework_TRUE@grammar_mechanics_utr_LDADD = $(LDADD) ../../../connexions/libcnx-usb.la
 EXTRA_DIST = grammar-formats.tcs grammar.tcs
 CLEANFILES = $(am__append_7) $(am__append_9)
 AM_DEFAULT_SOURCE_EXT = .cpp
@@ -448,6 +459,9 @@ clean-checkPROGRAMS:
 grammar-formats.utr$(EXEEXT): $(grammar_formats_utr_OBJECTS) $(grammar_formats_utr_DEPENDENCIES) 
 	@rm -f grammar-formats.utr$(EXEEXT)
 	$(AM_V_CXXLD)$(CXXLINK) $(grammar_formats_utr_OBJECTS) $(grammar_formats_utr_LDADD) $(LIBS)
+grammar-mechanics.utr$(EXEEXT): $(grammar_mechanics_utr_OBJECTS) $(grammar_mechanics_utr_DEPENDENCIES) 
+	@rm -f grammar-mechanics.utr$(EXEEXT)
+	$(AM_V_CXXLD)$(CXXLINK) $(grammar_mechanics_utr_OBJECTS) $(grammar_mechanics_utr_LDADD) $(LIBS)
 grammar.utr$(EXEEXT): $(grammar_utr_OBJECTS) $(grammar_utr_DEPENDENCIES) 
 	@rm -f grammar.utr$(EXEEXT)
 	$(AM_V_CXXLD)$(CXXLINK) $(grammar_utr_OBJECTS) $(grammar_utr_LDADD) $(LIBS)
@@ -462,6 +476,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/grammar-formats.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/grammar-mechanics.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/grammar.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/setter.Po@am__quote@
 

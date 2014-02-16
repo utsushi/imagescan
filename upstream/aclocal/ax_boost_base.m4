@@ -200,7 +200,7 @@ if test "x$want_boost" = "xyes"; then
 		AC_LANG_POP([C++])
 	fi
 
-    if test "$succeeded" != "yes"; then
+    if test "$succeeded" != "yes" ; then
         if test "$_version" = "0" ; then
             AC_MSG_RESULT([no])
         else
@@ -215,6 +215,7 @@ if test "x$want_boost" = "xyes"; then
         # execute ACTION-IF-FOUND (if present):
         ifelse([$2], , :, [$2])
     fi
+
     CPPFLAGS="$CPPFLAGS_SAVED"
     LDFLAGS="$LDFLAGS_SAVED"
 fi

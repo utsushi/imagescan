@@ -261,6 +261,7 @@ LT_DLLOADERS = @LT_DLLOADERS@
 LT_DLPREOPEN = @LT_DLPREOPEN@
 LT_MODULE_EXT = @LT_MODULE_EXT@
 LT_MODULE_PATH_VAR = @LT_MODULE_PATH_VAR@
+MAGICK_CONVERT = @MAGICK_CONVERT@
 MAINT = @MAINT@
 MAKEINFO = @MAKEINFO@
 MKDIR_P = @MKDIR_P@
@@ -369,9 +370,9 @@ EXTRA_DIST = bootstrap install-deps tools/boost-test-report \
 	lib/tag.xsl lib/tag.cpp
 ACLOCAL_AMFLAGS = -I upstream/aclocal
 DISTCHECK_CONFIGURE_FLAGS = --with-included-ltdl --with-gtkmm \
-	--with-sane --with-jpeg --with-tiff --disable-sane-config \
-	--disable-udev-config --enable-test-reports \
-	--enable-code-coverage
+	--with-sane --with-magick --with-jpeg --with-tiff \
+	--disable-sane-config --disable-udev-config \
+	--enable-test-reports --enable-code-coverage
 pattern_headers = utsushi/pattern/decorator.hpp
 stream_headers = utsushi/octet.hpp utsushi/context.hpp \
 	utsushi/iobase.hpp utsushi/device.hpp utsushi/filter.hpp \

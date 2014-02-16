@@ -53,9 +53,12 @@
 ../drivers/esci/constant.hpp
 ../drivers/esci/data/
 ../drivers/esci/data/DS-50000.dat
+../drivers/esci/data/DS-510.dat
 ../drivers/esci/data/DS-5500.dat
+../drivers/esci/data/DS-560.dat
 ../drivers/esci/data/DS-70000.dat
 ../drivers/esci/data/DS-7500.dat
+../drivers/esci/data/DS-860.dat
 ../drivers/esci/exception.hpp
 ../drivers/esci/extended-scanner.cpp
 ../drivers/esci/extended-scanner.hpp
@@ -137,6 +140,7 @@
 ../drivers/esci/tests/Makefile.am
 ../drivers/esci/tests/grammar-formats.cpp
 ../drivers/esci/tests/grammar-formats.tcs
+../drivers/esci/tests/grammar-mechanics.cpp
 ../drivers/esci/tests/grammar.cpp
 ../drivers/esci/tests/grammar.tcs
 ../drivers/esci/tests/setter.cpp
@@ -156,6 +160,8 @@
 ../filters/jpeg.hpp
 ../filters/lut.cpp
 ../filters/lut.hpp
+../filters/magick.cpp
+../filters/magick.hpp
 ../filters/padding.cpp
 ../filters/padding.hpp
 ../filters/pdf/
@@ -173,6 +179,8 @@
 ../filters/pdf.hpp
 ../filters/pnm.cpp
 ../filters/pnm.hpp
+../filters/shell-pipe.cpp
+../filters/shell-pipe.hpp
 ../filters/tests/
 ../filters/tests/Makefile.am
 ../filters/tests/data/
@@ -183,8 +191,11 @@
 ../filters/tests/image-skip.cpp
 ../filters/tests/jpeg.cpp
 ../filters/tests/lut.cpp
+../filters/tests/magick.cpp
+../filters/tests/padding.cpp
 ../filters/tests/pdf.cpp
 ../filters/tests/pnm.cpp
+../filters/tests/shell-pipe.cpp
 ../filters/tests/threshold.cpp
 ../filters/threshold.cpp
 ../filters/threshold.hpp

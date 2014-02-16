@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: utsushi 0.4.0\n"
+"Project-Id-Version: utsushi 0.5.0\n"
 "Report-Msgid-Bugs-To: linux-scanner@epson.jp\n"
-"POT-Creation-Date: 2013-11-21 09:34+0900\n"
+"POT-Creation-Date: 2014-02-13 11:32+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,216 +20,253 @@ msgstr ""
 msgid "unable to initialise USB support"
 msgstr ""
 
-#: connexions/usb.cpp:113 connexions/usb.cpp:377
+#: connexions/usb.cpp:113 connexions/usb.cpp:348
 msgid "no usable, matching device"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:330 drivers/esci/extended-scanner.cpp:203
+#: drivers/esci/compound-scanner.cpp:391 drivers/esci/extended-scanner.cpp:203
 msgid "Document Source"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:344
+#: drivers/esci/compound-scanner.cpp:405
 msgid "Image Type"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:357
+#: drivers/esci/compound-scanner.cpp:418
 msgid "Dropout"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:370
+#: drivers/esci/compound-scanner.cpp:431
 msgid "Transfer Format"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:371
+#: drivers/esci/compound-scanner.cpp:432
 msgid ""
 "Selecting a compressed format such as JPEG normally results in faster device "
 "side processing."
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:385
+#: drivers/esci/compound-scanner.cpp:446
 msgid "JPEG Quality"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:398 filters/threshold.cpp:49
+#: drivers/esci/compound-scanner.cpp:459 filters/threshold.cpp:49
 #: filters/threshold.cpp:142
 msgid "Threshold"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:411
+#: drivers/esci/compound-scanner.cpp:472
 msgid "Gamma"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:428 filters/lut.cpp:129
+#: drivers/esci/compound-scanner.cpp:489 filters/lut.cpp:129
 msgid "Brightness"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:435 filters/lut.cpp:138
+#: drivers/esci/compound-scanner.cpp:496 filters/lut.cpp:138
 msgid "Contrast"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:449
+#: drivers/esci/compound-scanner.cpp:510
 msgid "Transfer Size"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:464
+#: drivers/esci/compound-scanner.cpp:525
 msgid "Border Fill"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:480
+#: drivers/esci/compound-scanner.cpp:541
 msgid "Left Border"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:485
+#: drivers/esci/compound-scanner.cpp:546
 msgid "Right Border"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:490
+#: drivers/esci/compound-scanner.cpp:551
 msgid "Top Border"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:495
+#: drivers/esci/compound-scanner.cpp:556
 msgid "Bottom Border"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:511
-msgid "Match Height"
+#: drivers/esci/compound-scanner.cpp:572
+msgid "Force Extent"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:512
-msgid "This may slow down application/driver side processing."
+#: drivers/esci/compound-scanner.cpp:573
+msgid ""
+"Force the image size to equal the user selected size.  Scanners may trim the "
+"image data to the detected size of the document.  This may result in images "
+"that are not all exactly the same size.  This option makes sure all image "
+"sizes match the selected area.\n"
+"Note that this option may slow down application/driver side processing."
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:534
+#: drivers/esci/compound-scanner.cpp:601
 msgid "esci::compound_scanner(): internal inconsistency"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:1387
-#: drivers/esci/grammar-capabilities.cpp:392
+#: drivers/esci/compound-scanner.cpp:1461
+#: drivers/esci/grammar-capabilities.cpp:400
 msgid "RAW"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:1435
+#: drivers/esci/compound-scanner.cpp:1509
 #, boost-format
 msgid ""
 "Scan area too small.\n"
 "The area needs to be larger than %1% by %2%."
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:1471
+#: drivers/esci/compound-scanner.cpp:1788
 msgid "Duplex"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:1483
+#: drivers/esci/compound-scanner.cpp:1800
 msgid "Image Count"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:1495
+#: drivers/esci/compound-scanner.cpp:1812
 msgid "Detect Double Feed"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:1562 drivers/esci/extended-scanner.cpp:85
+#: drivers/esci/compound-scanner.cpp:1927
+#: drivers/esci/compound-scanner.cpp:1997
+msgid "Bind X and Y resolutions"
+msgstr ""
+
+#: drivers/esci/compound-scanner.cpp:1931
+#: drivers/esci/compound-scanner.cpp:1966
+#: drivers/esci/compound-scanner.cpp:2001
+#: drivers/esci/compound-scanner.cpp:2036 drivers/esci/extended-scanner.cpp:85
 msgid "Resolution"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:1570
-msgid "Resolution X"
+#: drivers/esci/compound-scanner.cpp:1935
+#: drivers/esci/compound-scanner.cpp:1950
+#: drivers/esci/compound-scanner.cpp:2005
+#: drivers/esci/compound-scanner.cpp:2020
+msgid "X Resolution"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:1574
-msgid "Resolution Y"
+#: drivers/esci/compound-scanner.cpp:1939
+#: drivers/esci/compound-scanner.cpp:1954
+#: drivers/esci/compound-scanner.cpp:2009
+#: drivers/esci/compound-scanner.cpp:2024
+msgid "Y Resolution"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:1592
+#: drivers/esci/compound-scanner.cpp:1984
+msgid "Enable Resampling"
+msgstr ""
+
+#: drivers/esci/compound-scanner.cpp:1985
+msgid ""
+"This option provides the user with a wider range of supported resolutions.  "
+"Resolutions not supported by the hardware will be achieved through image "
+"processing methods."
+msgstr ""
+
+#: drivers/esci/compound-scanner.cpp:2061
 msgid "Manual"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:1593
+#: drivers/esci/compound-scanner.cpp:2062
 msgid "Maximum"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:1602
+#: drivers/esci/compound-scanner.cpp:2071
 msgid "Scan Area"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:1610
+#: drivers/esci/compound-scanner.cpp:2079
 #: drivers/esci/extended-scanner.cpp:105
 msgid "Top Left X"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:1618
+#: drivers/esci/compound-scanner.cpp:2087
 #: drivers/esci/extended-scanner.cpp:121
 msgid "Top Left Y"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:1626
+#: drivers/esci/compound-scanner.cpp:2095
 #: drivers/esci/extended-scanner.cpp:113
 msgid "Bottom Right X"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:1634
+#: drivers/esci/compound-scanner.cpp:2103
 #: drivers/esci/extended-scanner.cpp:129
 msgid "Bottom Right Y"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:1657
+#: drivers/esci/compound-scanner.cpp:2126
 msgid "Crop"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:1668
+#: drivers/esci/compound-scanner.cpp:2137
 msgid "Crop Adjustment"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:1692
+#: drivers/esci/compound-scanner.cpp:2161
 msgid "Deskew"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:1720
+#: drivers/esci/compound-scanner.cpp:2189
 msgid "Overscan"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:1742
+#: drivers/esci/compound-scanner.cpp:2211
 msgid "internal error: no document source"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:1925
+#: drivers/esci/compound-scanner.cpp:2400
+msgid ""
+"Authentication is required.\n"
+"Unfortunately, this version of the driver does not support authentication "
+"yet."
+msgstr ""
+
+#: drivers/esci/compound-scanner.cpp:2404
 #, boost-format
 msgid "Unknown device error: %1%/%2%"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:1965 sane/backend.cpp:274
+#: drivers/esci/compound-scanner.cpp:2448 sane/backend.cpp:276
 msgid "Please close the ADF cover and try again."
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:1967 sane/backend.cpp:267
+#: drivers/esci/compound-scanner.cpp:2450 sane/backend.cpp:269
 msgid "Clear the ADF document jam and try again."
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:1969 sane/backend.cpp:264
+#: drivers/esci/compound-scanner.cpp:2452 sane/backend.cpp:266
 msgid "Please put your document in the ADF before scanning."
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:1971 sane/backend.cpp:270
+#: drivers/esci/compound-scanner.cpp:2454 sane/backend.cpp:272
 msgid ""
 "A multi page feed occurred in the ADF.\n"
 "Clear the document feeder and try again."
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:1974
+#: drivers/esci/compound-scanner.cpp:2457
 msgid ""
 "A fatal ADF error has occurred.\n"
 "Resolve the error condition and try again.  You may have to restart the scan "
 "dialog or application in order to be able to scan."
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:1988
+#: drivers/esci/compound-scanner.cpp:2471
 msgid "A fatal error has occurred"
 msgstr ""
 
-#: drivers/esci/compound-tweaks.cpp:102 drivers/esci/extended-scanner.cpp:144
+#: drivers/esci/compound-tweaks.cpp:111 drivers/esci/extended-scanner.cpp:144
 msgid "Speed"
 msgstr ""
 
-#: drivers/esci/compound-tweaks.cpp:103
+#: drivers/esci/compound-tweaks.cpp:112
 msgid "Optimize image acquisition for speed"
 msgstr ""
 
@@ -302,8 +339,8 @@ msgid ""
 msgstr ""
 
 #: drivers/esci/extended-scanner.cpp:171
-#: drivers/esci/grammar-capabilities.cpp:264
-#: drivers/esci/grammar-capabilities.cpp:274
+#: drivers/esci/grammar-capabilities.cpp:272
+#: drivers/esci/grammar-capabilities.cpp:282
 msgid "Flatbed"
 msgstr ""
 
@@ -316,8 +353,8 @@ msgid "ADF Duplex"
 msgstr ""
 
 #: drivers/esci/extended-scanner.cpp:181
-#: drivers/esci/grammar-capabilities.cpp:262
-#: drivers/esci/grammar-capabilities.cpp:272
+#: drivers/esci/grammar-capabilities.cpp:270
+#: drivers/esci/grammar-capabilities.cpp:280
 msgid "ADF"
 msgstr ""
 
@@ -330,116 +367,116 @@ msgid "Secondary TPU"
 msgstr ""
 
 #: drivers/esci/extended-scanner.cpp:195
-#: drivers/esci/grammar-capabilities.cpp:263
-#: drivers/esci/grammar-capabilities.cpp:273
+#: drivers/esci/grammar-capabilities.cpp:271
+#: drivers/esci/grammar-capabilities.cpp:281
 msgid "TPU"
 msgstr ""
 
-#: drivers/esci/grammar-capabilities.cpp:194
-#: drivers/esci/grammar-capabilities.cpp:333
+#: drivers/esci/grammar-capabilities.cpp:202
+#: drivers/esci/grammar-capabilities.cpp:341
 msgid "None"
 msgstr ""
 
-#: drivers/esci/grammar-capabilities.cpp:203
+#: drivers/esci/grammar-capabilities.cpp:211
 msgid "White"
 msgstr ""
 
-#: drivers/esci/grammar-capabilities.cpp:204
+#: drivers/esci/grammar-capabilities.cpp:212
 msgid "Black"
 msgstr ""
 
-#: drivers/esci/grammar-capabilities.cpp:300
+#: drivers/esci/grammar-capabilities.cpp:308
 msgid "Off"
 msgstr ""
 
-#: drivers/esci/grammar-capabilities.cpp:301
+#: drivers/esci/grammar-capabilities.cpp:309
 msgid "Normal"
 msgstr ""
 
-#: drivers/esci/grammar-capabilities.cpp:302
+#: drivers/esci/grammar-capabilities.cpp:310
 msgid "Sensitive"
 msgstr ""
 
-#: drivers/esci/grammar-capabilities.cpp:342
+#: drivers/esci/grammar-capabilities.cpp:350
 msgid "Red (1 bit)"
 msgstr ""
 
-#: drivers/esci/grammar-capabilities.cpp:343
+#: drivers/esci/grammar-capabilities.cpp:351
 msgid "Red (8 bit)"
 msgstr ""
 
-#: drivers/esci/grammar-capabilities.cpp:344
+#: drivers/esci/grammar-capabilities.cpp:352
 msgid "Red (16 bit)"
 msgstr ""
 
-#: drivers/esci/grammar-capabilities.cpp:345
+#: drivers/esci/grammar-capabilities.cpp:353
 msgid "Green (1 bit)"
 msgstr ""
 
-#: drivers/esci/grammar-capabilities.cpp:346
+#: drivers/esci/grammar-capabilities.cpp:354
 msgid "Green (8 bit)"
 msgstr ""
 
-#: drivers/esci/grammar-capabilities.cpp:347
+#: drivers/esci/grammar-capabilities.cpp:355
 msgid "Green (16 bit)"
 msgstr ""
 
-#: drivers/esci/grammar-capabilities.cpp:348
+#: drivers/esci/grammar-capabilities.cpp:356
 msgid "Blue (1 bit)"
 msgstr ""
 
-#: drivers/esci/grammar-capabilities.cpp:349
+#: drivers/esci/grammar-capabilities.cpp:357
 msgid "Blue (8 bit)"
 msgstr ""
 
-#: drivers/esci/grammar-capabilities.cpp:350
+#: drivers/esci/grammar-capabilities.cpp:358
 msgid "Blue (16 bit)"
 msgstr ""
 
-#: drivers/esci/grammar-capabilities.cpp:393
+#: drivers/esci/grammar-capabilities.cpp:401
 msgid "JPEG"
 msgstr ""
 
-#: drivers/esci/grammar-capabilities.cpp:510
+#: drivers/esci/grammar-capabilities.cpp:518
 msgid "Color (1 bit)"
 msgstr ""
 
-#: drivers/esci/grammar-capabilities.cpp:511
+#: drivers/esci/grammar-capabilities.cpp:519
 msgid "Color (8 bit)"
 msgstr ""
 
-#: drivers/esci/grammar-capabilities.cpp:512
+#: drivers/esci/grammar-capabilities.cpp:520
 msgid "Color (16 bit)"
 msgstr ""
 
-#: drivers/esci/grammar-capabilities.cpp:513
+#: drivers/esci/grammar-capabilities.cpp:521
 msgid "Gray (1 bit)"
 msgstr ""
 
-#: drivers/esci/grammar-capabilities.cpp:514
+#: drivers/esci/grammar-capabilities.cpp:522
 msgid "Gray (8 bit)"
 msgstr ""
 
-#: drivers/esci/grammar-capabilities.cpp:515
+#: drivers/esci/grammar-capabilities.cpp:523
 msgid "Gray (16 bit)"
 msgstr ""
 
-#: drivers/esci/verify.cpp:264 lib/run-time.cpp:294
+#: drivers/esci/verify.cpp:267 lib/run-time.cpp:294
 msgid "display this help and exit"
 msgstr ""
 
-#: drivers/esci/verify.cpp:266
+#: drivers/esci/verify.cpp:269
 msgid ""
 "log device I/O in hexdump format\n"
 "Data is sent to standard error and may be helpful when debugging test "
 "failures."
 msgstr ""
 
-#: drivers/esci/verify.cpp:270
+#: drivers/esci/verify.cpp:273
 msgid "filename"
 msgstr ""
 
-#: drivers/esci/verify.cpp:271
+#: drivers/esci/verify.cpp:274
 msgid ""
 "dump binary device data\n"
 "The dump is meant as a starting point for a known good reference for device "
@@ -449,7 +486,7 @@ msgid ""
 "the program terminated once the dump is complete."
 msgstr ""
 
-#: drivers/esci/verify.cpp:278
+#: drivers/esci/verify.cpp:281
 msgid ""
 "use given file to obtain known good reference data\n"
 "If --devdata is given with a filename, that file name will be used.  If this "
@@ -457,52 +494,52 @@ msgid ""
 "product or firmware name."
 msgstr ""
 
-#: drivers/esci/verify.cpp:283
+#: drivers/esci/verify.cpp:286
 msgid ""
 "do not run any tests\n"
 "This can be used, for example, to stop the --devdata option from proceeding "
 "with the tests when a filename is given."
 msgstr ""
 
-#: drivers/esci/verify.cpp:294
+#: drivers/esci/verify.cpp:297
 msgid ""
 "image acquistion device to use\n"
 "Defaults to the first driver supported device found."
 msgstr ""
 
-#: drivers/esci/verify.cpp:316
+#: drivers/esci/verify.cpp:319
 msgid "Usage: "
 msgstr ""
 
-#: drivers/esci/verify.cpp:321
+#: drivers/esci/verify.cpp:324
 msgid ""
 "Boost.Test options are supported as well.\n"
 "Unknown options are silently ignored.\n"
 msgstr ""
 
-#: drivers/esci/verify.cpp:336
+#: drivers/esci/verify.cpp:339
 msgid "driver mismatch"
 msgstr ""
 
-#: drivers/esci/verify.cpp:366 src/scan-cli.cpp:164
+#: drivers/esci/verify.cpp:369 src/scan-cli.cpp:166
 #, boost-format
 msgid "cannot find '%1%'"
 msgstr ""
 
-#: drivers/esci/verify.cpp:371 src/scan-cli.cpp:169
+#: drivers/esci/verify.cpp:374 src/scan-cli.cpp:171
 msgid "no devices available"
 msgstr ""
 
-#: drivers/esci/verify.cpp:398 drivers/esci/verify.cpp:418
+#: drivers/esci/verify.cpp:401 drivers/esci/verify.cpp:421
 msgid "unable to connect with device"
 msgstr ""
 
-#: drivers/esci/verify.cpp:431
+#: drivers/esci/verify.cpp:434
 #, boost-format
 msgid "cannot open %1%"
 msgstr ""
 
-#: filters/image-skip.cpp:67 filters/image-skip.cpp:206
+#: filters/image-skip.cpp:67 filters/image-skip.cpp:217
 msgid "Blank Image Threshold"
 msgstr ""
 
@@ -526,7 +563,7 @@ msgstr ""
 msgid "Change contrast of the acquired image."
 msgstr ""
 
-#: filters/padding.cpp:87 filters/padding.cpp:170
+#: filters/padding.cpp:87 filters/padding.cpp:177
 msgid "padding only works with raster images of known size"
 msgstr ""
 
@@ -637,61 +674,61 @@ msgstr ""
 msgid "gtk-refresh"
 msgstr ""
 
-#: gtkmm/dialog.cpp:72
+#: gtkmm/dialog.cpp:73
 msgid "Dialog specification requires a 'uimanager'"
 msgstr ""
 
-#: gtkmm/dialog.cpp:230
+#: gtkmm/dialog.cpp:231
 msgid "Save As"
 msgstr ""
 
-#: gtkmm/dialog.cpp:243
+#: gtkmm/dialog.cpp:244
 msgid "Image Files"
 msgstr ""
 
-#: gtkmm/dialog.cpp:249
+#: gtkmm/dialog.cpp:250
 msgid "All Files"
 msgstr ""
 
-#: gtkmm/dialog.cpp:279
+#: gtkmm/dialog.cpp:280
 msgid "Unsupported file format."
 msgstr ""
 
-#: gtkmm/dialog.cpp:282
+#: gtkmm/dialog.cpp:283
 #, boost-format
 msgid ""
 "Support for images in %1% format has not been implemented yet.\n"
 "Please use PNM, JPEG, PDF or TIFF for now."
 msgstr ""
 
-#: gtkmm/dialog.cpp:377 gtkmm/dialog.cpp:416 gtkmm/dialog.cpp:465
-#: gtkmm/dialog.cpp:484 src/scan-cli.cpp:632 src/scan-cli.cpp:671
-#: src/scan-cli.cpp:720 src/scan-cli.cpp:739
+#: gtkmm/dialog.cpp:413 gtkmm/dialog.cpp:462 gtkmm/dialog.cpp:514
+#: gtkmm/dialog.cpp:532 src/scan-cli.cpp:731 src/scan-cli.cpp:780
+#: src/scan-cli.cpp:832 src/scan-cli.cpp:848
 #, boost-format
 msgid "conversion from %1% to %2% is not supported"
 msgstr ""
 
-#: gtkmm/dialog.cpp:391 src/scan-cli.cpp:646
+#: gtkmm/dialog.cpp:431 src/scan-cli.cpp:749
 msgid "JPEG does not support bi-level imagery"
 msgstr ""
 
-#: gtkmm/dialog.cpp:520
+#: gtkmm/dialog.cpp:572
 #, boost-format
 msgid "A file named \"%1%\" already exists.  Do you want to replace it?"
 msgstr ""
 
-#: gtkmm/dialog.cpp:526
+#: gtkmm/dialog.cpp:578
 #, boost-format
 msgid ""
 "The file already exists in \"%1%\".  Replacing it will overwrite its "
 "contents."
 msgstr ""
 
-#: gtkmm/dialog.cpp:538
+#: gtkmm/dialog.cpp:590
 msgid "This may overwrite existing files!"
 msgstr ""
 
-#: gtkmm/dialog.cpp:542
+#: gtkmm/dialog.cpp:594
 #, boost-format
 msgid "Files matching \"%1%\" may be overwritten."
 msgstr ""
@@ -758,31 +795,31 @@ msgstr ""
 msgid "The selected combination of values is not supported."
 msgstr ""
 
-#: lib/descriptor.cpp:37
+#: lib/descriptor.cpp:47
 msgid "Standard"
 msgstr ""
 
-#: lib/descriptor.cpp:38
+#: lib/descriptor.cpp:48
 msgid ""
 "If there is any user interface at all, options at the standard level are "
 "meant to be made available to the user."
 msgstr ""
 
-#: lib/descriptor.cpp:44
+#: lib/descriptor.cpp:54
 msgid "Extended"
 msgstr ""
 
-#: lib/descriptor.cpp:45
+#: lib/descriptor.cpp:55
 msgid ""
 "Extended options are for those situations where the user needs a bit more "
 "control over how things will be done."
 msgstr ""
 
-#: lib/descriptor.cpp:51
+#: lib/descriptor.cpp:61
 msgid "Complete"
 msgstr ""
 
-#: lib/descriptor.cpp:52
+#: lib/descriptor.cpp:62
 msgid ""
 "This is for options that are mostly just relevant for the most demanding of "
 "image acquisition jobs or those users will not be satisfied unless they are "
@@ -837,7 +874,7 @@ msgstr ""
 msgid "Executive"
 msgstr ""
 
-#: lib/option.cpp:542
+#: lib/option.cpp:549
 msgid "cannot add option::map to self"
 msgstr ""
 
@@ -943,7 +980,7 @@ msgstr ""
 msgid "failure writing TIFF directory"
 msgstr ""
 
-#: sane/backend.cpp:1008
+#: sane/backend.cpp:1010
 msgid ""
 "The current locale settings are not supported by the standard C++ library "
 "used by this application.  This is most likely caused by a misconfigured "
@@ -953,7 +990,7 @@ msgid ""
 "locale support of the C++ library used by the application."
 msgstr ""
 
-#: sane/backend.cpp:1032
+#: sane/backend.cpp:1034
 msgid "library initialization failed"
 msgstr ""
 
@@ -962,13 +999,13 @@ msgstr ""
 msgid "Unknown SANE status code %d"
 msgstr ""
 
-#: sane/handle.cpp:715
+#: sane/handle.cpp:1105
 msgid ""
 "SANE API specification violation\n"
 "The option number count has to be the first option."
 msgstr ""
 
-#: sane/handle.cpp:849
+#: sane/handle.cpp:1277
 msgid ""
 "SANE API specification violation\n"
 "Option names must start with a lower-case ASCII character."
@@ -1014,66 +1051,66 @@ msgstr ""
 msgid "next generation image acquisition"
 msgstr ""
 
-#: src/scan-cli.cpp:149
+#: src/scan-cli.cpp:151
 msgid "device found but has no driver"
 msgstr ""
 
-#: src/scan-cli.cpp:184
+#: src/scan-cli.cpp:186
 #, boost-format
 msgid "%1%: not supported"
 msgstr ""
 
-#: src/scan-cli.cpp:219
+#: src/scan-cli.cpp:231
 #, boost-format
 msgid ""
 "%1%\n"
 "Allowed values: %2%"
 msgstr ""
 
-#: src/scan-cli.cpp:226
+#: src/scan-cli.cpp:238
 #, boost-format
 msgid "Allowed values: %1%"
 msgstr ""
 
-#: src/scan-cli.cpp:334
+#: src/scan-cli.cpp:370
 #, boost-format
 msgid ""
 "option parser internal inconsistency\n"
 "  key = %1%"
 msgstr ""
 
-#: src/scan-cli.cpp:412
+#: src/scan-cli.cpp:458
 msgid "image acquisition device to use"
 msgstr ""
 
-#: src/scan-cli.cpp:414
+#: src/scan-cli.cpp:460
 msgid "output destination to use"
 msgstr ""
 
-#: src/scan-cli.cpp:428 src/scan-gtkmm.cpp:73
+#: src/scan-cli.cpp:474 src/scan-gtkmm.cpp:73
 msgid "Utility options"
 msgstr ""
 
-#: src/scan-cli.cpp:431
+#: src/scan-cli.cpp:477
 msgid "log device I/O in hexdump format"
 msgstr ""
 
-#: src/scan-cli.cpp:433
+#: src/scan-cli.cpp:479
 msgid ""
 "output image format\n"
 "PNM, JPEG, PDF, TIFF or one of the device supported transfer-formats.  The "
 "explicitly mentioned types are normally inferred from the output file name."
 msgstr ""
 
-#: src/scan-cli.cpp:482
+#: src/scan-cli.cpp:528
 msgid "Device options"
 msgstr ""
 
-#: src/scan-cli.cpp:488
+#: src/scan-cli.cpp:540
 msgid "Add-on options"
 msgstr ""
 
-#: src/scan-cli.cpp:501
+#: src/scan-cli.cpp:553
 msgid ""
 "Note: device options may be ignored if their prerequisites are not "
 "satisfied.\n"
