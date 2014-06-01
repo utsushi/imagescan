@@ -98,7 +98,7 @@ am__base_list = \
   sed '$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;s/\n/ /g' | \
   sed '$$!N;$$!N;$$!N;$$!N;s/\n/ /g'
 am__installdirs = "$(DESTDIR)$(driverlibdir)" \
-	"$(DESTDIR)$(exec_udev_rulesdir)"
+	"$(DESTDIR)$(driverdatadir)" "$(DESTDIR)$(exec_udev_rulesdir)"
 LTLIBRARIES = $(driverlib_LTLIBRARIES)
 libdrv_esci_la_DEPENDENCIES = ../../lib/libutsushi.la
 am_libdrv_esci_la_OBJECTS = capture-scanner.lo compound.lo \
@@ -189,7 +189,7 @@ RECURSIVE_TARGETS = all-recursive check-recursive dvi-recursive \
 	install-pdf-recursive install-ps-recursive install-recursive \
 	installcheck-recursive installdirs-recursive pdf-recursive \
 	ps-recursive uninstall-recursive
-DATA = $(exec_udev_rules_DATA)
+DATA = $(driverdata_DATA) $(exec_udev_rules_DATA)
 RECURSIVE_CLEAN_TARGETS = mostlyclean-recursive clean-recursive	\
   distclean-recursive maintainer-clean-recursive
 AM_RECURSIVE_TARGETS = $(RECURSIVE_TARGETS:-recursive=) \
@@ -426,7 +426,7 @@ top_srcdir = @top_srcdir@
 SUBDIRS = . tests
 driver = esci
 driverlibdir = $(pkglibdir)
-driverdatadir = $(pkgdatadir)
+driverdatadir = $(pkgdatadir)/drivers/esci
 driver_ldflags = $(AM_LDFLAGS) -export-dynamic -export-symbols-regex \
 	libdrv_$(driver)_LTX_factory
 driverlib_LTLIBRARIES = libdrv-esci.la
@@ -467,10 +467,7 @@ libdrv_esci_la_SOURCES = action.hpp buffer.hpp bounding-box.hpp \
 	set-zoom.hpp setter.hpp start-extended-scan.cpp \
 	start-extended-scan.hpp start-scan.hpp start-standard-scan.cpp \
 	start-standard-scan.hpp vector.hpp
-EXTRA_DIST = utsushi-esci.rules data/DS-510.dat data/DS-560.dat \
-	data/DS-760.dat data/DS-860.dat data/DS-5500.dat \
-	data/DS-6500.dat data/DS-7500.dat data/DS-50000.dat \
-	data/DS-60000.dat data/DS-70000.dat
+EXTRA_DIST = utsushi-esci.rules $(driverdata_DATA)
 @enable_udev_config_TRUE@exec_udev_rulesdir = $(UDEV_SYSCONFDIR)/rules.d
 @enable_udev_config_TRUE@exec_udev_rules_DATA = utsushi-esci.rules
 @enable_boost_unit_test_framework_TRUE@verify_SOURCES = verify.cpp \
@@ -488,6 +485,10 @@ EXTRA_DIST = utsushi-esci.rules data/DS-510.dat data/DS-560.dat \
 @enable_boost_unit_test_framework_TRUE@	$(BOOST_UNIT_TEST_FRAMEWORK_LIB) \
 @enable_boost_unit_test_framework_TRUE@	../../connexions/libcnx-usb.la \
 @enable_boost_unit_test_framework_TRUE@	../../connexions/libcnx-hexdump.la
+driverdata_DATA = data/DS-40.dat data/DS-510.dat data/DS-560.dat \
+	data/DS-760.dat data/DS-860.dat data/DS-5500.dat \
+	data/DS-6500.dat data/DS-7500.dat data/DS-50000.dat \
+	data/DS-60000.dat data/DS-70000.dat
 clone_dat = \
 	src=`echo $< | sed 's,^.*/,,; s,\.dat$$,,'`; \
 	dst=`echo $@ | sed 's,^.*/,,; s,\.dat$$,,'`; \
@@ -700,6 +701,26 @@ mostlyclean-libtool:
 
 clean-libtool:
 	-rm -rf .libs _libs
+install-driverdataDATA: $(driverdata_DATA)
+	@$(NORMAL_INSTALL)
+	test -z "$(driverdatadir)" || $(MKDIR_P) "$(DESTDIR)$(driverdatadir)"
+	@list='$(driverdata_DATA)'; test -n "$(driverdatadir)" || list=; \
+	for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  echo "$$d$$p"; \
+	done | $(am__base_list) | \
+	while read files; do \
+	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(driverdatadir)'"; \
+	  $(INSTALL_DATA) $$files "$(DESTDIR)$(driverdatadir)" || exit $$?; \
+	done
+
+uninstall-driverdataDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(driverdata_DATA)'; test -n "$(driverdatadir)" || list=; \
+	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
+	test -n "$$files" || exit 0; \
+	echo " ( cd '$(DESTDIR)$(driverdatadir)' && rm -f" $$files ")"; \
+	cd "$(DESTDIR)$(driverdatadir)" && rm -f $$files
 install-exec_udev_rulesDATA: $(exec_udev_rules_DATA)
 	@$(NORMAL_INSTALL)
 	test -z "$(exec_udev_rulesdir)" || $(MKDIR_P) "$(DESTDIR)$(exec_udev_rulesdir)"
@@ -919,7 +940,7 @@ check: check-recursive
 all-am: Makefile $(LTLIBRARIES) $(PROGRAMS) $(DATA)
 installdirs: installdirs-recursive
 installdirs-am:
-	for dir in "$(DESTDIR)$(driverlibdir)" "$(DESTDIR)$(exec_udev_rulesdir)"; do \
+	for dir in "$(DESTDIR)$(driverlibdir)" "$(DESTDIR)$(driverdatadir)" "$(DESTDIR)$(exec_udev_rulesdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-recursive
@@ -970,7 +991,7 @@ info: info-recursive
 
 info-am:
 
-install-data-am: install-driverlibLTLIBRARIES
+install-data-am: install-driverdataDATA install-driverlibLTLIBRARIES
 
 install-dvi: install-dvi-recursive
 
@@ -1016,7 +1037,7 @@ ps: ps-recursive
 
 ps-am:
 
-uninstall-am: uninstall-driverlibLTLIBRARIES \
+uninstall-am: uninstall-driverdataDATA uninstall-driverlibLTLIBRARIES \
 	uninstall-exec_udev_rulesDATA
 
 .MAKE: $(RECURSIVE_CLEAN_TARGETS) $(RECURSIVE_TARGETS) ctags-recursive \
@@ -1028,16 +1049,18 @@ uninstall-am: uninstall-driverlibLTLIBRARIES \
 	ctags-recursive distclean distclean-compile distclean-generic \
 	distclean-libtool distclean-tags distdir dvi dvi-am html \
 	html-am info info-am install install-am install-data \
-	install-data-am install-driverlibLTLIBRARIES install-dvi \
-	install-dvi-am install-exec install-exec-am \
-	install-exec_udev_rulesDATA install-html install-html-am \
-	install-info install-info-am install-man install-pdf \
-	install-pdf-am install-ps install-ps-am install-strip \
-	installcheck installcheck-am installdirs installdirs-am \
-	maintainer-clean maintainer-clean-generic mostlyclean \
-	mostlyclean-compile mostlyclean-generic mostlyclean-libtool \
-	pdf pdf-am ps ps-am tags tags-recursive uninstall uninstall-am \
-	uninstall-driverlibLTLIBRARIES uninstall-exec_udev_rulesDATA
+	install-data-am install-driverdataDATA \
+	install-driverlibLTLIBRARIES install-dvi install-dvi-am \
+	install-exec install-exec-am install-exec_udev_rulesDATA \
+	install-html install-html-am install-info install-info-am \
+	install-man install-pdf install-pdf-am install-ps \
+	install-ps-am install-strip installcheck installcheck-am \
+	installdirs installdirs-am maintainer-clean \
+	maintainer-clean-generic mostlyclean mostlyclean-compile \
+	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
+	tags tags-recursive uninstall uninstall-am \
+	uninstall-driverdataDATA uninstall-driverlibLTLIBRARIES \
+	uninstall-exec_udev_rulesDATA
 
 
 $(srcdir)/data/DS-760.dat: $(srcdir)/data/DS-860.dat

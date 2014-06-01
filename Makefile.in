@@ -363,8 +363,9 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 SUBDIRS = . $(am__append_1) lib connexions filters $(am__append_2) \
 	drivers/esci $(am__append_3) po src doc tests
-EXTRA_DIST = bootstrap install-deps tools/boost-test-report \
-	tools/boost-test-report.xsl tools/include-boost-src \
+EXTRA_DIST = bootstrap config-bot.h install-deps \
+	tools/boost-test-report tools/boost-test-report.xsl \
+	tools/include-boost-src \
 	upstream/include/no_attribute_directive.hpp \
 	upstream/tools/vc-list-files $(test_headers) lib/tag.xml \
 	lib/tag.xsl lib/tag.cpp
@@ -947,6 +948,7 @@ $(srcdir)/utsushi/tag.hpp $(srcdir)/lib/tag.cpp: $(srcdir)/lib/tag.xml \
 	    -e "/^<!--/s/\.xml ::/.$$format --/" \
 	    -e '/^<!--/,/-->/{ /-->/d; s|^$$|//|p; s|^....|//|p; }' $< > $@; \
 	xsltproc --stringparam format $$format $(srcdir)/lib/tag.xsl $< >> $@
+	sed -i 's/N_("%1%")/"%1%"/' $@
 
 @with_included_boost_TRUE@all-local: boost-libs
 

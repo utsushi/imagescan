@@ -769,6 +769,7 @@ uninstall-am:
 
 @enable_boost_unit_test_framework_TRUE@all-local: $(indent_config) vc-dist-files
 
+distdir ?= $(srcdir)
 vc-dist-files:
 	-@top_srcdir=`echo $(top_srcdir) | sed 's|\\.|\\\\.|g'`; \
 	for file in `$(vc_list_files)`; do \

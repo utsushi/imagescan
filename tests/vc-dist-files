@@ -5,6 +5,7 @@
 ../NEWS
 ../README
 ../bootstrap
+../config-bot.h
 ../configure.ac
 ../connexions/
 ../connexions/Makefile.am
@@ -52,6 +53,7 @@
 ../drivers/esci/compound.hpp
 ../drivers/esci/constant.hpp
 ../drivers/esci/data/
+../drivers/esci/data/DS-40.dat
 ../drivers/esci/data/DS-50000.dat
 ../drivers/esci/data/DS-510.dat
 ../drivers/esci/data/DS-5500.dat
@@ -202,6 +204,8 @@
 ../gtkmm/
 ../gtkmm/Makefile.am
 ../gtkmm/about.xml.in
+../gtkmm/action-dialog.cpp
+../gtkmm/action-dialog.hpp
 ../gtkmm/chooser.cpp
 ../gtkmm/chooser.hpp
 ../gtkmm/dialog-alt.glade

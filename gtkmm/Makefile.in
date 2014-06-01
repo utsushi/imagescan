@@ -100,8 +100,8 @@ LTLIBRARIES = $(gtkmmlib_LTLIBRARIES)
 am__DEPENDENCIES_1 =
 libutsushi_gtkmm_la_DEPENDENCIES = ../lib/libutsushi.la \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
-am_libutsushi_gtkmm_la_OBJECTS = chooser.lo dialog.lo dropdown.lo \
-	editor.lo presets.lo preview.lo pump.lo
+am_libutsushi_gtkmm_la_OBJECTS = action-dialog.lo chooser.lo dialog.lo \
+	dropdown.lo editor.lo presets.lo preview.lo pump.lo
 libutsushi_gtkmm_la_OBJECTS = $(am_libutsushi_gtkmm_la_OBJECTS)
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
@@ -357,10 +357,10 @@ gtkmmdatadir = $(pkgdatadir)/gtkmm
 gtkmmlib_LTLIBRARIES = libutsushi-gtkmm.la
 libutsushi_gtkmm_la_LIBADD = ../lib/libutsushi.la $(LIBGTKMM_LIBS) \
 	$(BOOST_THREAD_LIB)
-libutsushi_gtkmm_la_SOURCES = chooser.cpp chooser.hpp dialog.cpp \
-	dialog.hpp dropdown.cpp dropdown.hpp editor.cpp editor.hpp \
-	presets.cpp presets.hpp preview.cpp preview.hpp pump.cpp \
-	pump.hpp
+libutsushi_gtkmm_la_SOURCES = action-dialog.cpp action-dialog.hpp \
+	chooser.cpp chooser.hpp dialog.cpp dialog.hpp dropdown.cpp \
+	dropdown.hpp editor.cpp editor.hpp presets.cpp presets.hpp \
+	preview.cpp preview.hpp pump.cpp pump.hpp
 dist_gtkmmdata_DATA = dialog.rc dialog.glade
 nodist_gtkmmdata_DATA = about.xml
 EXTRA_DIST = dialog-alt.glade
@@ -441,6 +441,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/action-dialog.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chooser.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dialog.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dropdown.Plo@am__quote@

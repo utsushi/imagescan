@@ -66,7 +66,7 @@ tag::symbol::operator key () const
 
 const tag::symbol tag::application (
   "01_application",
-  N_("%1%"),
+  "%1%",
   N_("Options provided by %1%.")
 );
 const tag::symbol tag::general (
