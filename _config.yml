@@ -1,0 +1,9 @@
+name: imagescan
+repository: https://github.com/utsushi/imagescan
+
+project:
+  name: utsushi
+  url: https://github.com/utsushi
+
+encoding: utf-8
+timezone: UTC
