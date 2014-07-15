@@ -1,4 +1,5 @@
 name: imagescan
+baseurl: /imagescan
 repository: https://github.com/utsushi/imagescan
 
 project:
