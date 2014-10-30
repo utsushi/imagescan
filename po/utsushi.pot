@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: utsushi 0.7.0\n"
+"Project-Id-Version: utsushi 0.8.0\n"
 "Report-Msgid-Bugs-To: linux-scanner@epson.jp\n"
-"POT-Creation-Date: 2014-08-25 05:39+0000\n"
+"POT-Creation-Date: 2014-10-20 06:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -277,7 +277,8 @@ msgstr ""
 msgid "Crop Adjustment"
 msgstr ""
 
-#: drivers/esci/compound-scanner.cpp:2404
+#: drivers/esci/compound-scanner.cpp:2404 gtkmm/dialog.cpp:559
+#: sane/handle.cpp:536 src/scan-cli.cpp:632
 msgid "Deskew"
 msgstr ""
 
@@ -662,19 +663,19 @@ msgstr ""
 msgid "gtk-refresh"
 msgstr ""
 
-#: gtkmm/dialog.cpp:82
+#: gtkmm/dialog.cpp:84
 msgid "Dialog specification requires a 'uimanager'"
 msgstr ""
 
-#: gtkmm/dialog.cpp:262
+#: gtkmm/dialog.cpp:264
 msgid "Save As"
 msgstr ""
 
-#: gtkmm/dialog.cpp:264
+#: gtkmm/dialog.cpp:266
 msgid "Untitled"
 msgstr ""
 
-#: gtkmm/dialog.cpp:437 src/scan-cli.cpp:898
+#: gtkmm/dialog.cpp:478 src/scan-cli.cpp:984
 #, boost-format
 msgid "conversion from %1% to %2% is not supported"
 msgstr ""
@@ -1026,13 +1027,13 @@ msgstr ""
 msgid "Unknown SANE status code %d"
 msgstr ""
 
-#: sane/handle.cpp:1139
+#: sane/handle.cpp:1243
 msgid ""
 "SANE API specification violation\n"
 "The option number count has to be the first option."
 msgstr ""
 
-#: sane/handle.cpp:1311
+#: sane/handle.cpp:1415
 msgid ""
 "SANE API specification violation\n"
 "Option names must start with a lower-case ASCII character."
@@ -1078,60 +1079,60 @@ msgstr ""
 msgid "next generation image acquisition"
 msgstr ""
 
-#: src/scan-cli.cpp:158
+#: src/scan-cli.cpp:160
 msgid "device found but has no driver"
 msgstr ""
 
-#: src/scan-cli.cpp:173
+#: src/scan-cli.cpp:175
 #, boost-format
 msgid "cannot find '%1%'"
 msgstr ""
 
-#: src/scan-cli.cpp:178
+#: src/scan-cli.cpp:180
 msgid "no devices available"
 msgstr ""
 
-#: src/scan-cli.cpp:193
+#: src/scan-cli.cpp:195
 #, boost-format
 msgid "%1%: not supported"
 msgstr ""
 
-#: src/scan-cli.cpp:238
+#: src/scan-cli.cpp:240
 #, boost-format
 msgid ""
 "%1%\n"
 "Allowed values: %2%"
 msgstr ""
 
-#: src/scan-cli.cpp:245
+#: src/scan-cli.cpp:247
 #, boost-format
 msgid "Allowed values: %1%"
 msgstr ""
 
-#: src/scan-cli.cpp:418
+#: src/scan-cli.cpp:420
 #, boost-format
 msgid ""
 "option parser internal inconsistency\n"
 "  key = %1%"
 msgstr ""
 
-#: src/scan-cli.cpp:504
+#: src/scan-cli.cpp:506
 msgid "image acquisition device to use"
 msgstr ""
 
-#: src/scan-cli.cpp:506
+#: src/scan-cli.cpp:508
 msgid "output destination to use"
 msgstr ""
 
-#: src/scan-cli.cpp:520 src/scan-gtkmm.cpp:73
+#: src/scan-cli.cpp:522 src/scan-gtkmm.cpp:73
 msgid "Utility options"
 msgstr ""
 
-#: src/scan-cli.cpp:523
+#: src/scan-cli.cpp:525
 msgid "log device I/O in hexdump format"
 msgstr ""
 
-#: src/scan-cli.cpp:526
+#: src/scan-cli.cpp:528
 msgid ""
 "output image format\n"
 "PNM, PNG, JPEG, PDF, TIFF or one of the device supported transfer-formats.  "
@@ -1139,25 +1140,25 @@ msgid ""
 "name."
 msgstr ""
 
-#: src/scan-cli.cpp:577
+#: src/scan-cli.cpp:579
 msgid "Device actions"
 msgstr ""
 
-#: src/scan-cli.cpp:587
+#: src/scan-cli.cpp:589
 msgid ""
 "Only perform the actions given on the command-line.  Do not perform image "
 "acquisition."
 msgstr ""
 
-#: src/scan-cli.cpp:593
+#: src/scan-cli.cpp:595
 msgid "Device options"
 msgstr ""
 
-#: src/scan-cli.cpp:595
+#: src/scan-cli.cpp:597
 msgid "Add-on options"
 msgstr ""
 
-#: src/scan-cli.cpp:623
+#: src/scan-cli.cpp:656
 msgid ""
 "Note: device options may be ignored if their prerequisites are not "
 "satisfied.\n"
@@ -1165,17 +1166,17 @@ msgid ""
 "example.\n"
 msgstr ""
 
-#: src/scan-cli.cpp:702
+#: src/scan-cli.cpp:757
 #, boost-format
 msgid "cannot infer image format from file extension: '%1%'"
 msgstr ""
 
-#: src/scan-cli.cpp:723
+#: src/scan-cli.cpp:778
 #, boost-format
 msgid "unsupported image format: '%1%'"
 msgstr ""
 
-#: src/scan-cli.cpp:775
+#: src/scan-cli.cpp:830
 #, boost-format
 msgid "%1% does not support multi-image files"
 msgstr ""

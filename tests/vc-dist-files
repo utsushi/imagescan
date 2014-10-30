@@ -57,7 +57,6 @@
 ../drivers/esci/data/DS-50000.dat
 ../drivers/esci/data/DS-510.dat
 ../drivers/esci/data/DS-5500.dat
-../drivers/esci/data/DS-560.dat
 ../drivers/esci/data/DS-70000.dat
 ../drivers/esci/data/DS-7500.dat
 ../drivers/esci/data/DS-860.dat
@@ -155,6 +154,11 @@
 ../drivers/esci/verify.hpp
 ../filters/
 ../filters/Makefile.am
+../filters/autocrop.cpp
+../filters/autocrop.hpp
+../filters/deskew.cpp
+../filters/deskew.hpp
+../filters/doc-locate.cpp
 ../filters/g3fax.cpp
 ../filters/g3fax.hpp
 ../filters/image-skip.cpp
