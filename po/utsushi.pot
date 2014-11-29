@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: utsushi 0.8.0\n"
+"Project-Id-Version: utsushi 0.8.2\n"
 "Report-Msgid-Bugs-To: linux-scanner@epson.jp\n"
-"POT-Creation-Date: 2014-10-20 06:26+0000\n"
+"POT-Creation-Date: 2014-11-21 00:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -675,7 +675,7 @@ msgstr ""
 msgid "Untitled"
 msgstr ""
 
-#: gtkmm/dialog.cpp:478 src/scan-cli.cpp:984
+#: gtkmm/dialog.cpp:478 src/scan-cli.cpp:991
 #, boost-format
 msgid "conversion from %1% to %2% is not supported"
 msgstr ""
@@ -734,11 +734,11 @@ msgstr ""
 msgid "Application"
 msgstr ""
 
-#: gtkmm/editor.cpp:657
+#: gtkmm/editor.cpp:659
 msgid "Restoring previous value"
 msgstr ""
 
-#: gtkmm/editor.cpp:660
+#: gtkmm/editor.cpp:662
 msgid "The selected combination of values is not supported."
 msgstr ""
 
@@ -1000,15 +1000,15 @@ msgstr ""
 msgid "cannot write TIFF to tty or pipe"
 msgstr ""
 
-#: outputs/tiff.cpp:234
+#: outputs/tiff.cpp:252
 msgid "unsupported colour space"
 msgstr ""
 
-#: outputs/tiff.cpp:239
+#: outputs/tiff.cpp:257
 msgid "unsupported bit depth"
 msgstr ""
 
-#: sane/backend.cpp:1011
+#: sane/backend.cpp:1024
 msgid ""
 "The current locale settings are not supported by the standard C++ library "
 "used by this application.  This is most likely caused by a misconfigured "
@@ -1018,7 +1018,7 @@ msgid ""
 "locale support of the C++ library used by the application."
 msgstr ""
 
-#: sane/backend.cpp:1035
+#: sane/backend.cpp:1048
 msgid "library initialization failed"
 msgstr ""
 
@@ -1027,13 +1027,13 @@ msgstr ""
 msgid "Unknown SANE status code %d"
 msgstr ""
 
-#: sane/handle.cpp:1243
+#: sane/handle.cpp:1262
 msgid ""
 "SANE API specification violation\n"
 "The option number count has to be the first option."
 msgstr ""
 
-#: sane/handle.cpp:1415
+#: sane/handle.cpp:1434
 msgid ""
 "SANE API specification violation\n"
 "Option names must start with a lower-case ASCII character."
@@ -1166,17 +1166,17 @@ msgid ""
 "example.\n"
 msgstr ""
 
-#: src/scan-cli.cpp:757
+#: src/scan-cli.cpp:764
 #, boost-format
 msgid "cannot infer image format from file extension: '%1%'"
 msgstr ""
 
-#: src/scan-cli.cpp:778
+#: src/scan-cli.cpp:785
 #, boost-format
 msgid "unsupported image format: '%1%'"
 msgstr ""
 
-#: src/scan-cli.cpp:830
+#: src/scan-cli.cpp:837
 #, boost-format
 msgid "%1% does not support multi-image files"
 msgstr ""

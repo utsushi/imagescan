@@ -104,11 +104,17 @@
 /* Define to 1 if GraphicsMagick is available */
 #undef HAVE_GRAPHICS_MAGICK
 
+/* Define to 1 if GraphicsMagick's C++ API is usable */
+#undef HAVE_GRAPHICS_MAGICK_PP
+
 /* Define if you have the iconv() function and it works. */
 #undef HAVE_ICONV
 
 /* Define to 1 if ImageMagick is available */
 #undef HAVE_IMAGE_MAGICK
+
+/* Define to 1 if ImageMagick's C++ API is usable */
+#undef HAVE_IMAGE_MAGICK_PP
 
 /* Define to 1 if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
@@ -160,9 +166,6 @@
 
 /* Define to 1 if you have the <mach-o/dyld.h> header file. */
 #undef HAVE_MACH_O_DYLD_H
-
-/* Define to 1 if GraphicsMagick or ImageMagick is available */
-#undef HAVE_MAGICK
 
 /* Define to 1 if you have the <memory.h> header file. */
 #undef HAVE_MEMORY_H
@@ -229,9 +232,6 @@
 
 /* define if your compiler has __attribute__ */
 #undef HAVE___ATTRIBUTE__
-
-/* Define to 1 if ImageMagick's Magick++ API is usable */
-#undef HAVE_libMagickPP
 
 /* Define if the OS needs help to load dependent libraries for dlopen(). */
 #undef LTDL_DLOPEN_DEPLIBS

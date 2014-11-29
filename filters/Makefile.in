@@ -58,9 +58,9 @@ pkglibexec_PROGRAMS = $(am__EXEEXT_1)
 @have_libjpeg_TRUE@am__append_2 = $(LIBJPEG_LIBS)
 @have_libjpeg_TRUE@am__append_3 = jpeg.cpp jpeg.hpp
 @have_magick_TRUE@am__append_4 = magick.cpp magick.hpp
-@have_libMagickPP_TRUE@am__append_5 = doc-locate
-@have_libMagickPP_TRUE@am__append_6 = autocrop.cpp autocrop.hpp \
-@have_libMagickPP_TRUE@	deskew.cpp deskew.hpp
+@have_libmagick_pp_TRUE@am__append_5 = doc-locate
+@have_libmagick_pp_TRUE@am__append_6 = autocrop.cpp autocrop.hpp \
+@have_libmagick_pp_TRUE@	deskew.cpp deskew.hpp
 subdir = filters
 DIST_COMMON = $(dist_pkglibexec_SCRIPTS) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in
@@ -145,8 +145,8 @@ am__objects_1 = libflt_all_la-pdf.lo pdf/libflt_all_la-array.lo \
 	pdf/libflt_all_la-primitive.lo pdf/libflt_all_la-writer.lo
 @have_libjpeg_TRUE@am__objects_2 = libflt_all_la-jpeg.lo
 @have_magick_TRUE@am__objects_3 = libflt_all_la-magick.lo
-@have_libMagickPP_TRUE@am__objects_4 = libflt_all_la-autocrop.lo \
-@have_libMagickPP_TRUE@	libflt_all_la-deskew.lo
+@have_libmagick_pp_TRUE@am__objects_4 = libflt_all_la-autocrop.lo \
+@have_libmagick_pp_TRUE@	libflt_all_la-deskew.lo
 am_libflt_all_la_OBJECTS = libflt_all_la-g3fax.lo libflt_all_la-lut.lo \
 	libflt_all_la-image-skip.lo libflt_all_la-padding.lo \
 	libflt_all_la-pnm.lo libflt_all_la-shell-pipe.lo \
@@ -160,11 +160,11 @@ libflt_all_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
 	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CXXLD) \
 	$(libflt_all_la_CXXFLAGS) $(CXXFLAGS) $(libflt_all_la_LDFLAGS) \
 	$(LDFLAGS) -o $@
-@have_libMagickPP_TRUE@am__EXEEXT_1 = doc-locate$(EXEEXT)
+@have_libmagick_pp_TRUE@am__EXEEXT_1 = doc-locate$(EXEEXT)
 PROGRAMS = $(pkglibexec_PROGRAMS)
 am__doc_locate_SOURCES_DIST = doc-locate.cpp
-@have_libMagickPP_TRUE@am_doc_locate_OBJECTS =  \
-@have_libMagickPP_TRUE@	doc_locate-doc-locate.$(OBJEXT)
+@have_libmagick_pp_TRUE@am_doc_locate_OBJECTS =  \
+@have_libmagick_pp_TRUE@	doc_locate-doc-locate.$(OBJEXT)
 doc_locate_OBJECTS = $(am_doc_locate_OBJECTS)
 doc_locate_LDADD = $(LDADD)
 doc_locate_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
@@ -334,6 +334,8 @@ LIBINTL = @LIBINTL@
 LIBJPEG_CFLAGS = @LIBJPEG_CFLAGS@
 LIBJPEG_LIBS = @LIBJPEG_LIBS@
 LIBLTDL = @LIBLTDL@
+LIBMAGICK_PP_CFLAGS = @LIBMAGICK_PP_CFLAGS@
+LIBMAGICK_PP_LIBS = @LIBMAGICK_PP_LIBS@
 LIBMAGIC_CFLAGS = @LIBMAGIC_CFLAGS@
 LIBMAGIC_LIBS = @LIBMAGIC_LIBS@
 LIBM_CFLAGS = @LIBM_CFLAGS@
@@ -444,8 +446,6 @@ htmldir = @htmldir@
 includedir = @includedir@
 infodir = @infodir@
 install_sh = @install_sh@
-libMagickPP_CFLAGS = @libMagickPP_CFLAGS@
-libMagickPP_LIBS = @libMagickPP_LIBS@
 libdir = @libdir@
 libexecdir = @libexecdir@
 localedir = @localedir@
@@ -483,10 +483,10 @@ libflt_all_la_SOURCES = g3fax.cpp g3fax.hpp lut.cpp lut.hpp \
 	pnm.hpp shell-pipe.cpp shell-pipe.hpp threshold.cpp \
 	threshold.hpp $(pdf_filter) $(am__append_3) $(am__append_4) \
 	$(am__append_6)
-@have_libMagickPP_TRUE@doc_locate_CPPFLAGS = $(AM_CPPFLAGS) \
-@have_libMagickPP_TRUE@	$(libMagickPP_CFLAGS)
-@have_libMagickPP_TRUE@doc_locate_LDFLAGS = $(libMagickPP_LIBS) -lm
-@have_libMagickPP_TRUE@doc_locate_SOURCES = doc-locate.cpp
+@have_libmagick_pp_TRUE@doc_locate_CPPFLAGS = $(AM_CPPFLAGS) \
+@have_libmagick_pp_TRUE@	$(LIBMAGICK_PP_CFLAGS)
+@have_libmagick_pp_TRUE@doc_locate_LDFLAGS = $(LIBMAGICK_PP_LIBS) -lm
+@have_libmagick_pp_TRUE@doc_locate_SOURCES = doc-locate.cpp
 pdf_filter = pdf.cpp pdf.hpp pdf/array.cpp pdf/array.hpp \
 	pdf/dictionary.cpp pdf/dictionary.hpp pdf/object.cpp \
 	pdf/object.hpp pdf/primitive.cpp pdf/primitive.hpp \
