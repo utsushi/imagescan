@@ -16,8 +16,9 @@ the [releases]({{site.repository}}/releases) and take your pick.
 
 Want to make some changes to the code?  Just clone the repository and
 help yourself.  Want to help your neighbours too?  Even better, but
-please head over to the `utsushi` repository where patches and pull
-requests are integrated.
+please head over to the
+[`utsushi` repository]({{site.project.url}}/utsushi) where patches and
+pull requests are integrated.
 The [`imagescan` repository]({{site.repository}}) exists solely to
 track the source code archives that are made available at the [EPSON
 Download Center][EDC].  Nothing more, nothing less.
