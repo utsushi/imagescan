@@ -58,9 +58,10 @@ subdir = .
 DIST_COMMON = README $(am__configure_deps) $(nobase_include_HEADERS) \
 	$(srcdir)/Makefile.am $(srcdir)/Makefile.in \
 	$(srcdir)/config.h.in $(top_srcdir)/configure ABOUT-NLS \
-	AUTHORS COPYING ChangeLog INSTALL NEWS upstream/config.guess \
-	upstream/config.rpath upstream/config.sub upstream/depcomp \
-	upstream/install-sh upstream/ltmain.sh upstream/missing
+	AUTHORS COPYING ChangeLog INSTALL NEWS upstream/ar-lib \
+	upstream/config.guess upstream/config.rpath \
+	upstream/config.sub upstream/depcomp upstream/install-sh \
+	upstream/ltmain.sh upstream/missing
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/upstream/aclocal/argz.m4 \
 	$(top_srcdir)/upstream/aclocal/ax_boost_base.m4 \
