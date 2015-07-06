@@ -1,3 +1,4 @@
+../.gitignore
 ../AUTHORS
 ../COPYING
 ../ChangeLog
@@ -246,8 +247,6 @@
 ../lib/exception.cpp
 ../lib/file.cpp
 ../lib/filter.cpp
-../lib/hal.cpp
-../lib/hal.hpp
 ../lib/iobase.cpp
 ../lib/key.cpp
 ../lib/log.cpp
@@ -350,6 +349,7 @@
 ../tests/
 ../tests/Makefile.am
 ../tests/indentation.cpp
+../tests/uncrustify.cfg
 ../tools/
 ../tools/boost-test-report
 ../tools/boost-test-report.xsl

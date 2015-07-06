@@ -55,11 +55,11 @@
 /* define if the Boost::Unit_Test_Framework library is available */
 #undef HAVE_BOOST_UNIT_TEST_FRAMEWORK
 
-/* Define to 1 if you have the MacOS X function CFLocaleCopyCurrent in the
+/* Define to 1 if you have the Mac OS X function CFLocaleCopyCurrent in the
    CoreFoundation framework. */
 #undef HAVE_CFLOCALECOPYCURRENT
 
-/* Define to 1 if you have the MacOS X function CFPreferencesCopyAppValue in
+/* Define to 1 if you have the Mac OS X function CFPreferencesCopyAppValue in
    the CoreFoundation framework. */
 #undef HAVE_CFPREFERENCESCOPYAPPVALUE
 
@@ -128,9 +128,6 @@
 /* Define to 1 if the gtkmm library is available */
 #undef HAVE_LIBGTKMM
 
-/* Define to 1 if the HAL library is available */
-#undef HAVE_LIBHAL
-
 /* define to 1 if a JPEG library is available */
 #undef HAVE_LIBJPEG
 
@@ -154,9 +151,6 @@
 
 /* define to 1 if libusb_get_port_number() is available */
 #undef HAVE_LIBUSB_GET_PORT_NUMBER
-
-/* define to 1 if libusb-0.1 is available */
-#undef HAVE_LIBUSB_LEGACY
 
 /* Define this if a modern libltdl is already installed */
 #undef HAVE_LTDL

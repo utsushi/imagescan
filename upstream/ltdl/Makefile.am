@@ -161,3 +161,5 @@ argz.h: argz_.h
 	mv $@-t $@
 MOSTLYCLEANFILES += argz.h \
 		    argz.h-t
+AM_CPPFLAGS += -I$(top_builddir)
+AM_CPPFLAGS += -I$(top_srcdir)
