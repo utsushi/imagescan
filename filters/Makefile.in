@@ -356,6 +356,7 @@ DEFS = @DEFS@
 DEPDIR = @DEPDIR@
 DLLTOOL = @DLLTOOL@
 DOT_PATH = @DOT_PATH@
+DOWNLOAD_DIR = @DOWNLOAD_DIR@
 DOXYGEN = @DOXYGEN@
 DSYMUTIL = @DSYMUTIL@
 DUMPBIN = @DUMPBIN@
@@ -461,6 +462,7 @@ SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
 UDEV_SYSCONFDIR = @UDEV_SYSCONFDIR@
+UNCRUSTIFY = @UNCRUSTIFY@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
 XGETTEXT = @XGETTEXT@
@@ -542,6 +544,7 @@ libflt_all_la_SOURCES = g3fax.cpp g3fax.hpp lut.cpp lut.hpp \
 @have_libmagick_pp_TRUE@	$(LIBMAGICK_PP_CFLAGS)
 @have_libmagick_pp_TRUE@doc_locate_LDFLAGS = $(LIBMAGICK_PP_LIBS) -lm
 @have_libmagick_pp_TRUE@doc_locate_SOURCES = doc-locate.cpp
+AM_INSTALLCHECK_STD_OPTIONS_EXEMPT = doc-locate
 pdf_filter = pdf.cpp pdf.hpp pdf/array.cpp pdf/array.hpp \
 	pdf/dictionary.cpp pdf/dictionary.hpp pdf/object.cpp \
 	pdf/object.hpp pdf/primitive.cpp pdf/primitive.hpp \

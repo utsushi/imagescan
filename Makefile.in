@@ -296,6 +296,7 @@ DEFS = @DEFS@
 DEPDIR = @DEPDIR@
 DLLTOOL = @DLLTOOL@
 DOT_PATH = @DOT_PATH@
+DOWNLOAD_DIR = @DOWNLOAD_DIR@
 DOXYGEN = @DOXYGEN@
 DSYMUTIL = @DSYMUTIL@
 DUMPBIN = @DUMPBIN@
@@ -401,6 +402,7 @@ SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
 UDEV_SYSCONFDIR = @UDEV_SYSCONFDIR@
+UNCRUSTIFY = @UNCRUSTIFY@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
 XGETTEXT = @XGETTEXT@
@@ -476,7 +478,8 @@ ACLOCAL_AMFLAGS = -I upstream/aclocal
 DISTCHECK_CONFIGURE_FLAGS = --with-included-ltdl --with-gtkmm \
 	--with-sane --with-magick --with-jpeg --with-tiff \
 	--enable-test-reports --enable-code-coverage \
-	--disable-sane-config --disable-udev-config
+	--disable-sane-config --disable-udev-config \
+	--with-download-dir=$(DOWNLOAD_DIR)
 pattern_headers = utsushi/pattern/decorator.hpp
 stream_headers = utsushi/octet.hpp utsushi/context.hpp \
 	utsushi/iobase.hpp utsushi/device.hpp utsushi/filter.hpp \
@@ -500,7 +503,8 @@ nobase_include_HEADERS = $(pattern_headers) $(stream_headers) \
 	utsushi/log.hpp utsushi/monitor.hpp utsushi/run-time.hpp \
 	utsushi/scanner.hpp $(wrapper_headers)
 BUILT_SOURCES = $(srcdir)/utsushi/tag.hpp $(srcdir)/lib/tag.cpp
-@with_included_boost_TRUE@boostdir = upstream/boost
+boostdir = upstream/boost
+BOOST_BUILD = bjam
 all: $(BUILT_SOURCES) config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
 
@@ -927,14 +931,10 @@ maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
 	@echo "it deletes files that may require special tools to rebuild."
 	-test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
-@with_included_boost_FALSE@uninstall-local:
-@with_shared_enabled_FALSE@uninstall-local:
 @with_included_boost_FALSE@install-exec-local:
 @with_shared_enabled_FALSE@install-exec-local:
-@with_included_boost_FALSE@maintainer-clean-local:
-@with_included_boost_FALSE@mostlyclean-local:
-@with_included_boost_FALSE@clean-local:
-@with_included_boost_FALSE@distclean-local:
+@with_included_boost_FALSE@uninstall-local:
+@with_shared_enabled_FALSE@uninstall-local:
 clean: clean-recursive
 
 clean-am: clean-generic clean-libtool clean-local mostlyclean-am
@@ -1042,53 +1042,6 @@ $(srcdir)/utsushi/tag.hpp $(srcdir)/lib/tag.cpp: $(srcdir)/lib/tag.xml \
 
 @with_included_boost_TRUE@all-local: boost-libs
 
-@with_included_boost_TRUE@boost-libs: $(boostdir)/lib/stamp
-@with_included_boost_TRUE@$(boostdir)/lib/stamp: $(boostdir)/bjam
-@with_included_boost_TRUE@	@echo "Building Boost libraries"; \
-@with_included_boost_TRUE@	if test $(srcdir) = $(builddir); then \
-@with_included_boost_TRUE@	  cmd="cd $(boostdir); ./bjam \
-@with_included_boost_TRUE@	    --build-dir=. --stagedir=."; \
-@with_included_boost_TRUE@	else \
-@with_included_boost_TRUE@	  dir1=$(srcdir)/$(boostdir); \
-@with_included_boost_TRUE@	  dir2=$(boostdir); \
-@with_included_boost_TRUE@	  $(am__relativize); \
-@with_included_boost_TRUE@	  cmd="cd $(srcdir)/$(boostdir); $$reldir/bjam \
-@with_included_boost_TRUE@	    --build-dir=$$reldir --stagedir=$$dir2"; \
-@with_included_boost_TRUE@	fi; \
-@with_included_boost_TRUE@	cmd="($$cmd variant=debug $(boost_build_link_properties))"; \
-@with_included_boost_TRUE@	echo $$cmd; \
-@with_included_boost_TRUE@	eval $$cmd && touch $@
-
-@with_included_boost_TRUE@$(boostdir)/bjam:
-@with_included_boost_TRUE@	@echo "Building Boost.Build (bjam)"; \
-@with_included_boost_TRUE@	if test $(srcdir) = $(builddir); then \
-@with_included_boost_TRUE@	  (cd $(boostdir); ./tools/build/v2/bootstrap.sh); \
-@with_included_boost_TRUE@	else \
-@with_included_boost_TRUE@	  test -d $(boostdir)/tools/build \
-@with_included_boost_TRUE@	    || $(MKDIR_P) $(boostdir)/tools/build; \
-@with_included_boost_TRUE@	  cp -a $(srcdir)/$(boostdir)/tools/build/v2 \
-@with_included_boost_TRUE@	    $(boostdir)/tools/build; \
-@with_included_boost_TRUE@	  find $(boostdir) -type d -exec chmod u+w {} ';'; \
-@with_included_boost_TRUE@	  (cd $(boostdir); ./tools/build/v2/bootstrap.sh) \
-@with_included_boost_TRUE@	    && rm -rf $(boostdir)/tools/build/v2; \
-@with_included_boost_TRUE@	  rmdir $(boostdir)/tools/build || true; \
-@with_included_boost_TRUE@	  rmdir $(boostdir)/tools || true; \
-@with_included_boost_TRUE@	fi
-
-@with_included_boost_TRUE@mostlyclean-local:
-@with_included_boost_TRUE@	-rm -r $(boostdir)/boost/bin.v2
-@with_included_boost_TRUE@	-rm $(boostdir)/bootstrap.log
-
-@with_included_boost_TRUE@clean-local:
-@with_included_boost_TRUE@	-rm -r $(boostdir)/lib
-@with_included_boost_TRUE@	-rm $(boostdir)/bjam
-
-@with_included_boost_TRUE@distclean-local:
-
-@with_included_boost_TRUE@maintainer-clean-local:
-@with_included_boost_TRUE@	-rm -r $(srcdir)/$(boostdir)/../downloads/boost*
-@with_included_boost_TRUE@	-rm -r $(srcdir)/$(boostdir)
-
 @with_included_boost_TRUE@@with_shared_enabled_TRUE@install-exec-local: $(boostdir)/lib/stamp
 @with_included_boost_TRUE@@with_shared_enabled_TRUE@	@$(NORMAL_INSTALL)
 @with_included_boost_TRUE@@with_shared_enabled_TRUE@	@test -z "$(pkglibdir)" || $(MKDIR_P) "$(DESTDIR)$(pkglibdir)"
@@ -1118,15 +1071,60 @@ $(srcdir)/utsushi/tag.hpp $(srcdir)/lib/tag.cpp: $(srcdir)/lib/tag.xml \
 @with_included_boost_TRUE@@with_shared_enabled_TRUE@uninstall-local:
 @with_included_boost_TRUE@@with_shared_enabled_TRUE@	-rm $(DESTDIR)$(pkglibdir)/libboost_*$(LT_MODULE_EXT)*
 
-dist-hook:
-	dir1=$(distdir); \
-	dir2=$(top_srcdir); \
-	$(am__relativize); \
-	cmd="(cd $(distdir); tools/include-boost-src \
-	  --source=$$reldir/upstream/downloads)"; \
+boost-libs: $(boostdir)/lib/stamp
+$(boostdir)/lib/stamp: Boost.Build
+	@echo "Building Boost libraries"; \
+	if test $(srcdir) = $(builddir); then \
+	  cmd="cd $(boostdir); ./bin/$(BOOST_BUILD) \
+	    --build-dir=. --stagedir=."; \
+	else \
+	  dir1=$(srcdir)/$(boostdir); \
+	  dir2=$(boostdir); \
+	  $(am__relativize); \
+	  cmd="cd $(srcdir)/$(boostdir); $$reldir/bin/$(BOOST_BUILD) \
+	    --build-dir=$$reldir --stagedir=$$dir2"; \
+	fi; \
+	cmd="($$cmd variant=debug $(boost_build_link_properties))"; \
 	echo $$cmd; \
-	eval $$cmd
-	chmod -R u+w $(distdir)
+	eval $$cmd && touch $@
+
+Boost.Build: $(boostdir)/bin/$(BOOST_BUILD)
+$(boostdir)/bin/$(BOOST_BUILD):
+	echo "Building Boost.Build ($(BOOST_BUILD))"; \
+	if test $(srcdir) = $(builddir); then \
+	  (cd $(boostdir)/tools/build/v2; \
+	   ./bootstrap.sh \
+	     && ./$(BOOST_BUILD) install --prefix=../../..); \
+	else \
+	  test -d $(boostdir)/tools/build \
+	    || $(MKDIR_P) $(boostdir)/tools/build; \
+	  cp -a $(srcdir)/$(boostdir)/tools/build/v2 \
+	    $(boostdir)/tools/build; \
+	  find $(boostdir) -type d -exec chmod u+w {} ';'; \
+	  (cd $(boostdir)/tools/build/v2; \
+	   ./bootstrap.sh \
+	     && ./$(BOOST_BUILD) install --prefix=../../..) \
+	    && rm -rf $(boostdir)/tools/build/v2; \
+	  rmdir $(boostdir)/tools/build || true; \
+	  rmdir $(boostdir)/tools || true; \
+	fi
+
+mostlyclean-local:
+	-rm -r $(boostdir)/boost/bin.v2
+	-rm $(boostdir)/bootstrap.log
+
+clean-local:
+	-rm -r $(boostdir)/lib
+	-rm $(boostdir)/bjam
+
+distclean-local:
+
+maintainer-clean-local:
+	-rm -r $(srcdir)/$(boostdir)/../downloads/boost*
+	-rm -r $(srcdir)/$(boostdir)
+
+dist-hook:
+	(cd $(distdir); tools/include-boost-src --source=$(DOWNLOAD_DIR))
 
 installcheck-local:
 	if test -n "$(dc_precious_dir)"; then \

@@ -132,6 +132,9 @@ DIST_COMMON = $(top_srcdir)/include/boost-test.am \
 @enable_boost_unit_test_framework_TRUE@@with_included_boost_TRUE@@with_shared_enabled_TRUE@am__append_13 = \
 @enable_boost_unit_test_framework_TRUE@@with_included_boost_TRUE@@with_shared_enabled_TRUE@	$(LT_MODULE_PATH_VAR)=`cd $(top_builddir) && pwd`/upstream/boost/lib
 
+@enable_code_coverage_TRUE@am__append_14 = ../../outputs/*.gcno \
+@enable_code_coverage_TRUE@	../../outputs/*.gcda \
+@enable_code_coverage_TRUE@	../../outputs/*.gcov
 subdir = lib/tests
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/upstream/aclocal/argz.m4 \
@@ -671,6 +674,7 @@ DEFS = @DEFS@
 DEPDIR = @DEPDIR@
 DLLTOOL = @DLLTOOL@
 DOT_PATH = @DOT_PATH@
+DOWNLOAD_DIR = @DOWNLOAD_DIR@
 DOXYGEN = @DOXYGEN@
 DSYMUTIL = @DSYMUTIL@
 DUMPBIN = @DUMPBIN@
@@ -776,6 +780,7 @@ SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
 UDEV_SYSCONFDIR = @UDEV_SYSCONFDIR@
+UNCRUSTIFY = @UNCRUSTIFY@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
 XGETTEXT = @XGETTEXT@
@@ -875,7 +880,7 @@ top_srcdir = @top_srcdir@
 @enable_boost_unit_test_framework_TRUE@@have_libtiff_TRUE@	$(LIBTIFF_LIBS) \
 @enable_boost_unit_test_framework_TRUE@@have_libtiff_TRUE@	$(am__append_4)
 EXTRA_DIST = value.hpp
-CLEANFILES = $(am__append_10) $(am__append_12)
+CLEANFILES = $(am__append_10) $(am__append_12) $(am__append_14)
 AM_DEFAULT_SOURCE_EXT = .cpp
 
 #  Create a test module name based on the directory we are run in.

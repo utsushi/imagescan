@@ -88,14 +88,15 @@ host_triplet = @host@
 @enable_boost_unit_test_framework_TRUE@	threshold.utr$(EXEEXT) \
 @enable_boost_unit_test_framework_TRUE@	image-skip.utr$(EXEEXT) \
 @enable_boost_unit_test_framework_TRUE@	shell-pipe.utr$(EXEEXT) \
-@enable_boost_unit_test_framework_TRUE@	magick.utr$(EXEEXT) \
-@enable_boost_unit_test_framework_TRUE@	$(am__EXEEXT_1)
-@enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@am__append_1 = jpeg.utr \
+@enable_boost_unit_test_framework_TRUE@	$(am__EXEEXT_1) \
+@enable_boost_unit_test_framework_TRUE@	$(am__EXEEXT_2)
+@enable_boost_unit_test_framework_TRUE@@have_magick_TRUE@am__append_1 = magick.utr
+@enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@am__append_2 = jpeg.utr \
 @enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@	pdf.utr
-@enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@@have_libmagic_TRUE@am__append_2 = $(LIBMAGIC_CFLAGS)
-@enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@@have_libmagic_TRUE@am__append_3 = $(LIBMAGIC_LIBS)
-@enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@@have_libmagic_TRUE@am__append_4 = $(LIBMAGIC_CFLAGS)
-@enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@@have_libmagic_TRUE@am__append_5 = $(LIBMAGIC_LIBS)
+@enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@@have_libmagic_TRUE@am__append_3 = $(LIBMAGIC_CFLAGS)
+@enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@@have_libmagic_TRUE@am__append_4 = $(LIBMAGIC_LIBS)
+@enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@@have_libmagic_TRUE@am__append_5 = $(LIBMAGIC_CFLAGS)
+@enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@@have_libmagic_TRUE@am__append_6 = $(LIBMAGIC_LIBS)
 DIST_COMMON = $(top_srcdir)/include/boost-test.am \
 	$(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	$(top_srcdir)/upstream/depcomp \
@@ -103,20 +104,20 @@ DIST_COMMON = $(top_srcdir)/include/boost-test.am \
 
 #  Set build-time flags to build Boost.Test Unit Test Framework (UTF)
 #  based test runners.
-@enable_boost_unit_test_framework_TRUE@am__append_6 = -I$(top_srcdir) \
+@enable_boost_unit_test_framework_TRUE@am__append_7 = -I$(top_srcdir) \
 @enable_boost_unit_test_framework_TRUE@	$(BOOST_CPPFLAGS) \
 @enable_boost_unit_test_framework_TRUE@	-DBOOST_TEST_NO_MAIN
-@enable_boost_unit_test_framework_TRUE@@with_shared_enabled_TRUE@am__append_7 = -DBOOST_TEST_DYN_LINK
-@enable_boost_unit_test_framework_TRUE@@with_static_enabled_TRUE@am__append_8 = -DBOOST_TEST_ALTERNATIVE_INIT_API
-@enable_boost_unit_test_framework_TRUE@am__append_9 = -DUTSUSHI_TEST_MODULE=\"$(utsushi_test_module)\" \
+@enable_boost_unit_test_framework_TRUE@@with_shared_enabled_TRUE@am__append_8 = -DBOOST_TEST_DYN_LINK
+@enable_boost_unit_test_framework_TRUE@@with_static_enabled_TRUE@am__append_9 = -DBOOST_TEST_ALTERNATIVE_INIT_API
+@enable_boost_unit_test_framework_TRUE@am__append_10 = -DUTSUSHI_TEST_MODULE=\"$(utsushi_test_module)\" \
 @enable_boost_unit_test_framework_TRUE@	-DUTSUSHI_TEST_SUITE=\"$*\"
-@enable_boost_unit_test_framework_TRUE@am__append_10 = $(BOOST_LDFLAGS)
+@enable_boost_unit_test_framework_TRUE@am__append_11 = $(BOOST_LDFLAGS)
 
 #  With test reports enabled, the test runner produces an XML file
 #  that matches *-report.xml and contains detailed test results.
-@enable_boost_unit_test_framework_TRUE@@enable_test_reports_TRUE@am__append_11 = -DENABLE_TEST_REPORTS
-@enable_boost_unit_test_framework_TRUE@@enable_test_reports_TRUE@am__append_12 = *-report.xml
-@enable_boost_unit_test_framework_TRUE@@enable_test_reports_TRUE@am__append_13 = BOOST_TEST_REPORT_FORMAT=xml \
+@enable_boost_unit_test_framework_TRUE@@enable_test_reports_TRUE@am__append_12 = -DENABLE_TEST_REPORTS
+@enable_boost_unit_test_framework_TRUE@@enable_test_reports_TRUE@am__append_13 = *-report.xml
+@enable_boost_unit_test_framework_TRUE@@enable_test_reports_TRUE@am__append_14 = BOOST_TEST_REPORT_FORMAT=xml \
 @enable_boost_unit_test_framework_TRUE@@enable_test_reports_TRUE@	BOOST_TEST_REPORT_LEVEL=detailed
 
 #  When code coverage is enabled, the compiler produces *.gcno files.
@@ -129,15 +130,17 @@ DIST_COMMON = $(top_srcdir)/include/boost-test.am \
 #  directory as a result of running tests.  Clean up such files here
 #  so that the parent directory's Makefile.am does not have to do so
 #  explicitly.
-@enable_boost_unit_test_framework_TRUE@@enable_code_coverage_TRUE@am__append_14 = *.gcno \
+@enable_boost_unit_test_framework_TRUE@@enable_code_coverage_TRUE@am__append_15 = *.gcno \
 @enable_boost_unit_test_framework_TRUE@@enable_code_coverage_TRUE@	../*.gcno \
 @enable_boost_unit_test_framework_TRUE@@enable_code_coverage_TRUE@	*.gcda \
 @enable_boost_unit_test_framework_TRUE@@enable_code_coverage_TRUE@	../*.gcda \
 @enable_boost_unit_test_framework_TRUE@@enable_code_coverage_TRUE@	*.gcov \
 @enable_boost_unit_test_framework_TRUE@@enable_code_coverage_TRUE@	../*.gcov
-@enable_boost_unit_test_framework_TRUE@@with_included_boost_TRUE@@with_shared_enabled_TRUE@am__append_15 = \
+@enable_boost_unit_test_framework_TRUE@@with_included_boost_TRUE@@with_shared_enabled_TRUE@am__append_16 = \
 @enable_boost_unit_test_framework_TRUE@@with_included_boost_TRUE@@with_shared_enabled_TRUE@	$(LT_MODULE_PATH_VAR)=`cd $(top_builddir) && pwd`/upstream/boost/lib
 
+@enable_code_coverage_TRUE@am__append_17 = ../pdf/*.gcno ../pdf/*.gcda \
+@enable_code_coverage_TRUE@	../pdf/*.gcov
 subdir = filters/tests
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/upstream/aclocal/argz.m4 \
@@ -173,7 +176,8 @@ mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
-@enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@am__EXEEXT_1 = jpeg.utr$(EXEEXT) \
+@enable_boost_unit_test_framework_TRUE@@have_magick_TRUE@am__EXEEXT_1 = magick.utr$(EXEEXT)
+@enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@am__EXEEXT_2 = jpeg.utr$(EXEEXT) \
 @enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@	pdf.utr$(EXEEXT)
 image_skip_utr_SOURCES = image-skip.cpp
 image_skip_utr_OBJECTS = image-skip.$(OBJEXT)
@@ -535,11 +539,11 @@ TEST_LOG_COMPILE = $(TEST_LOG_COMPILER) $(AM_TEST_LOG_FLAGS) \
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
 AMTAR = @AMTAR@
-AM_CPPFLAGS = @AM_CPPFLAGS@ $(am__append_6) $(am__append_7) \
-	$(am__append_8) $(am__append_9) $(am__append_11)
+AM_CPPFLAGS = @AM_CPPFLAGS@ $(am__append_7) $(am__append_8) \
+	$(am__append_9) $(am__append_10) $(am__append_12)
 AM_CXXFLAGS = @AM_CXXFLAGS@
 AM_DEFAULT_VERBOSITY = @AM_DEFAULT_VERBOSITY@
-AM_LDFLAGS = @AM_LDFLAGS@ $(am__append_10)
+AM_LDFLAGS = @AM_LDFLAGS@ $(am__append_11)
 AR = @AR@
 ARGZ_H = @ARGZ_H@
 AUTOCONF = @AUTOCONF@
@@ -569,6 +573,7 @@ DEFS = @DEFS@
 DEPDIR = @DEPDIR@
 DLLTOOL = @DLLTOOL@
 DOT_PATH = @DOT_PATH@
+DOWNLOAD_DIR = @DOWNLOAD_DIR@
 DOXYGEN = @DOXYGEN@
 DSYMUTIL = @DSYMUTIL@
 DUMPBIN = @DUMPBIN@
@@ -674,6 +679,7 @@ SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
 UDEV_SYSCONFDIR = @UDEV_SYSCONFDIR@
+UNCRUSTIFY = @UNCRUSTIFY@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
 XGETTEXT = @XGETTEXT@
@@ -738,10 +744,9 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 @enable_boost_unit_test_framework_TRUE@TESTS_ENVIRONMENT =  \
-@enable_boost_unit_test_framework_TRUE@	$(am__append_13) \
-@enable_boost_unit_test_framework_TRUE@	$(am__append_15)
+@enable_boost_unit_test_framework_TRUE@	$(am__append_14) \
+@enable_boost_unit_test_framework_TRUE@	$(am__append_16)
 @enable_boost_unit_test_framework_TRUE@TESTS = $(check_PROGRAMS)
-#endif
 @enable_boost_unit_test_framework_TRUE@LDADD = ../libflt-all.la \
 @enable_boost_unit_test_framework_TRUE@	../../lib/libutsushi.la \
 @enable_boost_unit_test_framework_TRUE@	$(LIBUTSUSHI_LIBS) \
@@ -749,19 +754,19 @@ top_srcdir = @top_srcdir@
 @enable_boost_unit_test_framework_TRUE@	$(BOOST_UNIT_TEST_FRAMEWORK_LIB)
 @enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@jpeg_utr_CXXFLAGS = $(AM_CXXFLAGS) \
 @enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@	$(LIBJPEG_CFLAGS) \
-@enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@	$(am__append_2)
+@enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@	$(am__append_3)
 @enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@jpeg_utr_LDADD = $(LDADD) \
 @enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@	$(LIBJPEG_LIBS) \
-@enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@	$(am__append_3)
+@enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@	$(am__append_4)
 @enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@pdf_utr_CXXFLAGS = $(AM_CXXFLAGS) \
 @enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@	$(LIBJPEG_CFLAGS) \
-@enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@	$(am__append_4)
+@enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@	$(am__append_5)
 @enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@pdf_utr_LDADD = $(LDADD) \
 @enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@	$(LIBJPEG_LIBS) \
-@enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@	$(am__append_5)
+@enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@	$(am__append_6)
 EXTRA_DIST = data/A4-300-x-300.jpg data/A4-300-x-max.jpg \
 	data/A4-max-x-300.jpg data/A4-max-x-max.jpg
-CLEANFILES = $(am__append_12) $(am__append_14)
+CLEANFILES = $(am__append_13) $(am__append_15) $(am__append_17)
 AM_DEFAULT_SOURCE_EXT = .cpp
 
 #  Create a test module name based on the directory we are run in.

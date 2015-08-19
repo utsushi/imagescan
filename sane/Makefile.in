@@ -316,6 +316,7 @@ DEFS = @DEFS@
 DEPDIR = @DEPDIR@
 DLLTOOL = @DLLTOOL@
 DOT_PATH = @DOT_PATH@
+DOWNLOAD_DIR = @DOWNLOAD_DIR@
 DOXYGEN = @DOXYGEN@
 DSYMUTIL = @DSYMUTIL@
 DUMPBIN = @DUMPBIN@
@@ -421,6 +422,7 @@ SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
 UDEV_SYSCONFDIR = @UDEV_SYSCONFDIR@
+UNCRUSTIFY = @UNCRUSTIFY@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
 XGETTEXT = @XGETTEXT@
@@ -492,19 +494,17 @@ exec_sane_backenddir = $(pkglibdir)/sane
 exec_sane_backend_LTLIBRARIES = libsane-$(BACKEND_NAME).la
 libsane___BACKEND_NAME__la_SOURCES = backend.cpp backend.hpp \
 	version.hpp guard.hpp handle.cpp handle.hpp device.cpp \
-	device.hpp value.cpp value.hpp log.hpp sane-api.sym
+	device.hpp value.cpp value.hpp log.hpp
 libsane___BACKEND_NAME__la_LDFLAGS = -export-dynamic -export-symbols \
-	$(srcdir)/sane-api.sym -version-number $(SANE_VERSION) -weak \
-	libsane
+	sane-api.sym -version-number $(SANE_VERSION) -weak libsane
 libsane___BACKEND_NAME__la_LIBADD = ../lib/libutsushi.la \
 	../filters/libflt-all.la ../connexions/libcnx-usb.la
-BUILT_SOURCES = $(srcdir)/sane-api.sym
+EXTRA_libsane___BACKEND_NAME__la_DEPENDENCIES = sane-api.sym
 CLEANFILES = sane-api.sym
 SANE_BACKEND_SANITY_CHECKS = $(am__append_1)
 auxdir = $(top_srcdir)/upstream
 @enable_sane_config_TRUE@@with_static_enabled_TRUE@STATIC_BACKEND_LIB = libsane-$(BACKEND_NAME).a
-all: $(BUILT_SOURCES)
-	$(MAKE) $(AM_MAKEFLAGS) all-recursive
+all: all-recursive
 
 .SUFFIXES:
 .SUFFIXES: .cpp .lo .o .obj
@@ -774,16 +774,14 @@ distdir: $(DISTFILES)
 	done
 check-am: all-am
 	$(MAKE) $(AM_MAKEFLAGS) check-local
-check: $(BUILT_SOURCES)
-	$(MAKE) $(AM_MAKEFLAGS) check-recursive
+check: check-recursive
 all-am: Makefile $(LTLIBRARIES)
 installdirs: installdirs-recursive
 installdirs-am:
 	for dir in "$(DESTDIR)$(exec_sane_backenddir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
-install: $(BUILT_SOURCES)
-	$(MAKE) $(AM_MAKEFLAGS) install-recursive
+install: install-recursive
 install-exec: install-exec-recursive
 install-data: install-data-recursive
 uninstall: uninstall-recursive
@@ -814,7 +812,6 @@ distclean-generic:
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
 	@echo "it deletes files that may require special tools to rebuild."
-	-test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
 @enable_sane_config_FALSE@install-exec-hook:
 @enable_sane_config_FALSE@install-data-hook:
 @enable_sane_config_FALSE@uninstall-hook:
@@ -892,8 +889,8 @@ ps-am:
 uninstall-am: uninstall-exec_sane_backendLTLIBRARIES
 	@$(NORMAL_INSTALL)
 	$(MAKE) $(AM_MAKEFLAGS) uninstall-hook
-.MAKE: $(am__recursive_targets) all check check-am install install-am \
-	install-data-am install-exec-am install-strip uninstall-am
+.MAKE: $(am__recursive_targets) check-am install-am install-data-am \
+	install-exec-am install-strip uninstall-am
 
 .PHONY: $(am__recursive_targets) CTAGS GTAGS TAGS all all-am check \
 	check-am check-local clean clean-exec_sane_backendLTLIBRARIES \

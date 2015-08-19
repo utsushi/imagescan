@@ -129,9 +129,13 @@
 #endif
 
 #if defined(_WIN32_WCE) || defined(UNDER_CE)
-#  define BOOST_NO_THREADEX
-#  define BOOST_NO_GETSYSTEMTIMEASFILETIME
 #  define BOOST_NO_SWPRINTF
+#endif
+
+// we have ThreadEx or GetSystemTimeAsFileTime unless we're running WindowsCE
+#if !defined(_WIN32_WCE) && !defined(UNDER_CE)
+#  define BOOST_HAS_THREADEX
+#  define BOOST_HAS_GETSYSTEMTIMEASFILETIME
 #endif
 
 //   
@@ -179,6 +183,7 @@
 #define BOOST_NO_RVALUE_REFERENCES
 #define BOOST_NO_STATIC_ASSERT
 #define BOOST_NO_NULLPTR
+#define BOOST_NO_DECLTYPE
 #endif // _MSC_VER < 1600
 
 #if _MSC_VER >= 1600
@@ -188,14 +193,14 @@
 // C++0x features not supported by any versions
 #define BOOST_NO_CHAR16_T
 #define BOOST_NO_CHAR32_T
-#define BOOST_NO_CONCEPTS
 #define BOOST_NO_CONSTEXPR
+#define BOOST_NO_DECLTYPE_N3276
 #define BOOST_NO_DEFAULTED_FUNCTIONS
-#define BOOST_NO_DECLTYPE
 #define BOOST_NO_DELETED_FUNCTIONS
 #define BOOST_NO_EXPLICIT_CONVERSION_OPERATORS
 #define BOOST_NO_FUNCTION_TEMPLATE_DEFAULT_ARGS
 #define BOOST_NO_INITIALIZER_LISTS
+#define BOOST_NO_NOEXCEPT
 #define BOOST_NO_RAW_LITERALS
 #define BOOST_NO_SCOPED_ENUMS
 #define BOOST_NO_TEMPLATE_ALIASES
@@ -203,6 +208,7 @@
 #define BOOST_NO_VARIADIC_TEMPLATES
 #define BOOST_NO_SFINAE_EXPR
 #define BOOST_NO_TWO_PHASE_NAME_LOOKUP
+#define BOOST_NO_UNIFIED_INITIALIZATION_SYNTAX
 //
 // prefix and suffix headers:
 //
@@ -230,6 +236,8 @@
 #     define BOOST_COMPILER_VERSION evc9
 #   elif _MSC_VER == 1600
 #     define BOOST_COMPILER_VERSION evc10
+#   elif _MSC_VER == 1700 
+#     define BOOST_COMPILER_VERSION evc11 
 #   else
 #      if defined(BOOST_ASSERT_CONFIG)
 #         error "Unknown EVC++ compiler version - please run the configure tests and report the results"
@@ -253,6 +261,8 @@
 #     define BOOST_COMPILER_VERSION 9.0
 #   elif _MSC_VER == 1600
 #     define BOOST_COMPILER_VERSION 10.0
+#   elif _MSC_VER == 1700 
+#     define BOOST_COMPILER_VERSION 11.0 
 #   else
 #     define BOOST_COMPILER_VERSION _MSC_VER
 #   endif
@@ -267,8 +277,8 @@
 #error "Compiler not supported or configured - please reconfigure"
 #endif
 //
-// last known and checked version is 1600 (VC10, aka 2010):
-#if (_MSC_VER > 1600)
+// last known and checked version is 1700 (VC11, aka 2011):
+#if (_MSC_VER > 1700)
 #  if defined(BOOST_ASSERT_CONFIG)
 #     error "Unknown compiler version - please run the configure tests and report the results"
 #  else

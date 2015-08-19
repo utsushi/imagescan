@@ -84,12 +84,14 @@ host_triplet = @host@
 @enable_boost_unit_test_framework_TRUE@TESTS = setter.utr$(EXEEXT) \
 @enable_boost_unit_test_framework_TRUE@	grammar-formats.utr$(EXEEXT) \
 @enable_boost_unit_test_framework_TRUE@	grammar.utr$(EXEEXT) \
-@enable_boost_unit_test_framework_TRUE@	grammar-mechanics.utr$(EXEEXT)
+@enable_boost_unit_test_framework_TRUE@	grammar-mechanics.utr$(EXEEXT) \
+@enable_boost_unit_test_framework_TRUE@	udev-rules.utr$(EXEEXT)
 @enable_boost_unit_test_framework_TRUE@check_PROGRAMS =  \
 @enable_boost_unit_test_framework_TRUE@	setter.utr$(EXEEXT) \
 @enable_boost_unit_test_framework_TRUE@	grammar-formats.utr$(EXEEXT) \
 @enable_boost_unit_test_framework_TRUE@	grammar.utr$(EXEEXT) \
-@enable_boost_unit_test_framework_TRUE@	grammar-mechanics.utr$(EXEEXT)
+@enable_boost_unit_test_framework_TRUE@	grammar-mechanics.utr$(EXEEXT) \
+@enable_boost_unit_test_framework_TRUE@	udev-rules.utr$(EXEEXT)
 
 #  Set build-time flags to build Boost.Test Unit Test Framework (UTF)
 #  based test runners.
@@ -202,6 +204,12 @@ setter_utr_OBJECTS = setter.$(OBJEXT)
 @enable_boost_unit_test_framework_TRUE@setter_utr_DEPENDENCIES =  \
 @enable_boost_unit_test_framework_TRUE@	$(am__DEPENDENCIES_2) \
 @enable_boost_unit_test_framework_TRUE@	../../../connexions/libcnx-usb.la
+udev_rules_utr_SOURCES = udev-rules.cpp
+udev_rules_utr_OBJECTS = udev-rules.$(OBJEXT)
+@enable_boost_unit_test_framework_TRUE@udev_rules_utr_DEPENDENCIES =  \
+@enable_boost_unit_test_framework_TRUE@	$(am__DEPENDENCIES_1) \
+@enable_boost_unit_test_framework_TRUE@	$(am__DEPENDENCIES_1) \
+@enable_boost_unit_test_framework_TRUE@	$(am__DEPENDENCIES_1)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -237,9 +245,9 @@ am__v_CXXLD_ = $(am__v_CXXLD_@AM_DEFAULT_V@)
 am__v_CXXLD_0 = @echo "  CXXLD   " $@;
 am__v_CXXLD_1 = 
 SOURCES = grammar-formats.cpp grammar-mechanics.cpp grammar.cpp \
-	setter.cpp
+	setter.cpp udev-rules.cpp
 DIST_SOURCES = grammar-formats.cpp grammar-mechanics.cpp grammar.cpp \
-	setter.cpp
+	setter.cpp udev-rules.cpp
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -505,6 +513,7 @@ DEFS = @DEFS@
 DEPDIR = @DEPDIR@
 DLLTOOL = @DLLTOOL@
 DOT_PATH = @DOT_PATH@
+DOWNLOAD_DIR = @DOWNLOAD_DIR@
 DOXYGEN = @DOXYGEN@
 DSYMUTIL = @DSYMUTIL@
 DUMPBIN = @DUMPBIN@
@@ -610,6 +619,7 @@ SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
 UDEV_SYSCONFDIR = @UDEV_SYSCONFDIR@
+UNCRUSTIFY = @UNCRUSTIFY@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
 XGETTEXT = @XGETTEXT@
@@ -688,6 +698,9 @@ top_srcdir = @top_srcdir@
 @enable_boost_unit_test_framework_TRUE@	../../../connexions/libcnx-usb.la
 @enable_boost_unit_test_framework_TRUE@setter_utr_LDADD = $(LDADD) ../../../connexions/libcnx-usb.la
 @enable_boost_unit_test_framework_TRUE@grammar_mechanics_utr_LDADD = $(LDADD) ../../../connexions/libcnx-usb.la
+@enable_boost_unit_test_framework_TRUE@udev_rules_utr_LDADD = $(BOOST_UNIT_TEST_FRAMEWORK_LIB) \
+@enable_boost_unit_test_framework_TRUE@	$(BOOST_FILESYSTEM_LIB) \
+@enable_boost_unit_test_framework_TRUE@	$(BOOST_REGEX_LIB)
 EXTRA_DIST = grammar-formats.tcs grammar.tcs
 CLEANFILES = $(am__append_7) $(am__append_9)
 AM_DEFAULT_SOURCE_EXT = .cpp
@@ -758,6 +771,10 @@ setter.utr$(EXEEXT): $(setter_utr_OBJECTS) $(setter_utr_DEPENDENCIES) $(EXTRA_se
 	@rm -f setter.utr$(EXEEXT)
 	$(AM_V_CXXLD)$(CXXLINK) $(setter_utr_OBJECTS) $(setter_utr_LDADD) $(LIBS)
 
+udev-rules.utr$(EXEEXT): $(udev_rules_utr_OBJECTS) $(udev_rules_utr_DEPENDENCIES) $(EXTRA_udev_rules_utr_DEPENDENCIES) 
+	@rm -f udev-rules.utr$(EXEEXT)
+	$(AM_V_CXXLD)$(CXXLINK) $(udev_rules_utr_OBJECTS) $(udev_rules_utr_LDADD) $(LIBS)
+
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
 
@@ -768,6 +785,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/grammar-mechanics.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/grammar.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/setter.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/udev-rules.Po@am__quote@
 
 .cpp.o:
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
@@ -1016,6 +1034,13 @@ grammar.utr.log: grammar.utr$(EXEEXT)
 grammar-mechanics.utr.log: grammar-mechanics.utr$(EXEEXT)
 	@p='grammar-mechanics.utr$(EXEEXT)'; \
 	b='grammar-mechanics.utr'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+udev-rules.utr.log: udev-rules.utr$(EXEEXT)
+	@p='udev-rules.utr$(EXEEXT)'; \
+	b='udev-rules.utr'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \

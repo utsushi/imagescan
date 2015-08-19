@@ -81,32 +81,34 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-@enable_boost_unit_test_framework_TRUE@check_PROGRAMS = indentation.utr$(EXEEXT)
+@enable_boost_unit_test_framework_TRUE@check_PROGRAMS =  \
+@enable_boost_unit_test_framework_TRUE@	$(am__EXEEXT_1)
+@enable_boost_unit_test_framework_TRUE@@enable_uncrustify_test_TRUE@am__append_1 = indentation.utr
 
 #  Set build-time flags to build Boost.Test Unit Test Framework (UTF)
 #  based test runners.
-@enable_boost_unit_test_framework_TRUE@am__append_1 =  \
+@enable_boost_unit_test_framework_TRUE@am__append_2 =  \
 @enable_boost_unit_test_framework_TRUE@	-DSHELL="\"/bin/sh\"" \
 @enable_boost_unit_test_framework_TRUE@	-I$(top_srcdir) \
 @enable_boost_unit_test_framework_TRUE@	$(BOOST_CPPFLAGS) \
 @enable_boost_unit_test_framework_TRUE@	-DBOOST_TEST_NO_MAIN
-@enable_boost_unit_test_framework_TRUE@am__append_2 =  \
+@enable_boost_unit_test_framework_TRUE@am__append_3 =  \
 @enable_boost_unit_test_framework_TRUE@	$(BOOST_LDFLAGS) \
 @enable_boost_unit_test_framework_TRUE@	$(BOOST_LDFLAGS)
 DIST_COMMON = $(top_srcdir)/include/boost-test.am \
 	$(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	$(top_srcdir)/upstream/depcomp \
 	$(top_srcdir)/upstream/test-driver
-@enable_boost_unit_test_framework_TRUE@@with_shared_enabled_TRUE@am__append_3 = -DBOOST_TEST_DYN_LINK
-@enable_boost_unit_test_framework_TRUE@@with_static_enabled_TRUE@am__append_4 = -DBOOST_TEST_ALTERNATIVE_INIT_API
-@enable_boost_unit_test_framework_TRUE@am__append_5 = -DUTSUSHI_TEST_MODULE=\"$(utsushi_test_module)\" \
+@enable_boost_unit_test_framework_TRUE@@with_shared_enabled_TRUE@am__append_4 = -DBOOST_TEST_DYN_LINK
+@enable_boost_unit_test_framework_TRUE@@with_static_enabled_TRUE@am__append_5 = -DBOOST_TEST_ALTERNATIVE_INIT_API
+@enable_boost_unit_test_framework_TRUE@am__append_6 = -DUTSUSHI_TEST_MODULE=\"$(utsushi_test_module)\" \
 @enable_boost_unit_test_framework_TRUE@	-DUTSUSHI_TEST_SUITE=\"$*\"
 
 #  With test reports enabled, the test runner produces an XML file
 #  that matches *-report.xml and contains detailed test results.
-@enable_boost_unit_test_framework_TRUE@@enable_test_reports_TRUE@am__append_6 = -DENABLE_TEST_REPORTS
-@enable_boost_unit_test_framework_TRUE@@enable_test_reports_TRUE@am__append_7 = *-report.xml
-@enable_boost_unit_test_framework_TRUE@@enable_test_reports_TRUE@am__append_8 = BOOST_TEST_REPORT_FORMAT=xml \
+@enable_boost_unit_test_framework_TRUE@@enable_test_reports_TRUE@am__append_7 = -DENABLE_TEST_REPORTS
+@enable_boost_unit_test_framework_TRUE@@enable_test_reports_TRUE@am__append_8 = *-report.xml
+@enable_boost_unit_test_framework_TRUE@@enable_test_reports_TRUE@am__append_9 = BOOST_TEST_REPORT_FORMAT=xml \
 @enable_boost_unit_test_framework_TRUE@@enable_test_reports_TRUE@	BOOST_TEST_REPORT_LEVEL=detailed
 
 #  When code coverage is enabled, the compiler produces *.gcno files.
@@ -119,13 +121,13 @@ DIST_COMMON = $(top_srcdir)/include/boost-test.am \
 #  directory as a result of running tests.  Clean up such files here
 #  so that the parent directory's Makefile.am does not have to do so
 #  explicitly.
-@enable_boost_unit_test_framework_TRUE@@enable_code_coverage_TRUE@am__append_9 = *.gcno \
+@enable_boost_unit_test_framework_TRUE@@enable_code_coverage_TRUE@am__append_10 = *.gcno \
 @enable_boost_unit_test_framework_TRUE@@enable_code_coverage_TRUE@	../*.gcno \
 @enable_boost_unit_test_framework_TRUE@@enable_code_coverage_TRUE@	*.gcda \
 @enable_boost_unit_test_framework_TRUE@@enable_code_coverage_TRUE@	../*.gcda \
 @enable_boost_unit_test_framework_TRUE@@enable_code_coverage_TRUE@	*.gcov \
 @enable_boost_unit_test_framework_TRUE@@enable_code_coverage_TRUE@	../*.gcov
-@enable_boost_unit_test_framework_TRUE@@with_included_boost_TRUE@@with_shared_enabled_TRUE@am__append_10 = \
+@enable_boost_unit_test_framework_TRUE@@with_included_boost_TRUE@@with_shared_enabled_TRUE@am__append_11 = \
 @enable_boost_unit_test_framework_TRUE@@with_included_boost_TRUE@@with_shared_enabled_TRUE@	$(LT_MODULE_PATH_VAR)=`cd $(top_builddir) && pwd`/upstream/boost/lib
 
 subdir = tests
@@ -163,6 +165,7 @@ mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
+@enable_boost_unit_test_framework_TRUE@@enable_uncrustify_test_TRUE@am__EXEEXT_1 = indentation.utr$(EXEEXT)
 indentation_utr_SOURCES = indentation.cpp
 indentation_utr_OBJECTS = indentation.$(OBJEXT)
 indentation_utr_LDADD = $(LDADD)
@@ -443,11 +446,11 @@ TEST_LOG_COMPILE = $(TEST_LOG_COMPILER) $(AM_TEST_LOG_FLAGS) \
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
 AMTAR = @AMTAR@
-AM_CPPFLAGS = @AM_CPPFLAGS@ $(am__append_1) $(am__append_3) \
-	$(am__append_4) $(am__append_5) $(am__append_6)
+AM_CPPFLAGS = @AM_CPPFLAGS@ $(am__append_2) $(am__append_4) \
+	$(am__append_5) $(am__append_6) $(am__append_7)
 AM_CXXFLAGS = @AM_CXXFLAGS@
 AM_DEFAULT_VERBOSITY = @AM_DEFAULT_VERBOSITY@
-AM_LDFLAGS = @AM_LDFLAGS@ $(am__append_2)
+AM_LDFLAGS = @AM_LDFLAGS@ $(am__append_3)
 AR = @AR@
 ARGZ_H = @ARGZ_H@
 AUTOCONF = @AUTOCONF@
@@ -477,6 +480,7 @@ DEFS = @DEFS@
 DEPDIR = @DEPDIR@
 DLLTOOL = @DLLTOOL@
 DOT_PATH = @DOT_PATH@
+DOWNLOAD_DIR = @DOWNLOAD_DIR@
 DOXYGEN = @DOXYGEN@
 DSYMUTIL = @DSYMUTIL@
 DUMPBIN = @DUMPBIN@
@@ -582,6 +586,7 @@ SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
 UDEV_SYSCONFDIR = @UDEV_SYSCONFDIR@
+UNCRUSTIFY = @UNCRUSTIFY@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
 XGETTEXT = @XGETTEXT@
@@ -647,14 +652,14 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 EXTRA_DIST = $(indent_config)
 @enable_boost_unit_test_framework_TRUE@TESTS_ENVIRONMENT =  \
-@enable_boost_unit_test_framework_TRUE@	$(am__append_8) \
-@enable_boost_unit_test_framework_TRUE@	$(am__append_10)
+@enable_boost_unit_test_framework_TRUE@	$(am__append_9) \
+@enable_boost_unit_test_framework_TRUE@	$(am__append_11)
 @enable_boost_unit_test_framework_TRUE@TESTS = $(check_PROGRAMS)
 @enable_boost_unit_test_framework_TRUE@LDADD = $(BOOST_FILESYSTEM_LIB) \
 @enable_boost_unit_test_framework_TRUE@	$(BOOST_IOSTREAMS_LIB) \
 @enable_boost_unit_test_framework_TRUE@	$(BOOST_REGEX_LIB) \
 @enable_boost_unit_test_framework_TRUE@	$(BOOST_UNIT_TEST_FRAMEWORK_LIB)
-CLEANFILES = $(am__append_7) $(am__append_9)
+CLEANFILES = $(am__append_8) $(am__append_10)
 AM_DEFAULT_SOURCE_EXT = .cpp
 
 #  Create a test module name based on the directory we are run in.

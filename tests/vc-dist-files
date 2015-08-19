@@ -147,6 +147,7 @@
 ../drivers/esci/tests/grammar.cpp
 ../drivers/esci/tests/grammar.tcs
 ../drivers/esci/tests/setter.cpp
+../drivers/esci/tests/udev-rules.cpp
 ../drivers/esci/utsushi-esci.rules
 ../drivers/esci/vector.hpp
 ../drivers/esci/verify-compound-protocol.cpp
