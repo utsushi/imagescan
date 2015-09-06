@@ -584,7 +584,7 @@ driverdata_DATA = data/DS-40.dat data/DS-510.dat data/DS-520.dat \
 	data/DS-560.dat data/DS-760.dat data/DS-860.dat \
 	data/DS-5500.dat data/DS-6500.dat data/DS-7500.dat \
 	data/DS-50000.dat data/DS-60000.dat data/DS-70000.dat \
-	data/PX-M7050.dat data/PX-M7050FX.dat
+	data/PX-M7050.dat data/PX-M7050FX.dat data/PX-M860F.dat
 clone_dat = \
 	src=`echo $< | sed 's,^.*/,,; s,\.dat$$,,'`; \
 	dst=`echo $@ | sed 's,^.*/,,; s,\.dat$$,,'`; \

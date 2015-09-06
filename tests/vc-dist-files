@@ -62,6 +62,7 @@
 ../drivers/esci/data/DS-7500.dat
 ../drivers/esci/data/DS-860.dat
 ../drivers/esci/data/PX-M7050.dat
+../drivers/esci/data/PX-M860F.dat
 ../drivers/esci/exception.hpp
 ../drivers/esci/extended-scanner.cpp
 ../drivers/esci/extended-scanner.hpp
@@ -167,8 +168,6 @@
 ../filters/image-skip.hpp
 ../filters/jpeg.cpp
 ../filters/jpeg.hpp
-../filters/lut.cpp
-../filters/lut.hpp
 ../filters/magick.cpp
 ../filters/magick.hpp
 ../filters/padding.cpp
@@ -199,7 +198,6 @@
 ../filters/tests/data/A4-max-x-max.jpg
 ../filters/tests/image-skip.cpp
 ../filters/tests/jpeg.cpp
-../filters/tests/lut.cpp
 ../filters/tests/magick.cpp
 ../filters/tests/padding.cpp
 ../filters/tests/pdf.cpp

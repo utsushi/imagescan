@@ -84,7 +84,6 @@ host_triplet = @host@
 @enable_boost_unit_test_framework_TRUE@check_PROGRAMS =  \
 @enable_boost_unit_test_framework_TRUE@	padding.utr$(EXEEXT) \
 @enable_boost_unit_test_framework_TRUE@	pnm.utr$(EXEEXT) \
-@enable_boost_unit_test_framework_TRUE@	lut.utr$(EXEEXT) \
 @enable_boost_unit_test_framework_TRUE@	threshold.utr$(EXEEXT) \
 @enable_boost_unit_test_framework_TRUE@	image-skip.utr$(EXEEXT) \
 @enable_boost_unit_test_framework_TRUE@	shell-pipe.utr$(EXEEXT) \
@@ -208,15 +207,6 @@ jpeg_utr_OBJECTS = jpeg_utr-jpeg.$(OBJEXT)
 jpeg_utr_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(jpeg_utr_CXXFLAGS) \
 	$(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
-lut_utr_SOURCES = lut.cpp
-lut_utr_OBJECTS = lut.$(OBJEXT)
-lut_utr_LDADD = $(LDADD)
-@enable_boost_unit_test_framework_TRUE@lut_utr_DEPENDENCIES =  \
-@enable_boost_unit_test_framework_TRUE@	../libflt-all.la \
-@enable_boost_unit_test_framework_TRUE@	../../lib/libutsushi.la \
-@enable_boost_unit_test_framework_TRUE@	$(am__DEPENDENCIES_1) \
-@enable_boost_unit_test_framework_TRUE@	../../connexions/libcnx-usb.la \
-@enable_boost_unit_test_framework_TRUE@	$(am__DEPENDENCIES_1)
 magick_utr_SOURCES = magick.cpp
 magick_utr_OBJECTS = magick.$(OBJEXT)
 magick_utr_LDADD = $(LDADD)
@@ -304,10 +294,10 @@ AM_V_CXXLD = $(am__v_CXXLD_@AM_V@)
 am__v_CXXLD_ = $(am__v_CXXLD_@AM_DEFAULT_V@)
 am__v_CXXLD_0 = @echo "  CXXLD   " $@;
 am__v_CXXLD_1 = 
-SOURCES = image-skip.cpp jpeg.cpp lut.cpp magick.cpp padding.cpp \
-	pdf.cpp pnm.cpp shell-pipe.cpp threshold.cpp
-DIST_SOURCES = image-skip.cpp jpeg.cpp lut.cpp magick.cpp padding.cpp \
-	pdf.cpp pnm.cpp shell-pipe.cpp threshold.cpp
+SOURCES = image-skip.cpp jpeg.cpp magick.cpp padding.cpp pdf.cpp \
+	pnm.cpp shell-pipe.cpp threshold.cpp
+DIST_SOURCES = image-skip.cpp jpeg.cpp magick.cpp padding.cpp pdf.cpp \
+	pnm.cpp shell-pipe.cpp threshold.cpp
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -827,10 +817,6 @@ jpeg.utr$(EXEEXT): $(jpeg_utr_OBJECTS) $(jpeg_utr_DEPENDENCIES) $(EXTRA_jpeg_utr
 	@rm -f jpeg.utr$(EXEEXT)
 	$(AM_V_CXXLD)$(jpeg_utr_LINK) $(jpeg_utr_OBJECTS) $(jpeg_utr_LDADD) $(LIBS)
 
-lut.utr$(EXEEXT): $(lut_utr_OBJECTS) $(lut_utr_DEPENDENCIES) $(EXTRA_lut_utr_DEPENDENCIES) 
-	@rm -f lut.utr$(EXEEXT)
-	$(AM_V_CXXLD)$(CXXLINK) $(lut_utr_OBJECTS) $(lut_utr_LDADD) $(LIBS)
-
 magick.utr$(EXEEXT): $(magick_utr_OBJECTS) $(magick_utr_DEPENDENCIES) $(EXTRA_magick_utr_DEPENDENCIES) 
 	@rm -f magick.utr$(EXEEXT)
 	$(AM_V_CXXLD)$(CXXLINK) $(magick_utr_OBJECTS) $(magick_utr_LDADD) $(LIBS)
@@ -863,7 +849,6 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/image-skip.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/jpeg_utr-jpeg.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lut.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/magick.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/padding.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pdf_utr-pdf.Po@am__quote@
@@ -1132,13 +1117,6 @@ padding.utr.log: padding.utr$(EXEEXT)
 pnm.utr.log: pnm.utr$(EXEEXT)
 	@p='pnm.utr$(EXEEXT)'; \
 	b='pnm.utr'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-lut.utr.log: lut.utr$(EXEEXT)
-	@p='lut.utr$(EXEEXT)'; \
-	b='lut.utr'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
