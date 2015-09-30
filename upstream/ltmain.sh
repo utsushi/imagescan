@@ -8203,6 +8203,7 @@ EOF
 ## may be helpful in identifying other soname patterns.
 ##
 ## Last versions checked: libtool-2.2.6b, sane-backends-1.0.21.
+## Last versions checked: libtool-2.4.2, sane-backends-1.0.24.
 
 	case $host in
 	  *aix*)		# rumoured not to work ...
