@@ -357,6 +357,7 @@
 ../upstream/include/
 ../upstream/include/no_attribute_directive.hpp
 ../utsushi/
+../utsushi/array.hpp
 ../utsushi/buffer.hpp
 ../utsushi/condition-variable.hpp
 ../utsushi/connexion.hpp
@@ -370,6 +371,7 @@
 ../utsushi/file.hpp
 ../utsushi/filter.hpp
 ../utsushi/format.hpp
+../utsushi/functional.hpp
 ../utsushi/i18n.hpp
 ../utsushi/iobase.hpp
 ../utsushi/key.hpp
@@ -386,6 +388,7 @@
 ../utsushi/pump.hpp
 ../utsushi/quantity.hpp
 ../utsushi/range.hpp
+../utsushi/regex.hpp
 ../utsushi/run-time.hpp
 ../utsushi/scanner.hpp
 ../utsushi/signal.hpp
@@ -402,4 +405,5 @@
 ../utsushi/test/tools.hpp
 ../utsushi/thread.hpp
 ../utsushi/toggle.hpp
+../utsushi/type-traits.hpp
 ../utsushi/value.hpp

@@ -684,8 +684,8 @@ distclean-generic:
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
 	@echo "it deletes files that may require special tools to rebuild."
-@have_pdflatex_FALSE@install-pdf-local:
 @have_pdflatex_FALSE@pdf-local:
+@have_pdflatex_FALSE@install-pdf-local:
 clean: clean-recursive
 
 clean-am: clean-generic clean-libtool clean-local mostlyclean-am
