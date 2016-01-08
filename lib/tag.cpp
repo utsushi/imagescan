@@ -1,8 +1,8 @@
 //  tag.cpp -- predefined self-documenting option categories
-//  Copyright (C) 2012  SEIKO EPSON CORPORATION
+//  Copyright (C) 2012, 2015  SEIKO EPSON CORPORATION
 //
 //  License: GPL-3.0+
-//  Author : AVASYS CORPORATION
+//  Author : EPSON AVASYS CORPORATION
 //
 //  This file is part of the 'Utsushi' package.
 //  This package is free software: you can redistribute it and/or modify
@@ -67,22 +67,22 @@ tag::symbol::operator key () const
 const tag::symbol tag::application (
   "01_application",
   "%1%",
-  N_("Options provided by %1%.")
+  CCB_N_("Options provided by %1%.")
 );
 const tag::symbol tag::general (
   "02_general",
-  N_("General"),
-  N_("Basic options.")
+  SEC_N_("General"),
+  CCB_N_("Basic options.")
 );
 const tag::symbol tag::geometry (
   "03_geometry",
-  N_("Geometry"),
-  N_("Scan area and image size related options.")
+  SEC_N_("Geometry"),
+  CCB_N_("Scan area and image size related options.")
 );
 const tag::symbol tag::enhancement (
   "04_enhancement",
-  N_("Enhancement"),
-  N_("Image modification options.")
+  SEC_N_("Enhancement"),
+  CCB_N_("Image modification options.")
 );
 
 tags::container_type tags::set_;

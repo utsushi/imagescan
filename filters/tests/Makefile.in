@@ -88,7 +88,8 @@ host_triplet = @host@
 @enable_boost_unit_test_framework_TRUE@	image-skip.utr$(EXEEXT) \
 @enable_boost_unit_test_framework_TRUE@	shell-pipe.utr$(EXEEXT) \
 @enable_boost_unit_test_framework_TRUE@	$(am__EXEEXT_1) \
-@enable_boost_unit_test_framework_TRUE@	$(am__EXEEXT_2)
+@enable_boost_unit_test_framework_TRUE@	$(am__EXEEXT_2) \
+@enable_boost_unit_test_framework_TRUE@	reorient.utr$(EXEEXT)
 @enable_boost_unit_test_framework_TRUE@@have_magick_TRUE@am__append_1 = magick.utr
 @enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@am__append_2 = jpeg.utr \
 @enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@	pdf.utr
@@ -242,6 +243,15 @@ pnm_utr_LDADD = $(LDADD)
 @enable_boost_unit_test_framework_TRUE@	$(am__DEPENDENCIES_1) \
 @enable_boost_unit_test_framework_TRUE@	../../connexions/libcnx-usb.la \
 @enable_boost_unit_test_framework_TRUE@	$(am__DEPENDENCIES_1)
+reorient_utr_SOURCES = reorient.cpp
+reorient_utr_OBJECTS = reorient.$(OBJEXT)
+reorient_utr_LDADD = $(LDADD)
+@enable_boost_unit_test_framework_TRUE@reorient_utr_DEPENDENCIES =  \
+@enable_boost_unit_test_framework_TRUE@	../libflt-all.la \
+@enable_boost_unit_test_framework_TRUE@	../../lib/libutsushi.la \
+@enable_boost_unit_test_framework_TRUE@	$(am__DEPENDENCIES_1) \
+@enable_boost_unit_test_framework_TRUE@	../../connexions/libcnx-usb.la \
+@enable_boost_unit_test_framework_TRUE@	$(am__DEPENDENCIES_1)
 shell_pipe_utr_SOURCES = shell-pipe.cpp
 shell_pipe_utr_OBJECTS = shell-pipe.$(OBJEXT)
 shell_pipe_utr_LDADD = $(LDADD)
@@ -295,9 +305,9 @@ am__v_CXXLD_ = $(am__v_CXXLD_@AM_DEFAULT_V@)
 am__v_CXXLD_0 = @echo "  CXXLD   " $@;
 am__v_CXXLD_1 = 
 SOURCES = image-skip.cpp jpeg.cpp magick.cpp padding.cpp pdf.cpp \
-	pnm.cpp shell-pipe.cpp threshold.cpp
+	pnm.cpp reorient.cpp shell-pipe.cpp threshold.cpp
 DIST_SOURCES = image-skip.cpp jpeg.cpp magick.cpp padding.cpp pdf.cpp \
-	pnm.cpp shell-pipe.cpp threshold.cpp
+	pnm.cpp reorient.cpp shell-pipe.cpp threshold.cpp
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -755,8 +765,13 @@ top_srcdir = @top_srcdir@
 @enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@	$(LIBJPEG_LIBS) \
 @enable_boost_unit_test_framework_TRUE@@have_libjpeg_TRUE@	$(am__append_6)
 EXTRA_DIST = data/A4-300-x-300.jpg data/A4-300-x-max.jpg \
-	data/A4-max-x-300.jpg data/A4-max-x-max.jpg
-CLEANFILES = $(am__append_13) $(am__append_15) $(am__append_17)
+	data/A4-max-x-300.jpg data/A4-max-x-max.jpg \
+	$(EXTRA_reorient_utr_DEPENDENCIES)
+CLEANFILES = reorient.box reorient.tif reorient.txt $(am__append_13) \
+	$(am__append_15) $(am__append_17)
+EXTRA_reorient_utr_DEPENDENCIES = $(srcdir)/data/top-left.png \
+	$(srcdir)/data/left-bottom.png $(srcdir)/data/bottom-right.png \
+	$(srcdir)/data/right-top.png
 AM_DEFAULT_SOURCE_EXT = .cpp
 
 #  Create a test module name based on the directory we are run in.
@@ -833,6 +848,10 @@ pnm.utr$(EXEEXT): $(pnm_utr_OBJECTS) $(pnm_utr_DEPENDENCIES) $(EXTRA_pnm_utr_DEP
 	@rm -f pnm.utr$(EXEEXT)
 	$(AM_V_CXXLD)$(CXXLINK) $(pnm_utr_OBJECTS) $(pnm_utr_LDADD) $(LIBS)
 
+reorient.utr$(EXEEXT): $(reorient_utr_OBJECTS) $(reorient_utr_DEPENDENCIES) $(EXTRA_reorient_utr_DEPENDENCIES) 
+	@rm -f reorient.utr$(EXEEXT)
+	$(AM_V_CXXLD)$(CXXLINK) $(reorient_utr_OBJECTS) $(reorient_utr_LDADD) $(LIBS)
+
 shell-pipe.utr$(EXEEXT): $(shell_pipe_utr_OBJECTS) $(shell_pipe_utr_DEPENDENCIES) $(EXTRA_shell_pipe_utr_DEPENDENCIES) 
 	@rm -f shell-pipe.utr$(EXEEXT)
 	$(AM_V_CXXLD)$(CXXLINK) $(shell_pipe_utr_OBJECTS) $(shell_pipe_utr_LDADD) $(LIBS)
@@ -853,6 +872,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/padding.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pdf_utr-pdf.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pnm.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/reorient.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/shell-pipe.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/threshold.Po@am__quote@
 
@@ -1163,6 +1183,13 @@ pdf.utr.log: pdf.utr$(EXEEXT)
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
+reorient.utr.log: reorient.utr$(EXEEXT)
+	@p='reorient.utr$(EXEEXT)'; \
+	b='reorient.utr'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
 .test.log:
 	@p='$<'; \
 	$(am__set_b); \
@@ -1335,6 +1362,31 @@ uninstall-am:
 	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
 	recheck tags tags-am uninstall uninstall-am
 
+
+$(EXTRA_reorient_utr_DEPENDENCIES): reorient.tif
+	file=`echo $@ | sed 's|.*/||'`; \
+	orient=`echo $$file | sed 's|\.[^.]*$$||'`; \
+	case $$orient in \
+	  left-bottom)  orient=right-top;; \
+	  right-top)  orient=left-bottom;; \
+	esac; \
+	$(MAGICK_CONVERT) '$<[0]' \
+	    -trim -bordercolor white -border 200 -monochrome \
+	    -orient $$orient \
+	    -auto-orient \
+	    $@
+
+reorient.tif: reorient.txt
+	text2image \
+	    --resolution 200 \
+	    --fonts_dir /usr/share/fonts \
+	    --font "DejaVu Sans" \
+	    --text $< \
+	    --outputbase `echo $@ | sed 's|\.[^.]*$$||'`
+
+#  A "page" of any reasonably static file with prose will do
+reorient.txt: $(top_srcdir)/ABOUT-NLS
+	sed '50q' $< > $@
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

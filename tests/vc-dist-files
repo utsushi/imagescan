@@ -30,9 +30,6 @@
 ../doc/test-spec.dox
 ../doc/tests/
 ../doc/tests/Makefile.am
-../doc/trac-footer.html
-../doc/trac-header.html
-../doc/trac-style.css
 ../doc/usr-guide.dox
 ../drivers/
 ../drivers/esci/
@@ -164,6 +161,7 @@
 ../filters/doc-locate.cpp
 ../filters/g3fax.cpp
 ../filters/g3fax.hpp
+../filters/get-text-orientation
 ../filters/image-skip.cpp
 ../filters/image-skip.hpp
 ../filters/jpeg.cpp
@@ -187,6 +185,8 @@
 ../filters/pdf.hpp
 ../filters/pnm.cpp
 ../filters/pnm.hpp
+../filters/reorient.cpp
+../filters/reorient.hpp
 ../filters/shell-pipe.cpp
 ../filters/shell-pipe.hpp
 ../filters/tests/
@@ -202,6 +202,7 @@
 ../filters/tests/padding.cpp
 ../filters/tests/pdf.cpp
 ../filters/tests/pnm.cpp
+../filters/tests/reorient.cpp
 ../filters/tests/shell-pipe.cpp
 ../filters/tests/threshold.cpp
 ../filters/threshold.cpp
@@ -213,7 +214,6 @@
 ../gtkmm/action-dialog.hpp
 ../gtkmm/chooser.cpp
 ../gtkmm/chooser.hpp
-../gtkmm/dialog-alt.glade
 ../gtkmm/dialog.cpp
 ../gtkmm/dialog.glade
 ../gtkmm/dialog.hpp
@@ -299,6 +299,7 @@
 ../po/Makevars
 ../po/POTFILES.in
 ../po/de.po
+../po/en.po
 ../po/es.po
 ../po/es_MX.po
 ../po/fr.po

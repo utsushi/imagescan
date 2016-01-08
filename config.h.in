@@ -128,28 +128,28 @@
 /* Define to 1 if the gtkmm library is available */
 #undef HAVE_LIBGTKMM
 
-/* define to 1 if a JPEG library is available */
+/* Define to 1 if a JPEG library is available */
 #undef HAVE_LIBJPEG
 
-/* define to 1 if libmagic is available */
+/* Define to 1 if libmagic is available */
 #undef HAVE_LIBMAGIC
 
 /* Define to 1 if the SANE library is available */
 #undef HAVE_LIBSANE
 
-/* define to 1 if a TIFF library is available */
+/* Define to 1 if a TIFF library is available */
 #undef HAVE_LIBTIFF
 
 /* Define to 1 if the udev library is available */
 #undef HAVE_LIBUDEV
 
-/* define to 1 if libusb-1.0 is available */
+/* Define to 1 if libusb-1.0 is available */
 #undef HAVE_LIBUSB
 
-/* define to 1 if libusb_error_name() is available */
+/* Define to 1 if libusb_error_name() is available */
 #undef HAVE_LIBUSB_ERROR_NAME
 
-/* define to 1 if libusb_get_port_number() is available */
+/* Define to 1 if libusb_get_port_number() is available */
 #undef HAVE_LIBUSB_GET_PORT_NUMBER
 
 /* Define this if a modern libltdl is already installed */
@@ -288,6 +288,9 @@
 
 /* Version number of package */
 #undef VERSION
+
+/* Define to 1 if using the included Boost sources */
+#undef WITH_INCLUDED_BOOST
 
 /* Define so that glibc/gnulib argp.h does not typedef error_t. */
 #undef __error_t_defined

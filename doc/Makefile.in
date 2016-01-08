@@ -404,8 +404,7 @@ SUBDIRS = . tests
 EXTRA_DIST = logo.svg logo.png icon.svg icon32.xpm icon16.xpm \
 	doxygen.conf layout.xml filter main.dox usr-guide.dox \
 	api-specs.dox test-spec.dox dev-notes.dox style.css \
-	trac-style.css header.html trac-header.html footer.html \
-	trac-footer.html
+	header.html footer.html
 documentation = usr_guide_doc api_specs_doc test_spec_doc \
 	dev_notes_doc
 usr_guide_inputs = 
@@ -441,9 +440,9 @@ html_configure = \
 	test -d html/$$output || $(MKDIR_P) html/$$output; \
 	$(configure); \
 	echo "HTML_OUTPUT = html/$$output"; \
-	echo 'HTML_HEADER = $(srcdir)/$(TRAC_DOXYGEN)header.html'; \
-	echo 'HTML_FOOTER = $(srcdir)/$(TRAC_DOXYGEN)footer.html'; \
-	echo 'HTML_STYLESHEET = $(srcdir)/$(TRAC_DOXYGEN)style.css'; \
+	echo 'HTML_HEADER = $(srcdir)/header.html'; \
+	echo 'HTML_FOOTER = $(srcdir)/footer.html'; \
+	echo 'HTML_STYLESHEET = $(srcdir)/style.css'; \
 	echo "GENERATE_HTML = YES"
 
 @have_pdflatex_TRUE@pdf_configure = \
@@ -684,8 +683,8 @@ distclean-generic:
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
 	@echo "it deletes files that may require special tools to rebuild."
-@have_pdflatex_FALSE@pdf-local:
 @have_pdflatex_FALSE@install-pdf-local:
+@have_pdflatex_FALSE@pdf-local:
 clean: clean-recursive
 
 clean-am: clean-generic clean-libtool clean-local mostlyclean-am

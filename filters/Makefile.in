@@ -165,7 +165,8 @@ am__libflt_all_la_SOURCES_DIST = g3fax.cpp g3fax.hpp image-skip.cpp \
 	pdf/dictionary.hpp pdf/object.cpp pdf/object.hpp \
 	pdf/primitive.cpp pdf/primitive.hpp pdf/writer.cpp \
 	pdf/writer.hpp jpeg.cpp jpeg.hpp magick.cpp magick.hpp \
-	autocrop.cpp autocrop.hpp deskew.cpp deskew.hpp
+	autocrop.cpp autocrop.hpp deskew.cpp deskew.hpp reorient.cpp \
+	reorient.hpp
 am__dirstamp = $(am__leading_dot)dirstamp
 am__objects_1 = libflt_all_la-pdf.lo pdf/libflt_all_la-array.lo \
 	pdf/libflt_all_la-dictionary.lo pdf/libflt_all_la-object.lo \
@@ -178,7 +179,7 @@ am_libflt_all_la_OBJECTS = libflt_all_la-g3fax.lo \
 	libflt_all_la-image-skip.lo libflt_all_la-padding.lo \
 	libflt_all_la-pnm.lo libflt_all_la-shell-pipe.lo \
 	libflt_all_la-threshold.lo $(am__objects_1) $(am__objects_2) \
-	$(am__objects_3) $(am__objects_4)
+	$(am__objects_3) $(am__objects_4) libflt_all_la-reorient.lo
 libflt_all_la_OBJECTS = $(am_libflt_all_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -530,15 +531,18 @@ SUBDIRS = . tests
 filterlibdir = $(pkglibdir)
 filterdatadir = $(pkgdatadir)
 filter_ldflags = $(AM_LDFLAGS) -export-dynamic
-dist_pkglibexec_SCRIPTS = 
+dist_pkglibexec_SCRIPTS = get-text-orientation
 filterlib_LTLIBRARIES = libflt-all.la
+libflt_all_la_CPPFLAGS = $(AM_CPPFLAGS) \
+	-DPKGLIBEXECDIR="\"$(pkglibexecdir)\""
 libflt_all_la_CXXFLAGS = $(AM_CXXFLAGS) $(am__append_1)
 libflt_all_la_LDFLAGS = $(filter_ldflags)
 libflt_all_la_LIBADD = $(am__append_2)
 libflt_all_la_SOURCES = g3fax.cpp g3fax.hpp image-skip.cpp \
 	image-skip.hpp padding.cpp padding.hpp pnm.cpp pnm.hpp \
 	shell-pipe.cpp shell-pipe.hpp threshold.cpp threshold.hpp \
-	$(pdf_filter) $(am__append_3) $(am__append_4) $(am__append_6)
+	$(pdf_filter) $(am__append_3) $(am__append_4) $(am__append_6) \
+	reorient.cpp reorient.hpp
 @have_libmagick_pp_TRUE@doc_locate_CPPFLAGS = $(AM_CPPFLAGS) \
 @have_libmagick_pp_TRUE@	$(LIBMAGICK_PP_CFLAGS)
 @have_libmagick_pp_TRUE@doc_locate_LDFLAGS = $(LIBMAGICK_PP_LIBS) -lm
@@ -774,6 +778,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libflt_all_la-padding.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libflt_all_la-pdf.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libflt_all_la-pnm.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libflt_all_la-reorient.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libflt_all_la-shell-pipe.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libflt_all_la-threshold.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@pdf/$(DEPDIR)/libflt_all_la-array.Plo@am__quote@
@@ -807,116 +812,123 @@ distclean-compile:
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LTCXXCOMPILE) -c -o $@ $<
 
 libflt_all_la-g3fax.lo: g3fax.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -MT libflt_all_la-g3fax.lo -MD -MP -MF $(DEPDIR)/libflt_all_la-g3fax.Tpo -c -o libflt_all_la-g3fax.lo `test -f 'g3fax.cpp' || echo '$(srcdir)/'`g3fax.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libflt_all_la_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -MT libflt_all_la-g3fax.lo -MD -MP -MF $(DEPDIR)/libflt_all_la-g3fax.Tpo -c -o libflt_all_la-g3fax.lo `test -f 'g3fax.cpp' || echo '$(srcdir)/'`g3fax.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libflt_all_la-g3fax.Tpo $(DEPDIR)/libflt_all_la-g3fax.Plo
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='g3fax.cpp' object='libflt_all_la-g3fax.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o libflt_all_la-g3fax.lo `test -f 'g3fax.cpp' || echo '$(srcdir)/'`g3fax.cpp
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libflt_all_la_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o libflt_all_la-g3fax.lo `test -f 'g3fax.cpp' || echo '$(srcdir)/'`g3fax.cpp
 
 libflt_all_la-image-skip.lo: image-skip.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -MT libflt_all_la-image-skip.lo -MD -MP -MF $(DEPDIR)/libflt_all_la-image-skip.Tpo -c -o libflt_all_la-image-skip.lo `test -f 'image-skip.cpp' || echo '$(srcdir)/'`image-skip.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libflt_all_la_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -MT libflt_all_la-image-skip.lo -MD -MP -MF $(DEPDIR)/libflt_all_la-image-skip.Tpo -c -o libflt_all_la-image-skip.lo `test -f 'image-skip.cpp' || echo '$(srcdir)/'`image-skip.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libflt_all_la-image-skip.Tpo $(DEPDIR)/libflt_all_la-image-skip.Plo
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='image-skip.cpp' object='libflt_all_la-image-skip.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o libflt_all_la-image-skip.lo `test -f 'image-skip.cpp' || echo '$(srcdir)/'`image-skip.cpp
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libflt_all_la_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o libflt_all_la-image-skip.lo `test -f 'image-skip.cpp' || echo '$(srcdir)/'`image-skip.cpp
 
 libflt_all_la-padding.lo: padding.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -MT libflt_all_la-padding.lo -MD -MP -MF $(DEPDIR)/libflt_all_la-padding.Tpo -c -o libflt_all_la-padding.lo `test -f 'padding.cpp' || echo '$(srcdir)/'`padding.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libflt_all_la_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -MT libflt_all_la-padding.lo -MD -MP -MF $(DEPDIR)/libflt_all_la-padding.Tpo -c -o libflt_all_la-padding.lo `test -f 'padding.cpp' || echo '$(srcdir)/'`padding.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libflt_all_la-padding.Tpo $(DEPDIR)/libflt_all_la-padding.Plo
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='padding.cpp' object='libflt_all_la-padding.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o libflt_all_la-padding.lo `test -f 'padding.cpp' || echo '$(srcdir)/'`padding.cpp
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libflt_all_la_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o libflt_all_la-padding.lo `test -f 'padding.cpp' || echo '$(srcdir)/'`padding.cpp
 
 libflt_all_la-pnm.lo: pnm.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -MT libflt_all_la-pnm.lo -MD -MP -MF $(DEPDIR)/libflt_all_la-pnm.Tpo -c -o libflt_all_la-pnm.lo `test -f 'pnm.cpp' || echo '$(srcdir)/'`pnm.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libflt_all_la_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -MT libflt_all_la-pnm.lo -MD -MP -MF $(DEPDIR)/libflt_all_la-pnm.Tpo -c -o libflt_all_la-pnm.lo `test -f 'pnm.cpp' || echo '$(srcdir)/'`pnm.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libflt_all_la-pnm.Tpo $(DEPDIR)/libflt_all_la-pnm.Plo
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='pnm.cpp' object='libflt_all_la-pnm.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o libflt_all_la-pnm.lo `test -f 'pnm.cpp' || echo '$(srcdir)/'`pnm.cpp
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libflt_all_la_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o libflt_all_la-pnm.lo `test -f 'pnm.cpp' || echo '$(srcdir)/'`pnm.cpp
 
 libflt_all_la-shell-pipe.lo: shell-pipe.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -MT libflt_all_la-shell-pipe.lo -MD -MP -MF $(DEPDIR)/libflt_all_la-shell-pipe.Tpo -c -o libflt_all_la-shell-pipe.lo `test -f 'shell-pipe.cpp' || echo '$(srcdir)/'`shell-pipe.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libflt_all_la_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -MT libflt_all_la-shell-pipe.lo -MD -MP -MF $(DEPDIR)/libflt_all_la-shell-pipe.Tpo -c -o libflt_all_la-shell-pipe.lo `test -f 'shell-pipe.cpp' || echo '$(srcdir)/'`shell-pipe.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libflt_all_la-shell-pipe.Tpo $(DEPDIR)/libflt_all_la-shell-pipe.Plo
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='shell-pipe.cpp' object='libflt_all_la-shell-pipe.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o libflt_all_la-shell-pipe.lo `test -f 'shell-pipe.cpp' || echo '$(srcdir)/'`shell-pipe.cpp
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libflt_all_la_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o libflt_all_la-shell-pipe.lo `test -f 'shell-pipe.cpp' || echo '$(srcdir)/'`shell-pipe.cpp
 
 libflt_all_la-threshold.lo: threshold.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -MT libflt_all_la-threshold.lo -MD -MP -MF $(DEPDIR)/libflt_all_la-threshold.Tpo -c -o libflt_all_la-threshold.lo `test -f 'threshold.cpp' || echo '$(srcdir)/'`threshold.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libflt_all_la_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -MT libflt_all_la-threshold.lo -MD -MP -MF $(DEPDIR)/libflt_all_la-threshold.Tpo -c -o libflt_all_la-threshold.lo `test -f 'threshold.cpp' || echo '$(srcdir)/'`threshold.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libflt_all_la-threshold.Tpo $(DEPDIR)/libflt_all_la-threshold.Plo
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='threshold.cpp' object='libflt_all_la-threshold.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o libflt_all_la-threshold.lo `test -f 'threshold.cpp' || echo '$(srcdir)/'`threshold.cpp
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libflt_all_la_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o libflt_all_la-threshold.lo `test -f 'threshold.cpp' || echo '$(srcdir)/'`threshold.cpp
 
 libflt_all_la-pdf.lo: pdf.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -MT libflt_all_la-pdf.lo -MD -MP -MF $(DEPDIR)/libflt_all_la-pdf.Tpo -c -o libflt_all_la-pdf.lo `test -f 'pdf.cpp' || echo '$(srcdir)/'`pdf.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libflt_all_la_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -MT libflt_all_la-pdf.lo -MD -MP -MF $(DEPDIR)/libflt_all_la-pdf.Tpo -c -o libflt_all_la-pdf.lo `test -f 'pdf.cpp' || echo '$(srcdir)/'`pdf.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libflt_all_la-pdf.Tpo $(DEPDIR)/libflt_all_la-pdf.Plo
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='pdf.cpp' object='libflt_all_la-pdf.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o libflt_all_la-pdf.lo `test -f 'pdf.cpp' || echo '$(srcdir)/'`pdf.cpp
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libflt_all_la_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o libflt_all_la-pdf.lo `test -f 'pdf.cpp' || echo '$(srcdir)/'`pdf.cpp
 
 pdf/libflt_all_la-array.lo: pdf/array.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -MT pdf/libflt_all_la-array.lo -MD -MP -MF pdf/$(DEPDIR)/libflt_all_la-array.Tpo -c -o pdf/libflt_all_la-array.lo `test -f 'pdf/array.cpp' || echo '$(srcdir)/'`pdf/array.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libflt_all_la_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -MT pdf/libflt_all_la-array.lo -MD -MP -MF pdf/$(DEPDIR)/libflt_all_la-array.Tpo -c -o pdf/libflt_all_la-array.lo `test -f 'pdf/array.cpp' || echo '$(srcdir)/'`pdf/array.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) pdf/$(DEPDIR)/libflt_all_la-array.Tpo pdf/$(DEPDIR)/libflt_all_la-array.Plo
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='pdf/array.cpp' object='pdf/libflt_all_la-array.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o pdf/libflt_all_la-array.lo `test -f 'pdf/array.cpp' || echo '$(srcdir)/'`pdf/array.cpp
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libflt_all_la_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o pdf/libflt_all_la-array.lo `test -f 'pdf/array.cpp' || echo '$(srcdir)/'`pdf/array.cpp
 
 pdf/libflt_all_la-dictionary.lo: pdf/dictionary.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -MT pdf/libflt_all_la-dictionary.lo -MD -MP -MF pdf/$(DEPDIR)/libflt_all_la-dictionary.Tpo -c -o pdf/libflt_all_la-dictionary.lo `test -f 'pdf/dictionary.cpp' || echo '$(srcdir)/'`pdf/dictionary.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libflt_all_la_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -MT pdf/libflt_all_la-dictionary.lo -MD -MP -MF pdf/$(DEPDIR)/libflt_all_la-dictionary.Tpo -c -o pdf/libflt_all_la-dictionary.lo `test -f 'pdf/dictionary.cpp' || echo '$(srcdir)/'`pdf/dictionary.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) pdf/$(DEPDIR)/libflt_all_la-dictionary.Tpo pdf/$(DEPDIR)/libflt_all_la-dictionary.Plo
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='pdf/dictionary.cpp' object='pdf/libflt_all_la-dictionary.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o pdf/libflt_all_la-dictionary.lo `test -f 'pdf/dictionary.cpp' || echo '$(srcdir)/'`pdf/dictionary.cpp
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libflt_all_la_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o pdf/libflt_all_la-dictionary.lo `test -f 'pdf/dictionary.cpp' || echo '$(srcdir)/'`pdf/dictionary.cpp
 
 pdf/libflt_all_la-object.lo: pdf/object.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -MT pdf/libflt_all_la-object.lo -MD -MP -MF pdf/$(DEPDIR)/libflt_all_la-object.Tpo -c -o pdf/libflt_all_la-object.lo `test -f 'pdf/object.cpp' || echo '$(srcdir)/'`pdf/object.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libflt_all_la_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -MT pdf/libflt_all_la-object.lo -MD -MP -MF pdf/$(DEPDIR)/libflt_all_la-object.Tpo -c -o pdf/libflt_all_la-object.lo `test -f 'pdf/object.cpp' || echo '$(srcdir)/'`pdf/object.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) pdf/$(DEPDIR)/libflt_all_la-object.Tpo pdf/$(DEPDIR)/libflt_all_la-object.Plo
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='pdf/object.cpp' object='pdf/libflt_all_la-object.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o pdf/libflt_all_la-object.lo `test -f 'pdf/object.cpp' || echo '$(srcdir)/'`pdf/object.cpp
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libflt_all_la_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o pdf/libflt_all_la-object.lo `test -f 'pdf/object.cpp' || echo '$(srcdir)/'`pdf/object.cpp
 
 pdf/libflt_all_la-primitive.lo: pdf/primitive.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -MT pdf/libflt_all_la-primitive.lo -MD -MP -MF pdf/$(DEPDIR)/libflt_all_la-primitive.Tpo -c -o pdf/libflt_all_la-primitive.lo `test -f 'pdf/primitive.cpp' || echo '$(srcdir)/'`pdf/primitive.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libflt_all_la_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -MT pdf/libflt_all_la-primitive.lo -MD -MP -MF pdf/$(DEPDIR)/libflt_all_la-primitive.Tpo -c -o pdf/libflt_all_la-primitive.lo `test -f 'pdf/primitive.cpp' || echo '$(srcdir)/'`pdf/primitive.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) pdf/$(DEPDIR)/libflt_all_la-primitive.Tpo pdf/$(DEPDIR)/libflt_all_la-primitive.Plo
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='pdf/primitive.cpp' object='pdf/libflt_all_la-primitive.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o pdf/libflt_all_la-primitive.lo `test -f 'pdf/primitive.cpp' || echo '$(srcdir)/'`pdf/primitive.cpp
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libflt_all_la_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o pdf/libflt_all_la-primitive.lo `test -f 'pdf/primitive.cpp' || echo '$(srcdir)/'`pdf/primitive.cpp
 
 pdf/libflt_all_la-writer.lo: pdf/writer.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -MT pdf/libflt_all_la-writer.lo -MD -MP -MF pdf/$(DEPDIR)/libflt_all_la-writer.Tpo -c -o pdf/libflt_all_la-writer.lo `test -f 'pdf/writer.cpp' || echo '$(srcdir)/'`pdf/writer.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libflt_all_la_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -MT pdf/libflt_all_la-writer.lo -MD -MP -MF pdf/$(DEPDIR)/libflt_all_la-writer.Tpo -c -o pdf/libflt_all_la-writer.lo `test -f 'pdf/writer.cpp' || echo '$(srcdir)/'`pdf/writer.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) pdf/$(DEPDIR)/libflt_all_la-writer.Tpo pdf/$(DEPDIR)/libflt_all_la-writer.Plo
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='pdf/writer.cpp' object='pdf/libflt_all_la-writer.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o pdf/libflt_all_la-writer.lo `test -f 'pdf/writer.cpp' || echo '$(srcdir)/'`pdf/writer.cpp
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libflt_all_la_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o pdf/libflt_all_la-writer.lo `test -f 'pdf/writer.cpp' || echo '$(srcdir)/'`pdf/writer.cpp
 
 libflt_all_la-jpeg.lo: jpeg.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -MT libflt_all_la-jpeg.lo -MD -MP -MF $(DEPDIR)/libflt_all_la-jpeg.Tpo -c -o libflt_all_la-jpeg.lo `test -f 'jpeg.cpp' || echo '$(srcdir)/'`jpeg.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libflt_all_la_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -MT libflt_all_la-jpeg.lo -MD -MP -MF $(DEPDIR)/libflt_all_la-jpeg.Tpo -c -o libflt_all_la-jpeg.lo `test -f 'jpeg.cpp' || echo '$(srcdir)/'`jpeg.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libflt_all_la-jpeg.Tpo $(DEPDIR)/libflt_all_la-jpeg.Plo
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='jpeg.cpp' object='libflt_all_la-jpeg.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o libflt_all_la-jpeg.lo `test -f 'jpeg.cpp' || echo '$(srcdir)/'`jpeg.cpp
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libflt_all_la_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o libflt_all_la-jpeg.lo `test -f 'jpeg.cpp' || echo '$(srcdir)/'`jpeg.cpp
 
 libflt_all_la-magick.lo: magick.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -MT libflt_all_la-magick.lo -MD -MP -MF $(DEPDIR)/libflt_all_la-magick.Tpo -c -o libflt_all_la-magick.lo `test -f 'magick.cpp' || echo '$(srcdir)/'`magick.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libflt_all_la_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -MT libflt_all_la-magick.lo -MD -MP -MF $(DEPDIR)/libflt_all_la-magick.Tpo -c -o libflt_all_la-magick.lo `test -f 'magick.cpp' || echo '$(srcdir)/'`magick.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libflt_all_la-magick.Tpo $(DEPDIR)/libflt_all_la-magick.Plo
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='magick.cpp' object='libflt_all_la-magick.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o libflt_all_la-magick.lo `test -f 'magick.cpp' || echo '$(srcdir)/'`magick.cpp
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libflt_all_la_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o libflt_all_la-magick.lo `test -f 'magick.cpp' || echo '$(srcdir)/'`magick.cpp
 
 libflt_all_la-autocrop.lo: autocrop.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -MT libflt_all_la-autocrop.lo -MD -MP -MF $(DEPDIR)/libflt_all_la-autocrop.Tpo -c -o libflt_all_la-autocrop.lo `test -f 'autocrop.cpp' || echo '$(srcdir)/'`autocrop.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libflt_all_la_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -MT libflt_all_la-autocrop.lo -MD -MP -MF $(DEPDIR)/libflt_all_la-autocrop.Tpo -c -o libflt_all_la-autocrop.lo `test -f 'autocrop.cpp' || echo '$(srcdir)/'`autocrop.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libflt_all_la-autocrop.Tpo $(DEPDIR)/libflt_all_la-autocrop.Plo
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='autocrop.cpp' object='libflt_all_la-autocrop.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o libflt_all_la-autocrop.lo `test -f 'autocrop.cpp' || echo '$(srcdir)/'`autocrop.cpp
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libflt_all_la_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o libflt_all_la-autocrop.lo `test -f 'autocrop.cpp' || echo '$(srcdir)/'`autocrop.cpp
 
 libflt_all_la-deskew.lo: deskew.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -MT libflt_all_la-deskew.lo -MD -MP -MF $(DEPDIR)/libflt_all_la-deskew.Tpo -c -o libflt_all_la-deskew.lo `test -f 'deskew.cpp' || echo '$(srcdir)/'`deskew.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libflt_all_la_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -MT libflt_all_la-deskew.lo -MD -MP -MF $(DEPDIR)/libflt_all_la-deskew.Tpo -c -o libflt_all_la-deskew.lo `test -f 'deskew.cpp' || echo '$(srcdir)/'`deskew.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libflt_all_la-deskew.Tpo $(DEPDIR)/libflt_all_la-deskew.Plo
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='deskew.cpp' object='libflt_all_la-deskew.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o libflt_all_la-deskew.lo `test -f 'deskew.cpp' || echo '$(srcdir)/'`deskew.cpp
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libflt_all_la_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o libflt_all_la-deskew.lo `test -f 'deskew.cpp' || echo '$(srcdir)/'`deskew.cpp
+
+libflt_all_la-reorient.lo: reorient.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libflt_all_la_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -MT libflt_all_la-reorient.lo -MD -MP -MF $(DEPDIR)/libflt_all_la-reorient.Tpo -c -o libflt_all_la-reorient.lo `test -f 'reorient.cpp' || echo '$(srcdir)/'`reorient.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libflt_all_la-reorient.Tpo $(DEPDIR)/libflt_all_la-reorient.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='reorient.cpp' object='libflt_all_la-reorient.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libflt_all_la_CPPFLAGS) $(CPPFLAGS) $(libflt_all_la_CXXFLAGS) $(CXXFLAGS) -c -o libflt_all_la-reorient.lo `test -f 'reorient.cpp' || echo '$(srcdir)/'`reorient.cpp
 
 doc_locate-doc-locate.o: doc-locate.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(doc_locate_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT doc_locate-doc-locate.o -MD -MP -MF $(DEPDIR)/doc_locate-doc-locate.Tpo -c -o doc_locate-doc-locate.o `test -f 'doc-locate.cpp' || echo '$(srcdir)/'`doc-locate.cpp

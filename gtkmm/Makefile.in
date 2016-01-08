@@ -456,7 +456,6 @@ libutsushi_gtkmm_la_SOURCES = action-dialog.cpp action-dialog.hpp \
 	preview.hpp pump.cpp pump.hpp
 dist_gtkmmdata_DATA = dialog.rc dialog.glade
 nodist_gtkmmdata_DATA = about.xml
-EXTRA_DIST = dialog-alt.glade
 CLEANFILES = $(am__append_1)
 all: all-am
 
