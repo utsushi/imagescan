@@ -85,21 +85,19 @@ host_triplet = @host@
 @enable_boost_unit_test_framework_TRUE@	command.utr$(EXEEXT) \
 @enable_boost_unit_test_framework_TRUE@	main.utr$(EXEEXT) \
 @enable_boost_unit_test_framework_TRUE@	main-failure.utr$(EXEEXT)
-
-#  Set build-time flags to build Boost.Test Unit Test Framework (UTF)
-#  based test runners.
 @enable_boost_unit_test_framework_TRUE@am__append_1 =  \
-@enable_boost_unit_test_framework_TRUE@	-DSHELL="\"/bin/sh\"" \
-@enable_boost_unit_test_framework_TRUE@	-I$(top_srcdir) \
-@enable_boost_unit_test_framework_TRUE@	$(BOOST_CPPFLAGS) \
-@enable_boost_unit_test_framework_TRUE@	-DBOOST_TEST_NO_MAIN
-@enable_boost_unit_test_framework_TRUE@am__append_2 =  \
 @enable_boost_unit_test_framework_TRUE@	$(BOOST_LDFLAGS) \
 @enable_boost_unit_test_framework_TRUE@	$(BOOST_LDFLAGS)
 DIST_COMMON = $(top_srcdir)/include/boost-test.am \
 	$(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	$(top_srcdir)/upstream/depcomp \
 	$(top_srcdir)/upstream/test-driver
+
+#  Set build-time flags to build Boost.Test Unit Test Framework (UTF)
+#  based test runners.
+@enable_boost_unit_test_framework_TRUE@am__append_2 = -I$(top_srcdir) \
+@enable_boost_unit_test_framework_TRUE@	$(BOOST_CPPFLAGS) \
+@enable_boost_unit_test_framework_TRUE@	-DBOOST_TEST_NO_MAIN
 @enable_boost_unit_test_framework_TRUE@@with_shared_enabled_TRUE@am__append_3 = -DBOOST_TEST_DYN_LINK
 @enable_boost_unit_test_framework_TRUE@@with_static_enabled_TRUE@am__append_4 = -DBOOST_TEST_ALTERNATIVE_INIT_API
 @enable_boost_unit_test_framework_TRUE@am__append_5 = -DUTSUSHI_TEST_MODULE=\"$(utsushi_test_module)\" \
@@ -459,11 +457,11 @@ TEST_LOG_COMPILE = $(TEST_LOG_COMPILER) $(AM_TEST_LOG_FLAGS) \
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
 AMTAR = @AMTAR@
-AM_CPPFLAGS = @AM_CPPFLAGS@ $(am__append_1) $(am__append_3) \
+AM_CPPFLAGS = @AM_CPPFLAGS@ $(am__append_2) $(am__append_3) \
 	$(am__append_4) $(am__append_5) $(am__append_6)
 AM_CXXFLAGS = @AM_CXXFLAGS@
 AM_DEFAULT_VERBOSITY = @AM_DEFAULT_VERBOSITY@
-AM_LDFLAGS = @AM_LDFLAGS@ $(am__append_2)
+AM_LDFLAGS = @AM_LDFLAGS@ $(am__append_1)
 AR = @AR@
 ARGZ_H = @ARGZ_H@
 AUTOCONF = @AUTOCONF@

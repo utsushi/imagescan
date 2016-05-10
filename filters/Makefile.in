@@ -532,6 +532,8 @@ filterlibdir = $(pkglibdir)
 filterdatadir = $(pkgdatadir)
 filter_ldflags = $(AM_LDFLAGS) -export-dynamic
 dist_pkglibexec_SCRIPTS = get-text-orientation
+AM_INSTALLCHECK_STD_OPTIONS_EXEMPT = $(pkglibexec_PROGRAMS) \
+	$(dist_pkglibexec_SCRIPTS)
 filterlib_LTLIBRARIES = libflt-all.la
 libflt_all_la_CPPFLAGS = $(AM_CPPFLAGS) \
 	-DPKGLIBEXECDIR="\"$(pkglibexecdir)\""
@@ -547,7 +549,6 @@ libflt_all_la_SOURCES = g3fax.cpp g3fax.hpp image-skip.cpp \
 @have_libmagick_pp_TRUE@	$(LIBMAGICK_PP_CFLAGS)
 @have_libmagick_pp_TRUE@doc_locate_LDFLAGS = $(LIBMAGICK_PP_LIBS) -lm
 @have_libmagick_pp_TRUE@doc_locate_SOURCES = doc-locate.cpp
-AM_INSTALLCHECK_STD_OPTIONS_EXEMPT = doc-locate
 pdf_filter = pdf.cpp pdf.hpp pdf/array.cpp pdf/array.hpp \
 	pdf/dictionary.cpp pdf/dictionary.hpp pdf/object.cpp \
 	pdf/object.hpp pdf/primitive.cpp pdf/primitive.hpp \
