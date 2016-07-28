@@ -54,7 +54,9 @@
 ../drivers/esci/data/DS-40.dat
 ../drivers/esci/data/DS-50000.dat
 ../drivers/esci/data/DS-510.dat
+../drivers/esci/data/DS-530.dat
 ../drivers/esci/data/DS-5500.dat
+../drivers/esci/data/DS-570W.dat
 ../drivers/esci/data/DS-70000.dat
 ../drivers/esci/data/DS-7500.dat
 ../drivers/esci/data/DS-860.dat
@@ -82,6 +84,9 @@
 ../drivers/esci/get-scanner-status.cpp
 ../drivers/esci/get-scanner-status.hpp
 ../drivers/esci/getter.hpp
+../drivers/esci/grammar-automatic-feed.cpp
+../drivers/esci/grammar-automatic-feed.hpp
+../drivers/esci/grammar-automatic-feed.ipp
 ../drivers/esci/grammar-capabilities.cpp
 ../drivers/esci/grammar-capabilities.hpp
 ../drivers/esci/grammar-capabilities.ipp

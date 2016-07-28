@@ -158,8 +158,9 @@ am_libdrv_esci_la_OBJECTS = capture-scanner.lo compound.lo \
 	get-extended-status.lo get-focus-position.lo \
 	get-hardware-property.lo get-identity.lo \
 	get-push-button-status.lo get-scan-parameters.lo \
-	get-scanner-status.lo grammar-capabilities.lo \
-	grammar-formats.lo grammar-information.lo grammar-mechanics.lo \
+	get-scanner-status.lo grammar-automatic-feed.lo \
+	grammar-capabilities.lo grammar-formats.lo \
+	grammar-information.lo grammar-mechanics.lo \
 	grammar-parameters.lo grammar-status.lo grammar.lo \
 	initialize.lo release-scanner.lo scan-parameters.lo \
 	scanner-control.lo scanner.lo set-color-matrix.lo \
@@ -541,9 +542,11 @@ libdrv_esci_la_SOURCES = action.hpp buffer.hpp bounding-box.hpp \
 	get-identity.cpp get-identity.hpp get-push-button-status.cpp \
 	get-push-button-status.hpp get-scan-parameters.cpp \
 	get-scan-parameters.hpp get-scanner-status.cpp \
-	get-scanner-status.hpp getter.hpp grammar-capabilities.cpp \
-	grammar-capabilities.hpp grammar-capabilities.ipp \
-	grammar-formats.cpp grammar-formats.hpp grammar-formats.ipp \
+	get-scanner-status.hpp getter.hpp grammar-automatic-feed.cpp \
+	grammar-automatic-feed.hpp grammar-automatic-feed.ipp \
+	grammar-capabilities.cpp grammar-capabilities.hpp \
+	grammar-capabilities.ipp grammar-formats.cpp \
+	grammar-formats.hpp grammar-formats.ipp \
 	grammar-information.cpp grammar-information.hpp \
 	grammar-information.ipp grammar-mechanics.cpp \
 	grammar-mechanics.hpp grammar-mechanics.ipp \
@@ -581,11 +584,11 @@ EXTRA_DIST = utsushi-esci.rules $(driverdata_DATA)
 @enable_boost_unit_test_framework_TRUE@	../../connexions/libcnx-usb.la \
 @enable_boost_unit_test_framework_TRUE@	../../connexions/libcnx-hexdump.la
 driverdata_DATA = data/DS-40.dat data/DS-510.dat data/DS-520.dat \
-	data/DS-560.dat data/DS-760.dat data/DS-860.dat \
-	data/DS-5500.dat data/DS-6500.dat data/DS-7500.dat \
-	data/DS-50000.dat data/DS-60000.dat data/DS-70000.dat \
-	data/PX-M7050.dat data/PX-M7050FX.dat data/PX-M860F.dat \
-	data/WF-6590.dat
+	data/DS-560.dat data/DS-530.dat data/DS-570W.dat \
+	data/DS-760.dat data/DS-860.dat data/DS-5500.dat \
+	data/DS-6500.dat data/DS-7500.dat data/DS-50000.dat \
+	data/DS-60000.dat data/DS-70000.dat data/PX-M7050.dat \
+	data/PX-M7050FX.dat data/PX-M860F.dat data/WF-6590.dat
 clone_dat = \
 	src=`echo $< | sed 's,^.*/,,; s,\.dat$$,,'`; \
 	dst=`echo $@ | sed 's,^.*/,,; s,\.dat$$,,'`; \
@@ -702,6 +705,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/get-push-button-status.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/get-scan-parameters.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/get-scanner-status.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/grammar-automatic-feed.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/grammar-capabilities.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/grammar-formats.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/grammar-information.Plo@am__quote@
@@ -1130,6 +1134,9 @@ $(srcdir)/data/DS-520.dat: $(srcdir)/data/DS-510.dat
 	$(clone_dat)
 
 $(srcdir)/data/DS-560.dat: $(srcdir)/data/DS-510.dat
+	$(clone_dat)
+
+$(srcdir)/data/DS-570W.dat: $(srcdir)/data/DS-530.dat
 	$(clone_dat)
 
 $(srcdir)/data/DS-760.dat: $(srcdir)/data/DS-860.dat
