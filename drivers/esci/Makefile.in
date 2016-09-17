@@ -585,10 +585,11 @@ EXTRA_DIST = utsushi-esci.rules $(driverdata_DATA)
 @enable_boost_unit_test_framework_TRUE@	../../connexions/libcnx-hexdump.la
 driverdata_DATA = data/DS-40.dat data/DS-510.dat data/DS-520.dat \
 	data/DS-560.dat data/DS-530.dat data/DS-570W.dat \
-	data/DS-760.dat data/DS-860.dat data/DS-5500.dat \
-	data/DS-6500.dat data/DS-7500.dat data/DS-50000.dat \
-	data/DS-60000.dat data/DS-70000.dat data/PX-M7050.dat \
-	data/PX-M7050FX.dat data/PX-M860F.dat data/WF-6590.dat
+	data/DS-760.dat data/DS-860.dat data/DS-1610.dat \
+	data/DS-1630.dat data/DS-5500.dat data/DS-6500.dat \
+	data/DS-7500.dat data/DS-50000.dat data/DS-60000.dat \
+	data/DS-70000.dat data/PX-M7050.dat data/PX-M7050FX.dat \
+	data/PX-M860F.dat data/WF-6590.dat
 clone_dat = \
 	src=`echo $< | sed 's,^.*/,,; s,\.dat$$,,'`; \
 	dst=`echo $@ | sed 's,^.*/,,; s,\.dat$$,,'`; \
@@ -1140,6 +1141,12 @@ $(srcdir)/data/DS-570W.dat: $(srcdir)/data/DS-530.dat
 	$(clone_dat)
 
 $(srcdir)/data/DS-760.dat: $(srcdir)/data/DS-860.dat
+	$(clone_dat)
+
+$(srcdir)/data/DS-1610.dat: $(srcdir)/data/DS-1630.dat
+	$(clone_dat)
+
+$(srcdir)/data/DS-1660W.dat: $(srcdir)/data/DS-1630.dat
 	$(clone_dat)
 
 $(srcdir)/data/DS-6500.dat: $(srcdir)/data/DS-7500.dat
