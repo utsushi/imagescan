@@ -52,6 +52,7 @@
 ../drivers/esci/constant.hpp
 ../drivers/esci/data/
 ../drivers/esci/data/DS-1630.dat
+../drivers/esci/data/DS-360W.dat
 ../drivers/esci/data/DS-40.dat
 ../drivers/esci/data/DS-50000.dat
 ../drivers/esci/data/DS-510.dat

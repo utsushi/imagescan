@@ -583,13 +583,14 @@ EXTRA_DIST = utsushi-esci.rules $(driverdata_DATA)
 @enable_boost_unit_test_framework_TRUE@	$(BOOST_UNIT_TEST_FRAMEWORK_LIB) \
 @enable_boost_unit_test_framework_TRUE@	../../connexions/libcnx-usb.la \
 @enable_boost_unit_test_framework_TRUE@	../../connexions/libcnx-hexdump.la
-driverdata_DATA = data/DS-40.dat data/DS-510.dat data/DS-520.dat \
-	data/DS-560.dat data/DS-530.dat data/DS-570W.dat \
-	data/DS-760.dat data/DS-860.dat data/DS-1610.dat \
-	data/DS-1630.dat data/DS-5500.dat data/DS-6500.dat \
-	data/DS-7500.dat data/DS-50000.dat data/DS-60000.dat \
-	data/DS-70000.dat data/PX-M7050.dat data/PX-M7050FX.dat \
-	data/PX-M860F.dat data/WF-6590.dat
+driverdata_DATA = data/DS-40.dat data/DS-310.dat data/DS-360W.dat \
+	data/DS-510.dat data/DS-520.dat data/DS-560.dat \
+	data/DS-530.dat data/DS-570W.dat data/DS-760.dat \
+	data/DS-860.dat data/DS-1610.dat data/DS-1630.dat \
+	data/DS-5500.dat data/DS-6500.dat data/DS-7500.dat \
+	data/DS-50000.dat data/DS-60000.dat data/DS-70000.dat \
+	data/PX-M7050.dat data/PX-M7050FX.dat data/PX-M860F.dat \
+	data/WF-6590.dat
 clone_dat = \
 	src=`echo $< | sed 's,^.*/,,; s,\.dat$$,,'`; \
 	dst=`echo $@ | sed 's,^.*/,,; s,\.dat$$,,'`; \
@@ -1130,6 +1131,9 @@ uninstall-am: uninstall-driverdataDATA uninstall-driverlibLTLIBRARIES \
 	tags tags-am uninstall uninstall-am uninstall-driverdataDATA \
 	uninstall-driverlibLTLIBRARIES uninstall-exec_udev_rulesDATA
 
+
+$(srcdir)/data/DS-310.dat: $(srcdir)/data/DS-360W.dat
+	$(clone_dat)
 
 $(srcdir)/data/DS-520.dat: $(srcdir)/data/DS-510.dat
 	$(clone_dat)
