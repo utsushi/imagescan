@@ -933,10 +933,10 @@ maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
 	@echo "it deletes files that may require special tools to rebuild."
 	-test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
-@with_included_boost_FALSE@install-exec-local:
-@with_shared_enabled_FALSE@install-exec-local:
 @with_included_boost_FALSE@uninstall-local:
 @with_shared_enabled_FALSE@uninstall-local:
+@with_included_boost_FALSE@install-exec-local:
+@with_shared_enabled_FALSE@install-exec-local:
 clean: clean-recursive
 
 clean-am: clean-generic clean-libtool clean-local mostlyclean-am
