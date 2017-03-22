@@ -80,6 +80,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
+driverexeclib_PROGRAMS = esci-interpreter$(EXEEXT)
 @enable_boost_unit_test_framework_TRUE@noinst_PROGRAMS =  \
 @enable_boost_unit_test_framework_TRUE@	verify$(EXEEXT)
 @enable_boost_unit_test_framework_TRUE@@with_shared_enabled_TRUE@am__append_1 = -DBOOST_TEST_DYN_LINK
@@ -149,14 +150,15 @@ am__uninstall_files_from_dir = { \
          $(am__cd) "$$dir" && rm -f $$files; }; \
   }
 am__installdirs = "$(DESTDIR)$(driverlibdir)" \
-	"$(DESTDIR)$(driverdatadir)" "$(DESTDIR)$(exec_udev_rulesdir)"
+	"$(DESTDIR)$(driverexeclibdir)" "$(DESTDIR)$(driverdatadir)" \
+	"$(DESTDIR)$(exec_udev_rulesdir)"
 LTLIBRARIES = $(driverlib_LTLIBRARIES)
 libdrv_esci_la_DEPENDENCIES = ../../lib/libutsushi.la
 am_libdrv_esci_la_OBJECTS = capture-scanner.lo compound.lo \
 	compound-scanner.lo compound-tweaks.lo extended-scanner.lo \
-	get-command-parameters.lo get-extended-identity.lo \
-	get-extended-status.lo get-focus-position.lo \
-	get-hardware-property.lo get-identity.lo \
+	extended-tweaks.lo get-command-parameters.lo \
+	get-extended-identity.lo get-extended-status.lo \
+	get-focus-position.lo get-hardware-property.lo get-identity.lo \
 	get-push-button-status.lo get-scan-parameters.lo \
 	get-scanner-status.lo grammar-automatic-feed.lo \
 	grammar-capabilities.lo grammar-formats.lo \
@@ -176,14 +178,25 @@ libdrv_esci_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
 	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CXXLD) \
 	$(AM_CXXFLAGS) $(CXXFLAGS) $(libdrv_esci_la_LDFLAGS) \
 	$(LDFLAGS) -o $@
-PROGRAMS = $(noinst_PROGRAMS)
+PROGRAMS = $(driverexeclib_PROGRAMS) $(noinst_PROGRAMS)
+am_esci_interpreter_OBJECTS = esci_interpreter-interpreter.$(OBJEXT) \
+	esci_interpreter-connexion.$(OBJEXT) \
+	esci_interpreter-machine.$(OBJEXT) \
+	esci_interpreter-usb.$(OBJEXT) esci_interpreter-udev.$(OBJEXT)
+esci_interpreter_OBJECTS = $(am_esci_interpreter_OBJECTS)
+am__DEPENDENCIES_1 =
+esci_interpreter_DEPENDENCIES = $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+esci_interpreter_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
+	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CXXLD) \
+	$(esci_interpreter_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) \
+	$(LDFLAGS) -o $@
 am__verify_SOURCES_DIST = verify.cpp verify.hpp \
 	verify-compound-protocol.cpp verify-compound-scanning.cpp
 @enable_boost_unit_test_framework_TRUE@am_verify_OBJECTS = verify-verify.$(OBJEXT) \
 @enable_boost_unit_test_framework_TRUE@	verify-verify-compound-protocol.$(OBJEXT) \
 @enable_boost_unit_test_framework_TRUE@	verify-verify-compound-scanning.$(OBJEXT)
 verify_OBJECTS = $(am_verify_OBJECTS)
-am__DEPENDENCIES_1 =
 @enable_boost_unit_test_framework_TRUE@verify_DEPENDENCIES =  \
 @enable_boost_unit_test_framework_TRUE@	libdrv-esci.la \
 @enable_boost_unit_test_framework_TRUE@	../../lib/libutsushi.la \
@@ -243,8 +256,10 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(libdrv_esci_la_SOURCES) $(verify_SOURCES)
-DIST_SOURCES = $(libdrv_esci_la_SOURCES) $(am__verify_SOURCES_DIST)
+SOURCES = $(libdrv_esci_la_SOURCES) $(esci_interpreter_SOURCES) \
+	$(verify_SOURCES)
+DIST_SOURCES = $(libdrv_esci_la_SOURCES) $(esci_interpreter_SOURCES) \
+	$(am__verify_SOURCES_DIST)
 RECURSIVE_TARGETS = all-recursive check-recursive cscopelist-recursive \
 	ctags-recursive dvi-recursive html-recursive info-recursive \
 	install-data-recursive install-dvi-recursive \
@@ -316,7 +331,7 @@ am__relativize = \
 ACLOCAL = @ACLOCAL@
 AMTAR = @AMTAR@
 AM_CPPFLAGS = @AM_CPPFLAGS@ -DFUSION_MAX_VECTOR_SIZE=22 \
-	-DESCI_GRAMMAR_TRACE=1
+	-DESCI_GRAMMAR_TRACE=1 -DPKGLIBDIR="\"$(pkglibdir)\""
 AM_CXXFLAGS = @AM_CXXFLAGS@
 AM_DEFAULT_VERBOSITY = @AM_DEFAULT_VERBOSITY@
 AM_LDFLAGS = @AM_LDFLAGS@ $(BOOST_LDFLAGS)
@@ -534,6 +549,7 @@ libdrv_esci_la_SOURCES = action.hpp buffer.hpp bounding-box.hpp \
 	compound.hpp compound-scanner.cpp compound-scanner.hpp \
 	compound-tweaks.cpp compound-tweaks.hpp constant.hpp \
 	exception.hpp extended-scanner.cpp extended-scanner.hpp \
+	extended-tweaks.cpp extended-tweaks.hpp \
 	get-command-parameters.cpp get-command-parameters.hpp \
 	get-extended-identity.cpp get-extended-identity.hpp \
 	get-extended-status.cpp get-extended-status.hpp \
@@ -568,6 +584,16 @@ libdrv_esci_la_SOURCES = action.hpp buffer.hpp bounding-box.hpp \
 EXTRA_DIST = utsushi-esci.rules $(driverdata_DATA)
 @enable_udev_config_TRUE@exec_udev_rulesdir = $(UDEV_SYSCONFDIR)/rules.d
 @enable_udev_config_TRUE@exec_udev_rules_DATA = utsushi-esci.rules
+driverexeclibdir = $(pkglibexecdir)
+AM_INSTALLCHECK_STD_OPTIONS_EXEMPT = $(driverexeclib_PROGRAMS)
+esci_interpreter_CPPFLAGS = $(AM_CPPFLAGS) $(BOOST_CPPFLAGS) \
+	$(LTDLINCL)
+esci_interpreter_CXXFLAGS = $(AM_CXXFLAGS) $(LIBUSB_CFLAGS) \
+	$(LIBUDEV_CFLAGS)
+esci_interpreter_LDADD = $(LIBLTDL) $(LIBUSB_LIBS) $(LIBUDEV_LIBS)
+esci_interpreter_SOURCES = interpreter.cpp interpreter.hpp \
+	connexion.cpp connexion.hpp machine.cpp machine.hpp usb.cpp \
+	usb.hpp udev.cpp udev.hpp
 @enable_boost_unit_test_framework_TRUE@verify_SOURCES = verify.cpp \
 @enable_boost_unit_test_framework_TRUE@	verify.hpp \
 @enable_boost_unit_test_framework_TRUE@	verify-compound-protocol.cpp \
@@ -674,6 +700,71 @@ clean-driverlibLTLIBRARIES:
 
 libdrv-esci.la: $(libdrv_esci_la_OBJECTS) $(libdrv_esci_la_DEPENDENCIES) $(EXTRA_libdrv_esci_la_DEPENDENCIES) 
 	$(AM_V_CXXLD)$(libdrv_esci_la_LINK) -rpath $(driverlibdir) $(libdrv_esci_la_OBJECTS) $(libdrv_esci_la_LIBADD) $(LIBS)
+install-driverexeclibPROGRAMS: $(driverexeclib_PROGRAMS)
+	@$(NORMAL_INSTALL)
+	@list='$(driverexeclib_PROGRAMS)'; test -n "$(driverexeclibdir)" || list=; \
+	if test -n "$$list"; then \
+	  echo " $(MKDIR_P) '$(DESTDIR)$(driverexeclibdir)'"; \
+	  $(MKDIR_P) "$(DESTDIR)$(driverexeclibdir)" || exit 1; \
+	fi; \
+	for p in $$list; do echo "$$p $$p"; done | \
+	sed 's/$(EXEEXT)$$//' | \
+	while read p p1; do if test -f $$p \
+	 || test -f $$p1 \
+	  ; then echo "$$p"; echo "$$p"; else :; fi; \
+	done | \
+	sed -e 'p;s,.*/,,;n;h' \
+	    -e 's|.*|.|' \
+	    -e 'p;x;s,.*/,,;s/$(EXEEXT)$$//;$(transform);s/$$/$(EXEEXT)/' | \
+	sed 'N;N;N;s,\n, ,g' | \
+	$(AWK) 'BEGIN { files["."] = ""; dirs["."] = 1 } \
+	  { d=$$3; if (dirs[d] != 1) { print "d", d; dirs[d] = 1 } \
+	    if ($$2 == $$4) files[d] = files[d] " " $$1; \
+	    else { print "f", $$3 "/" $$4, $$1; } } \
+	  END { for (d in files) print "f", d, files[d] }' | \
+	while read type dir files; do \
+	    if test "$$dir" = .; then dir=; else dir=/$$dir; fi; \
+	    test -z "$$files" || { \
+	    echo " $(INSTALL_PROGRAM_ENV) $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=install $(INSTALL_PROGRAM) $$files '$(DESTDIR)$(driverexeclibdir)$$dir'"; \
+	    $(INSTALL_PROGRAM_ENV) $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=install $(INSTALL_PROGRAM) $$files "$(DESTDIR)$(driverexeclibdir)$$dir" || exit $$?; \
+	    } \
+	; done
+
+uninstall-driverexeclibPROGRAMS:
+	@$(NORMAL_UNINSTALL)
+	@list='$(driverexeclib_PROGRAMS)'; test -n "$(driverexeclibdir)" || list=; \
+	files=`for p in $$list; do echo "$$p"; done | \
+	  sed -e 'h;s,^.*/,,;s/$(EXEEXT)$$//;$(transform)' \
+	      -e 's/$$/$(EXEEXT)/' \
+	`; \
+	test -n "$$list" || exit 0; \
+	echo " ( cd '$(DESTDIR)$(driverexeclibdir)' && rm -f" $$files ")"; \
+	cd "$(DESTDIR)$(driverexeclibdir)" && rm -f $$files
+
+clean-driverexeclibPROGRAMS:
+	@list='$(driverexeclib_PROGRAMS)'; test -n "$$list" || exit 0; \
+	echo " rm -f" $$list; \
+	rm -f $$list || exit $$?; \
+	test -n "$(EXEEXT)" || exit 0; \
+	list=`for p in $$list; do echo "$$p"; done | sed 's/$(EXEEXT)$$//'`; \
+	echo " rm -f" $$list; \
+	rm -f $$list
+
+installcheck-driverexeclibPROGRAMS: $(driverexeclib_PROGRAMS)
+	bad=0; pid=$$$$; list="$(driverexeclib_PROGRAMS)"; for p in $$list; do \
+	  case ' $(AM_INSTALLCHECK_STD_OPTIONS_EXEMPT) ' in \
+	   *" $$p "* | *" $(srcdir)/$$p "*) continue;; \
+	  esac; \
+	  f=`echo "$$p" | \
+	     sed 's,^.*/,,;s/$(EXEEXT)$$//;$(transform);s/$$/$(EXEEXT)/'`; \
+	  for opt in --help --version; do \
+	    if "$(DESTDIR)$(driverexeclibdir)/$$f" $$opt >c$${pid}_.out \
+	         2>c$${pid}_.err </dev/null \
+		 && test -n "`cat c$${pid}_.out`" \
+		 && test -z "`cat c$${pid}_.err`"; then :; \
+	    else echo "$$f does not support $$opt" 1>&2; bad=1; fi; \
+	  done; \
+	done; rm -f c$${pid}_.???; exit $$bad
 
 clean-noinstPROGRAMS:
 	@list='$(noinst_PROGRAMS)'; test -n "$$list" || exit 0; \
@@ -683,6 +774,10 @@ clean-noinstPROGRAMS:
 	list=`for p in $$list; do echo "$$p"; done | sed 's/$(EXEEXT)$$//'`; \
 	echo " rm -f" $$list; \
 	rm -f $$list
+
+esci-interpreter$(EXEEXT): $(esci_interpreter_OBJECTS) $(esci_interpreter_DEPENDENCIES) $(EXTRA_esci_interpreter_DEPENDENCIES) 
+	@rm -f esci-interpreter$(EXEEXT)
+	$(AM_V_CXXLD)$(esci_interpreter_LINK) $(esci_interpreter_OBJECTS) $(esci_interpreter_LDADD) $(LIBS)
 
 verify$(EXEEXT): $(verify_OBJECTS) $(verify_DEPENDENCIES) $(EXTRA_verify_DEPENDENCIES) 
 	@rm -f verify$(EXEEXT)
@@ -698,7 +793,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/compound-scanner.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/compound-tweaks.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/compound.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/esci_interpreter-connexion.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/esci_interpreter-interpreter.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/esci_interpreter-machine.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/esci_interpreter-udev.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/esci_interpreter-usb.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/extended-scanner.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/extended-tweaks.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/get-command-parameters.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/get-extended-identity.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/get-extended-status.Plo@am__quote@
@@ -757,6 +858,76 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LTCXXCOMPILE) -c -o $@ $<
+
+esci_interpreter-interpreter.o: interpreter.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(esci_interpreter_CPPFLAGS) $(CPPFLAGS) $(esci_interpreter_CXXFLAGS) $(CXXFLAGS) -MT esci_interpreter-interpreter.o -MD -MP -MF $(DEPDIR)/esci_interpreter-interpreter.Tpo -c -o esci_interpreter-interpreter.o `test -f 'interpreter.cpp' || echo '$(srcdir)/'`interpreter.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/esci_interpreter-interpreter.Tpo $(DEPDIR)/esci_interpreter-interpreter.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='interpreter.cpp' object='esci_interpreter-interpreter.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(esci_interpreter_CPPFLAGS) $(CPPFLAGS) $(esci_interpreter_CXXFLAGS) $(CXXFLAGS) -c -o esci_interpreter-interpreter.o `test -f 'interpreter.cpp' || echo '$(srcdir)/'`interpreter.cpp
+
+esci_interpreter-interpreter.obj: interpreter.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(esci_interpreter_CPPFLAGS) $(CPPFLAGS) $(esci_interpreter_CXXFLAGS) $(CXXFLAGS) -MT esci_interpreter-interpreter.obj -MD -MP -MF $(DEPDIR)/esci_interpreter-interpreter.Tpo -c -o esci_interpreter-interpreter.obj `if test -f 'interpreter.cpp'; then $(CYGPATH_W) 'interpreter.cpp'; else $(CYGPATH_W) '$(srcdir)/interpreter.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/esci_interpreter-interpreter.Tpo $(DEPDIR)/esci_interpreter-interpreter.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='interpreter.cpp' object='esci_interpreter-interpreter.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(esci_interpreter_CPPFLAGS) $(CPPFLAGS) $(esci_interpreter_CXXFLAGS) $(CXXFLAGS) -c -o esci_interpreter-interpreter.obj `if test -f 'interpreter.cpp'; then $(CYGPATH_W) 'interpreter.cpp'; else $(CYGPATH_W) '$(srcdir)/interpreter.cpp'; fi`
+
+esci_interpreter-connexion.o: connexion.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(esci_interpreter_CPPFLAGS) $(CPPFLAGS) $(esci_interpreter_CXXFLAGS) $(CXXFLAGS) -MT esci_interpreter-connexion.o -MD -MP -MF $(DEPDIR)/esci_interpreter-connexion.Tpo -c -o esci_interpreter-connexion.o `test -f 'connexion.cpp' || echo '$(srcdir)/'`connexion.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/esci_interpreter-connexion.Tpo $(DEPDIR)/esci_interpreter-connexion.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='connexion.cpp' object='esci_interpreter-connexion.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(esci_interpreter_CPPFLAGS) $(CPPFLAGS) $(esci_interpreter_CXXFLAGS) $(CXXFLAGS) -c -o esci_interpreter-connexion.o `test -f 'connexion.cpp' || echo '$(srcdir)/'`connexion.cpp
+
+esci_interpreter-connexion.obj: connexion.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(esci_interpreter_CPPFLAGS) $(CPPFLAGS) $(esci_interpreter_CXXFLAGS) $(CXXFLAGS) -MT esci_interpreter-connexion.obj -MD -MP -MF $(DEPDIR)/esci_interpreter-connexion.Tpo -c -o esci_interpreter-connexion.obj `if test -f 'connexion.cpp'; then $(CYGPATH_W) 'connexion.cpp'; else $(CYGPATH_W) '$(srcdir)/connexion.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/esci_interpreter-connexion.Tpo $(DEPDIR)/esci_interpreter-connexion.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='connexion.cpp' object='esci_interpreter-connexion.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(esci_interpreter_CPPFLAGS) $(CPPFLAGS) $(esci_interpreter_CXXFLAGS) $(CXXFLAGS) -c -o esci_interpreter-connexion.obj `if test -f 'connexion.cpp'; then $(CYGPATH_W) 'connexion.cpp'; else $(CYGPATH_W) '$(srcdir)/connexion.cpp'; fi`
+
+esci_interpreter-machine.o: machine.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(esci_interpreter_CPPFLAGS) $(CPPFLAGS) $(esci_interpreter_CXXFLAGS) $(CXXFLAGS) -MT esci_interpreter-machine.o -MD -MP -MF $(DEPDIR)/esci_interpreter-machine.Tpo -c -o esci_interpreter-machine.o `test -f 'machine.cpp' || echo '$(srcdir)/'`machine.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/esci_interpreter-machine.Tpo $(DEPDIR)/esci_interpreter-machine.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='machine.cpp' object='esci_interpreter-machine.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(esci_interpreter_CPPFLAGS) $(CPPFLAGS) $(esci_interpreter_CXXFLAGS) $(CXXFLAGS) -c -o esci_interpreter-machine.o `test -f 'machine.cpp' || echo '$(srcdir)/'`machine.cpp
+
+esci_interpreter-machine.obj: machine.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(esci_interpreter_CPPFLAGS) $(CPPFLAGS) $(esci_interpreter_CXXFLAGS) $(CXXFLAGS) -MT esci_interpreter-machine.obj -MD -MP -MF $(DEPDIR)/esci_interpreter-machine.Tpo -c -o esci_interpreter-machine.obj `if test -f 'machine.cpp'; then $(CYGPATH_W) 'machine.cpp'; else $(CYGPATH_W) '$(srcdir)/machine.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/esci_interpreter-machine.Tpo $(DEPDIR)/esci_interpreter-machine.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='machine.cpp' object='esci_interpreter-machine.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(esci_interpreter_CPPFLAGS) $(CPPFLAGS) $(esci_interpreter_CXXFLAGS) $(CXXFLAGS) -c -o esci_interpreter-machine.obj `if test -f 'machine.cpp'; then $(CYGPATH_W) 'machine.cpp'; else $(CYGPATH_W) '$(srcdir)/machine.cpp'; fi`
+
+esci_interpreter-usb.o: usb.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(esci_interpreter_CPPFLAGS) $(CPPFLAGS) $(esci_interpreter_CXXFLAGS) $(CXXFLAGS) -MT esci_interpreter-usb.o -MD -MP -MF $(DEPDIR)/esci_interpreter-usb.Tpo -c -o esci_interpreter-usb.o `test -f 'usb.cpp' || echo '$(srcdir)/'`usb.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/esci_interpreter-usb.Tpo $(DEPDIR)/esci_interpreter-usb.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='usb.cpp' object='esci_interpreter-usb.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(esci_interpreter_CPPFLAGS) $(CPPFLAGS) $(esci_interpreter_CXXFLAGS) $(CXXFLAGS) -c -o esci_interpreter-usb.o `test -f 'usb.cpp' || echo '$(srcdir)/'`usb.cpp
+
+esci_interpreter-usb.obj: usb.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(esci_interpreter_CPPFLAGS) $(CPPFLAGS) $(esci_interpreter_CXXFLAGS) $(CXXFLAGS) -MT esci_interpreter-usb.obj -MD -MP -MF $(DEPDIR)/esci_interpreter-usb.Tpo -c -o esci_interpreter-usb.obj `if test -f 'usb.cpp'; then $(CYGPATH_W) 'usb.cpp'; else $(CYGPATH_W) '$(srcdir)/usb.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/esci_interpreter-usb.Tpo $(DEPDIR)/esci_interpreter-usb.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='usb.cpp' object='esci_interpreter-usb.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(esci_interpreter_CPPFLAGS) $(CPPFLAGS) $(esci_interpreter_CXXFLAGS) $(CXXFLAGS) -c -o esci_interpreter-usb.obj `if test -f 'usb.cpp'; then $(CYGPATH_W) 'usb.cpp'; else $(CYGPATH_W) '$(srcdir)/usb.cpp'; fi`
+
+esci_interpreter-udev.o: udev.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(esci_interpreter_CPPFLAGS) $(CPPFLAGS) $(esci_interpreter_CXXFLAGS) $(CXXFLAGS) -MT esci_interpreter-udev.o -MD -MP -MF $(DEPDIR)/esci_interpreter-udev.Tpo -c -o esci_interpreter-udev.o `test -f 'udev.cpp' || echo '$(srcdir)/'`udev.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/esci_interpreter-udev.Tpo $(DEPDIR)/esci_interpreter-udev.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='udev.cpp' object='esci_interpreter-udev.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(esci_interpreter_CPPFLAGS) $(CPPFLAGS) $(esci_interpreter_CXXFLAGS) $(CXXFLAGS) -c -o esci_interpreter-udev.o `test -f 'udev.cpp' || echo '$(srcdir)/'`udev.cpp
+
+esci_interpreter-udev.obj: udev.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(esci_interpreter_CPPFLAGS) $(CPPFLAGS) $(esci_interpreter_CXXFLAGS) $(CXXFLAGS) -MT esci_interpreter-udev.obj -MD -MP -MF $(DEPDIR)/esci_interpreter-udev.Tpo -c -o esci_interpreter-udev.obj `if test -f 'udev.cpp'; then $(CYGPATH_W) 'udev.cpp'; else $(CYGPATH_W) '$(srcdir)/udev.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/esci_interpreter-udev.Tpo $(DEPDIR)/esci_interpreter-udev.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='udev.cpp' object='esci_interpreter-udev.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(esci_interpreter_CPPFLAGS) $(CPPFLAGS) $(esci_interpreter_CXXFLAGS) $(CXXFLAGS) -c -o esci_interpreter-udev.obj `if test -f 'udev.cpp'; then $(CYGPATH_W) 'udev.cpp'; else $(CYGPATH_W) '$(srcdir)/udev.cpp'; fi`
 
 verify-verify.o: verify.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(verify_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT verify-verify.o -MD -MP -MF $(DEPDIR)/verify-verify.Tpo -c -o verify-verify.o `test -f 'verify.cpp' || echo '$(srcdir)/'`verify.cpp
@@ -1007,7 +1178,7 @@ check: check-recursive
 all-am: Makefile $(LTLIBRARIES) $(PROGRAMS) $(DATA)
 installdirs: installdirs-recursive
 installdirs-am:
-	for dir in "$(DESTDIR)$(driverlibdir)" "$(DESTDIR)$(driverdatadir)" "$(DESTDIR)$(exec_udev_rulesdir)"; do \
+	for dir in "$(DESTDIR)$(driverlibdir)" "$(DESTDIR)$(driverexeclibdir)" "$(DESTDIR)$(driverdatadir)" "$(DESTDIR)$(exec_udev_rulesdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-recursive
@@ -1042,8 +1213,9 @@ maintainer-clean-generic:
 	@echo "it deletes files that may require special tools to rebuild."
 clean: clean-recursive
 
-clean-am: clean-driverlibLTLIBRARIES clean-generic clean-libtool \
-	clean-noinstPROGRAMS mostlyclean-am
+clean-am: clean-driverexeclibPROGRAMS clean-driverlibLTLIBRARIES \
+	clean-generic clean-libtool clean-noinstPROGRAMS \
+	mostlyclean-am
 
 distclean: distclean-recursive
 	-rm -rf ./$(DEPDIR)
@@ -1069,7 +1241,8 @@ install-dvi: install-dvi-recursive
 
 install-dvi-am:
 
-install-exec-am: install-exec_udev_rulesDATA
+install-exec-am: install-driverexeclibPROGRAMS \
+	install-exec_udev_rulesDATA
 
 install-html: install-html-recursive
 
@@ -1089,7 +1262,7 @@ install-ps: install-ps-recursive
 
 install-ps-am:
 
-installcheck-am:
+installcheck-am: installcheck-driverexeclibPROGRAMS
 
 maintainer-clean: maintainer-clean-recursive
 	-rm -rf ./$(DEPDIR)
@@ -1109,27 +1282,29 @@ ps: ps-recursive
 
 ps-am:
 
-uninstall-am: uninstall-driverdataDATA uninstall-driverlibLTLIBRARIES \
-	uninstall-exec_udev_rulesDATA
+uninstall-am: uninstall-driverdataDATA uninstall-driverexeclibPROGRAMS \
+	uninstall-driverlibLTLIBRARIES uninstall-exec_udev_rulesDATA
 
 .MAKE: $(am__recursive_targets) install-am install-strip
 
 .PHONY: $(am__recursive_targets) CTAGS GTAGS TAGS all all-am check \
-	check-am clean clean-driverlibLTLIBRARIES clean-generic \
-	clean-libtool clean-noinstPROGRAMS cscopelist-am ctags \
-	ctags-am distclean distclean-compile distclean-generic \
-	distclean-libtool distclean-tags distdir dvi dvi-am html \
-	html-am info info-am install install-am install-data \
-	install-data-am install-driverdataDATA \
+	check-am clean clean-driverexeclibPROGRAMS \
+	clean-driverlibLTLIBRARIES clean-generic clean-libtool \
+	clean-noinstPROGRAMS cscopelist-am ctags ctags-am distclean \
+	distclean-compile distclean-generic distclean-libtool \
+	distclean-tags distdir dvi dvi-am html html-am info info-am \
+	install install-am install-data install-data-am \
+	install-driverdataDATA install-driverexeclibPROGRAMS \
 	install-driverlibLTLIBRARIES install-dvi install-dvi-am \
 	install-exec install-exec-am install-exec_udev_rulesDATA \
 	install-html install-html-am install-info install-info-am \
 	install-man install-pdf install-pdf-am install-ps \
 	install-ps-am install-strip installcheck installcheck-am \
-	installdirs installdirs-am maintainer-clean \
-	maintainer-clean-generic mostlyclean mostlyclean-compile \
-	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
-	tags tags-am uninstall uninstall-am uninstall-driverdataDATA \
+	installcheck-driverexeclibPROGRAMS installdirs installdirs-am \
+	maintainer-clean maintainer-clean-generic mostlyclean \
+	mostlyclean-compile mostlyclean-generic mostlyclean-libtool \
+	pdf pdf-am ps ps-am tags tags-am uninstall uninstall-am \
+	uninstall-driverdataDATA uninstall-driverexeclibPROGRAMS \
 	uninstall-driverlibLTLIBRARIES uninstall-exec_udev_rulesDATA
 
 

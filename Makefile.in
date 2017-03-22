@@ -217,7 +217,7 @@ am__define_uniq_tagged_files = \
 ETAGS = etags
 CTAGS = ctags
 CSCOPE = cscope
-DIST_SUBDIRS = . upstream/ltdl lib connexions filters gtkmm \
+DIST_SUBDIRS = . upstream/ltdl lib connexions filters gtkmm drivers \
 	drivers/esci sane po src doc tests
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 distdir = $(PACKAGE)-$(VERSION)
@@ -467,7 +467,7 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 SUBDIRS = . $(am__append_1) lib connexions filters $(am__append_2) \
-	drivers/esci $(am__append_3) po src doc tests
+	drivers drivers/esci $(am__append_3) po src doc tests
 EXTRA_DIST = bootstrap config-bot.h install-deps \
 	tools/boost-test-report tools/boost-test-report.xsl \
 	tools/include-boost-src \

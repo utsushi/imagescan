@@ -146,7 +146,8 @@ am__uninstall_files_from_dir = { \
 am__installdirs = "$(DESTDIR)$(exec_sane_backenddir)"
 LTLIBRARIES = $(exec_sane_backend_LTLIBRARIES)
 libsane___BACKEND_NAME__la_DEPENDENCIES = ../lib/libutsushi.la \
-	../filters/libflt-all.la ../connexions/libcnx-usb.la
+	../filters/libflt-all.la ../connexions/libcnx-usb.la \
+	../connexions/libcnx-hexdump.la
 am_libsane___BACKEND_NAME__la_OBJECTS = backend.lo handle.lo device.lo \
 	value.lo
 libsane___BACKEND_NAME__la_OBJECTS =  \
@@ -499,7 +500,8 @@ libsane___BACKEND_NAME__la_SOURCES = backend.cpp backend.hpp \
 libsane___BACKEND_NAME__la_LDFLAGS = -export-dynamic -export-symbols \
 	sane-api.sym -version-number $(SANE_VERSION) -weak libsane
 libsane___BACKEND_NAME__la_LIBADD = ../lib/libutsushi.la \
-	../filters/libflt-all.la ../connexions/libcnx-usb.la
+	../filters/libflt-all.la ../connexions/libcnx-usb.la \
+	../connexions/libcnx-hexdump.la
 EXTRA_libsane___BACKEND_NAME__la_DEPENDENCIES = sane-api.sym
 CLEANFILES = sane-api.sym
 SANE_BACKEND_SANITY_CHECKS = $(am__append_1)

@@ -32,6 +32,10 @@
 ../doc/tests/Makefile.am
 ../doc/usr-guide.dox
 ../drivers/
+../drivers/Makefile.am
+../drivers/combo.conf
+../drivers/combo.cpp
+../drivers/combo.hpp
 ../drivers/esci/
 ../drivers/esci/Makefile.am
 ../drivers/esci/action.hpp
@@ -49,6 +53,8 @@
 ../drivers/esci/compound-tweaks.hpp
 ../drivers/esci/compound.cpp
 ../drivers/esci/compound.hpp
+../drivers/esci/connexion.cpp
+../drivers/esci/connexion.hpp
 ../drivers/esci/constant.hpp
 ../drivers/esci/data/
 ../drivers/esci/data/DS-1630.dat
@@ -66,6 +72,8 @@
 ../drivers/esci/exception.hpp
 ../drivers/esci/extended-scanner.cpp
 ../drivers/esci/extended-scanner.hpp
+../drivers/esci/extended-tweaks.cpp
+../drivers/esci/extended-tweaks.hpp
 ../drivers/esci/get-command-parameters.cpp
 ../drivers/esci/get-command-parameters.hpp
 ../drivers/esci/get-extended-identity.cpp
@@ -112,6 +120,10 @@
 ../drivers/esci/grammar.ipp
 ../drivers/esci/initialize.cpp
 ../drivers/esci/initialize.hpp
+../drivers/esci/interpreter.cpp
+../drivers/esci/interpreter.hpp
+../drivers/esci/machine.cpp
+../drivers/esci/machine.hpp
 ../drivers/esci/matrix.hpp
 ../drivers/esci/point.hpp
 ../drivers/esci/release-scanner.cpp
@@ -152,6 +164,10 @@
 ../drivers/esci/tests/grammar.tcs
 ../drivers/esci/tests/setter.cpp
 ../drivers/esci/tests/udev-rules.cpp
+../drivers/esci/udev.cpp
+../drivers/esci/udev.hpp
+../drivers/esci/usb.cpp
+../drivers/esci/usb.hpp
 ../drivers/esci/utsushi-esci.rules
 ../drivers/esci/vector.hpp
 ../drivers/esci/verify-compound-protocol.cpp
