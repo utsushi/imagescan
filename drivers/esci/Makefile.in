@@ -611,8 +611,9 @@ esci_interpreter_SOURCES = interpreter.cpp interpreter.hpp \
 @enable_boost_unit_test_framework_TRUE@	../../connexions/libcnx-hexdump.la
 driverdata_DATA = data/DS-40.dat data/DS-310.dat data/DS-320.dat \
 	data/DS-360W.dat data/DS-510.dat data/DS-520.dat \
-	data/DS-560.dat data/DS-530.dat data/DS-570W.dat \
-	data/DS-760.dat data/DS-770.dat data/DS-860.dat \
+	data/DS-560.dat data/DS-530.dat data/DS-535.dat \
+	data/DS-570W.dat data/DS-575W.dat data/DS-760.dat \
+	data/DS-770.dat data/DS-775.dat data/DS-860.dat \
 	data/DS-1610.dat data/DS-1630.dat data/DS-1660W.dat \
 	data/DS-5500.dat data/DS-6500.dat data/DS-7500.dat \
 	data/DS-50000.dat data/DS-60000.dat data/DS-70000.dat \
@@ -1359,6 +1360,15 @@ $(srcdir)/data/PX-M7050FX.dat: $(srcdir)/data/PX-M7050.dat
 
 $(srcdir)/data/WF-6590.dat: $(srcdir)/data/PX-M860F.dat
 	sed -e 's,PID 08CE,PID 08CF,' $< > $@
+
+$(srcdir)/data/DS-535.dat: $(srcdir)/data/DS-530.dat
+	$(clone_dat)
+
+$(srcdir)/data/DS-775.dat: $(srcdir)/data/DS-530.dat
+	$(clone_dat)
+
+$(srcdir)/data/DS-575W.dat: $(srcdir)/data/DS-530.dat
+	sed -e 's,DS-530 ,DS-575W,' $< > $@
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
